@@ -1,0 +1,87 @@
+﻿@model IEnumerable<JobPortal.Models.UserEducation>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "add")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("User Name")
+        </th>
+        <th>
+            @Html.Label("Course")
+        </th>
+        <th>
+            @Html.Label("Board")
+        </th>
+        <th>
+            @Html.Label("Institution Name")
+        </th>
+        <th>
+            @Html.Label("Course StartYear")
+        </th>
+        <th>
+            @Html.Label("Course EndYear")
+        </th>
+        <th>
+            @Html.Label("Course Type")
+        </th>
+
+        <th>
+            @Html.Label("Percentage Obtained")
+        </th>
+        <th>
+            @Html.Label("Actions")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Board)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.InstituteName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.StartYear)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EndYear)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percentage)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Delete", "delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

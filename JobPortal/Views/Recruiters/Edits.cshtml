@@ -1,0 +1,116 @@
+﻿@model IEnumerable<JobPortal.Models.RecruiterPlanDet>
+
+@{
+    ViewBag.Title = "Edits";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<h2>Sub Users</h2>
+
+<h2>Edits</h2>
+@foreach (var item in Model)
+{
+    <th style="display:none">
+        @Html.HiddenFor(modelItem => item.RecruiterPlanId, htmlAttributes: new { @id = "RecrId" })
+    </th>
+}
+
+<table class="table" id="tblRow">
+    <tr>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.EmailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNo)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="display:none">
+                @Html.TextBoxFor(modelItem => item.Id, htmlAttributes: new { @class = "form-control" })
+            </td>
+            <td>
+
+                @Html.TextBoxFor(modelItem => item.UserName, htmlAttributes: new { @class = "form-control" ,@name="username"})
+            </td>
+            <td>
+
+                @Html.TextBoxFor(modelItem => item.Password, htmlAttributes: new { @class = "form-control", @name = "password" })
+            </td>
+
+            <td>
+
+                @Html.TextBoxFor(modelItem => item.EmailId, htmlAttributes: new { @class = "form-control" })
+            </td>
+            <td>
+
+                @Html.TextBoxFor(modelItem => item.ContactNo, htmlAttributes: new { @class = "form-control" })
+            </td>
+
+            @*<td>
+                      @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Create" class="btn btn-primary" id="SubmitId" />
+    </div>
+</div>
+
+
+<script>
+    $("#SubmitId").click(function () {
+        alert("2");
+        var rowarray = [];
+        var id = $("#RecrId").val();
+        var n = $("#tblRow").find("tr").length;
+        for (var i = 1; i < n; i++) {
+
+            // var sid = $("#tblRow").find("tr").eq(i).find("td").eq(0).text();
+            var username = $("#tblRow").find("tr").eq(i).find("td input[type=text]").eq(1).val();
+            var password = $("#tblRow").find("tr").eq(i).find("td input[type=text]").eq(2).val();
+            var email = $("#tblRow").find("tr").eq(i).find("td input[type=text]").eq(3).val();
+            var contact = $("#tblRow").find("tr").eq(i).find("td input[type=text]").eq(4).val();
+            var Item = { UserName: username, Password: password, ContactNo: contact, EmailId: email };
+            rowarray.push(Item);
+
+        }
+        alert(rowarray);
+        $.ajax({
+            url:  '@Url.Action("getRecruiterPlan", "Recruiters")',
+            dataType: "json",
+            data: JSON.stringify({ RecPlan: rowarray, rid: id }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                alert("Success");
+                window.location.href = newUrl
+            },
+
+            error: function (response) {
+                alert('error')
+             //   alert(response);
+            }
+        });
+    });
+</script>

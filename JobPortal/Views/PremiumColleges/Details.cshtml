@@ -1,0 +1,51 @@
+﻿@model JobPortal.Models.primecollege
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PremiumCollege</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PremiumInstituteNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremiumInstituteNames)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortForms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortForms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserEducation.Course)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserEducation.Course)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

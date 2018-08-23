@@ -1,0 +1,187 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Consolas;}{\f2\fnil\fcharset0 Consolas;}}
+{\colortbl ;\red0\green0\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;\red255\green255\blue0;\red128\green0\blue0;\red255\green0\blue0;\red0\green100\blue0;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 --------------CRUD IN WEBFORM---------------------\par
+---------------------------METHODS-------------\par
+\cf1\f1\fs19 using\cf2  System;\par
+\cf1 using\cf2  System.Collections.Generic;\par
+\cf1 using\cf2  System.Linq;\par
+\cf1 using\cf2  System.Web;\par
+\cf1 using\cf2  System.Web.UI;\par
+\cf1 using\cf2  System.Web.UI.WebControls;\par
+\cf1 using\cf2  System.Data.SqlClient;\par
+\cf1 using\cf2  System.Data.Sql;\par
+\cf1 using\cf2  System.Data;\par
+\par
+\par
+\cf1 namespace\cf2  CRUDoperationINwebapplication\par
+\{\par
+    \cf1 public\cf2  \cf1 partial\cf2  \cf1 class\cf2  \cf3 WebForm1\cf2  : System.Web.UI.Page\par
+    \{\par
+        SqlConnection con = \cf1 new\cf2  SqlConnection(\cf4 "Data Source=G10GNLT029;Initial Catalog=school;Integrated Security=True"\cf2 );\par
+\par
+        \cf1 protected\cf2  \cf1 void\cf2  Page_Load(\cf1 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf1 if\cf2 (!IsPostBack)\par
+            \{\par
+                fillgrid();\par
+            \}\par
+        \}\par
+        \cf1 public\cf2  \cf1 void\cf2  fillgrid()\par
+        \{\par
+            con.Open();\par
+            SqlCommand cmd = \cf1 new\cf2  SqlCommand(\cf4 "sp_get_student"\cf2 , con);\par
+            cmd.CommandType = CommandType.StoredProcedure;\par
+            SqlDataAdapter da = \cf1 new\cf2  SqlDataAdapter(cmd);\par
+            DataTable dt = \cf1 new\cf2  DataTable();\par
+            da.Fill(dt);\par
+            GV.DataSource = dt;\par
+            GV.DataBind();\par
+        \}\par
+\par
+        \cf1 protected\cf2  \cf1 void\cf2  GV_RowEditing(\cf1 object\cf2  sender, GridViewEditEventArgs e)\par
+        \{\par
+            GV.EditIndex = e.NewEditIndex;\par
+            fillgrid();\par
+        \}\par
+\par
+        \cf1 protected\cf2  \cf1 void\cf2  GV_RowCancelingEdit(\cf1 object\cf2  sender, GridViewCancelEditEventArgs e)\par
+        \{\par
+            GV.EditIndex = -1;\par
+            fillgrid();\par
+        \}\par
+\par
+        \cf1 protected\cf2  \cf1 void\cf2  GV_RowUpdating(\cf1 object\cf2  sender, GridViewUpdateEventArgs e)\par
+        \{\par
+            \par
+            GridViewRow row = (GridViewRow)\cf1 this\cf2 .GV.Rows[e.RowIndex];\par
+            Label lblid = (Label)\cf1 this\cf2 .GV.Rows[e.RowIndex].FindControl(\cf4 "lblsid"\cf2 );\par
+            TextBox txtname = (TextBox)\cf1 this\cf2 .GV.Rows[e.RowIndex].Cells[1].FindControl(\cf4 "txtname"\cf2 );\par
+            TextBox txtaddress = (TextBox)\cf1 this\cf2 .GV.Rows[e.RowIndex].Cells[2].FindControl(\cf4 "txtaddress"\cf2 );\par
+            TextBox txtmark = (TextBox)\cf1 this\cf2 .GV.Rows[e.RowIndex].Cells[3].FindControl(\cf4 "txtmark"\cf2 );\par
+            con.Open();\par
+            SqlCommand cmd2 = \cf1 new\cf2  SqlCommand(\cf4 "sp_change_student"\cf2 , con);\par
+            cmd2.CommandType = CommandType.StoredProcedure;\par
+            cmd2.Parameters.AddWithValue(\cf4 "@id"\cf2 ,Convert.ToInt32(lblid.Text));\par
+            cmd2.Parameters.AddWithValue(\cf4 "@name"\cf2 , txtname.Text);\par
+            cmd2.Parameters.AddWithValue(\cf4 "@addres"\cf2 , txtaddress.Text);\par
+            cmd2.Parameters.AddWithValue(\cf4 "@Marks"\cf2 , txtmark.Text);\par
+            cmd2.ExecuteNonQuery();\par
+            con.Close();\par
+            fillgrid();\par
+\par
+        \}\par
+\par
+        \cf1 protected\cf2  \cf1 void\cf2  GV_RowDeleting(\cf1 object\cf2  sender, GridViewDeleteEventArgs e)\par
+        \{\par
+            Label l1 = (Label)GV.Rows[e.RowIndex].Cells[0].FindControl(\cf4 "lblid"\cf2 );\par
+            con.Open();\par
+            SqlCommand cmd2 = \cf1 new\cf2  SqlCommand(\cf4 "sp_del_student"\cf2 , con);\par
+            cmd2.CommandType = CommandType.StoredProcedure;\par
+            cmd2.Parameters.AddWithValue(\cf4 "@id"\cf2 ,Convert.ToInt32(l1.Text));\par
+            cmd2.ExecuteNonQuery();\par
+            con.Close();\par
+            fillgrid();\par
+            \cf1 this\cf2 .GV.EditIndex = -1;\par
+        \}\par
+\par
+        \cf1 protected\cf2  \cf1 void\cf2  btninsid_Click(\cf1 object\cf2  sender, EventArgs e)\par
+        \{\par
+            con.Open();\par
+            SqlCommand cmd3 = \cf1 new\cf2  SqlCommand(\cf4 "sp_ins_student"\cf2 , con);\par
+            cmd3.CommandType = CommandType.StoredProcedure;\par
+            cmd3.Parameters.AddWithValue(\cf4 "@name"\cf2 , Textname.Text);\par
+            cmd3.Parameters.AddWithValue(\cf4 "@addres"\cf2 , Textaddres.Text);\par
+            cmd3.Parameters.AddWithValue(\cf4 "@Marks"\cf2 , Textmark.Text);\par
+            cmd3.ExecuteNonQuery();\par
+            con.Close();\par
+            fillgrid();\par
+            Textname.Text = \cf4 ""\cf2 ;\par
+            Textaddres.Text = \cf4 ""\cf2 ;\par
+            Textmark.Text = \cf4 ""\cf2 ;\par
+        \}\par
+    \}\par
+\}\par
+\lang1033\f2 --------------------MAIN PROGRAM----------------\par
+\par
+\par
+\highlight5\f1 <%\cf1\highlight0 @\cf2  \cf6 Page\cf2  \cf7 Language\cf1 ="C#"\cf2  \cf7 AutoEventWireup\cf1 ="true"\cf2  \cf7 CodeBehind\cf1 ="WebForm1.aspx.cs"\cf2  \cf7 Inherits\cf1 ="CRUDoperationINwebapplication.WebForm1"\cf2  \highlight5 %>\highlight0\par
+\par
+\cf1 <!\cf6 DOCTYPE\cf2  \cf7 html\cf1 >\cf2\par
+\par
+\cf1 <\cf6 html\cf2  \cf7 xmlns\cf1 ="http://www.w3.org/1999/xhtml">\cf2\par
+\cf1 <\cf6 head\cf2  \cf7 runat\cf1 ="server">\cf2\par
+    \cf1 <\cf6 title\cf1 ></\cf6 title\cf1 >\cf2\par
+    \cf1 <\cf6 link\cf2  \cf7 href\cf1 ="Scripts/bootstrap.css"\cf2  \cf7 rel\cf1 ="stylesheet"\cf2  \cf1 />\cf2\par
+    \cf1 <\cf6 link\cf2  \cf7 href\cf1 ="Scripts/bootstrap.min.css"\cf2  \cf7 rel\cf1 ="stylesheet"\cf2  \cf1 />\cf2\par
+\cf1 </\cf6 head\cf1 >\cf2\par
+\cf1 <\cf6 body\cf1 >\cf2\par
+    \cf1 <\cf6 form\cf2  \cf7 id\cf1 ="form1"\cf2  \cf7 runat\cf1 ="server">\cf2\par
+        \cf1 <\cf6 div\cf1 >\cf2\par
+            \highlight5 <%\cf8\highlight0 --DataSourceID="SqlDataSource1"--\cf2\highlight5 %>\highlight0\par
+            \cf1 <\cf6 br\cf2  \cf1 />\cf2\par
+            \cf1 <\cf6 asp\cf1 :\cf6 GridView\cf2  \cf7 ID\cf1 ="GV"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 class\cf1 ="table table-striped"\cf2  \cf7 AutoGenerateColumns\cf1 ="False"\cf2  \cf7 width\cf1 ="150"\cf2  \cf7 height\cf1 ="160"\cf2  \cf7 OnRowCancelingEdit\cf1 ="GV_RowCancelingEdit"\cf2  \cf7 OnRowDeleting\cf1 ="GV_RowDeleting"\cf2  \cf7 OnRowEditing\cf1 ="GV_RowEditing"\cf2  \cf7 OnRowUpdating\cf1 ="GV_RowUpdating">\cf2\par
+                \par
+                \cf1 <\cf6 Columns\cf1 >\cf2\par
+                    \cf1 <\cf6 asp\cf1 :\cf6 TemplateField\cf2  \cf7 HeaderText\cf1 ="id"\cf2  \cf7 SortExpression\cf1 ="id">\cf2\par
+                        \cf1 <\cf6 EditItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lblsid"\cf2   \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "id"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+                        \cf1 </\cf6 EditItemTemplate\cf1 >\cf2\par
+                        \cf1 <\cf6 ItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lblid"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "id"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+                        \cf1 </\cf6 ItemTemplate\cf1 >\cf2\par
+                    \cf1 </\cf6 asp\cf1 :\cf6 TemplateField\cf1 >\cf2\par
+                    \cf1 <\cf6 asp\cf1 :\cf6 TemplateField\cf2  \cf7 HeaderText\cf1 ="name"\cf2  \cf7 SortExpression\cf1 ="name">\cf2\par
+                        \cf1 <\cf6 EditItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 TextBox\cf2  \cf7 ID\cf1 ="txtname"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "name"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 TextBox\cf1 >\cf2\par
+                        \cf1 </\cf6 EditItemTemplate\cf1 >\cf2\par
+                        \cf1 <\cf6 ItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lblnid"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "name"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+                        \cf1 </\cf6 ItemTemplate\cf1 >\cf2\par
+                    \cf1 </\cf6 asp\cf1 :\cf6 TemplateField\cf1 >\cf2\par
+                    \cf1 <\cf6 asp\cf1 :\cf6 TemplateField\cf2  \cf7 HeaderText\cf1 ="addres"\cf2  \cf7 SortExpression\cf1 ="addres">\cf2\par
+                        \cf1 <\cf6 EditItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 TextBox\cf2  \cf7 ID\cf1 ="txtaddress"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "addres"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 TextBox\cf1 >\cf2\par
+                        \cf1 </\cf6 EditItemTemplate\cf1 >\cf2\par
+                        \cf1 <\cf6 ItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lbladdid"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "addres"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+                        \cf1 </\cf6 ItemTemplate\cf1 >\cf2\par
+                    \cf1 </\cf6 asp\cf1 :\cf6 TemplateField\cf1 >\cf2\par
+                    \cf1 <\cf6 asp\cf1 :\cf6 TemplateField\cf2  \cf7 HeaderText\cf1 ="Marks"\cf2  \cf7 SortExpression\cf1 ="Marks">\cf2\par
+                        \cf1 <\cf6 EditItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 TextBox\cf2  \cf7 ID\cf1 ="txtmark"\cf2  \cf7 runat\cf1 ="server"\cf2   \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "Marks"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 TextBox\cf1 >\cf2\par
+                        \cf1 </\cf6 EditItemTemplate\cf1 >\cf2\par
+                        \cf1 <\cf6 ItemTemplate\cf1 >\cf2\par
+                            \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lblmarkid"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ='\cf2\highlight5 <%\cf1\highlight0 #\cf2  Bind(\cf4 "Marks"\cf2 ) \highlight5 %>\cf1\highlight0 '></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+                        \cf1 </\cf6 ItemTemplate\cf1 >\cf2\par
+                    \cf1 </\cf6 asp\cf1 :\cf6 TemplateField\cf1 >\cf2\par
+                    \cf1 <\cf6 asp\cf1 :\cf6 CommandField\cf2  \cf7 ShowEditButton\cf1 ="True"\cf2  \cf7 HeaderText\cf1 ="Edit"/>\cf2\par
+                    \cf1 <\cf6 asp\cf1 :\cf6 CommandField\cf2  \cf7 ShowDeleteButton\cf1 ="True"\cf2  \cf7 HeaderText\cf1 ="Delete"\cf2  \cf1 />\cf2\par
+                \cf1 </\cf6 Columns\cf1 >\cf2\par
+            \cf1 </\cf6 asp\cf1 :\cf6 GridView\cf1 >\cf2\par
+            \highlight5 <%\cf8\highlight0 --<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:schoolConnectionString %>" SelectCommand="SELECT * FROM [student]"></asp:SqlDataSource>--\cf2\highlight5 %>\highlight0\par
+        \cf1 </\cf6 div\cf1 >\cf2\par
+               \par
+\cf1 <\cf6 div\cf2  \cf7 class\cf1 ="form-group">\cf2\par
+     \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lblnameid"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ="Name"></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+\par
+     \cf1 <\cf6 asp\cf1 :\cf6 TextBox\cf2  \cf7 ID\cf1 ="Textname"\cf2   \cf7 class\cf1 ="form-control"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf1 ></\cf6 asp\cf1 :\cf6 TextBox\cf1 >\cf2\par
+\cf1 </\cf6 div\cf1 >\cf2\par
+\par
+\cf1 <\cf6 div\cf2  \cf7 class\cf1 ="form-group">\cf2\par
+     \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="lblpriceid"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ="Addres"></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+\par
+     \cf1 <\cf6 asp\cf1 :\cf6 TextBox\cf2  \cf7 ID\cf1 ="Textaddres"\cf2  \cf7 class\cf1 ="form-control"\cf2   \cf7 runat\cf2  \cf1 ="server"></\cf6 asp\cf1 :\cf6 TextBox\cf1 >\cf2\par
+\cf1 </\cf6 div\cf1 >\cf2\par
+     \cf1 <\cf6 div\cf2  \cf7 class\cf1 ="form-group">\cf2\par
+     \cf1 <\cf6 asp\cf1 :\cf6 Label\cf2  \cf7 ID\cf1 ="Label1"\cf2  \cf7 runat\cf1 ="server"\cf2  \cf7 Text\cf1 ="Marks"></\cf6 asp\cf1 :\cf6 Label\cf1 >\cf2\par
+\par
+     \cf1 <\cf6 asp\cf1 :\cf6 TextBox\cf2  \cf7 ID\cf1 ="Textmark"\cf2  \cf7 class\cf1 ="form-control"\cf2   \cf7 runat\cf2  \cf1 ="server"\cf2  \cf1 ></\cf6 asp\cf1 :\cf6 TextBox\cf1 >\cf2\par
+\cf1 </\cf6 div\cf1 >\cf2\par
+    \par
+     \cf1 <\cf6 asp\cf1 :\cf6 Button\cf2  \cf7 ID\cf1 ="btninsid"\cf2  \cf7 class\cf1 ="btn btn-success"\cf2   \cf7 runat\cf1 ="server"\cf2   \cf7 Text\cf1 ="Insert"\cf2   \cf7 OnClick\cf1 ="btninsid_Click"/>\cf2\par
+     \cf1 <\cf6 br\cf1 />\cf2\par
+    \cf1 </\cf6 form\cf1 >\cf2\par
+\cf1 </\cf6 body\cf1 >\cf2\par
+\cf1 </\cf6 html\cf1 >\cf0\lang9\f0\fs22\par
+}
+ 

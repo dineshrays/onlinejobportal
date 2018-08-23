@@ -1,0 +1,2869 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JobPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Certification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ValidDate" Type="datetime" />
+          <Property Name="PersonalInfo_id" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="IndustryId" Type="int" />
+          <Property Name="AboutCompany" Type="varbinary(max)" />
+          <Property Name="ComapnyWebsite" Type="varchar" MaxLength="100" />
+          <Property Name="EstablishmentDate" Type="date" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="200" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="ContactNumber" Type="bigint" />
+          <Property Name="CompanyImage" Type="varchar" MaxLength="500" />
+          <Property Name="CompanyPresentation" Type="varchar" MaxLength="500" />
+          <Property Name="CompanyLogo" Type="varchar" MaxLength="200" />
+          <Property Name="UploadPresentation" Type="varchar" MaxLength="300" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="FunctionalArea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FunctionalAreaName" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IndustryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessStreamName" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobLocDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobPostId" Type="int" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobPgDet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PGiD" Type="int" Nullable="false" />
+          <Property Name="JobPostId" Type="int" Nullable="false" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobPost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="RecruiterId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="NoOfvacancies" Type="int" />
+          <Property Name="Location" Type="varchar" MaxLength="500" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+          <Property Name="Requirement" Type="varchar" MaxLength="1000" />
+          <Property Name="SpecifyDoc" Type="varchar" MaxLength="100" />
+          <Property Name="IndustryId" Type="int" Nullable="false" />
+          <Property Name="FunctionalAreaId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ExpFrom" Type="int" />
+          <Property Name="ExpTo" Type="int" />
+          <Property Name="CTCFrom" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="CTCTo" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="JobTittle" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="JobPostActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobPostId" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="Isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="JobPostSkills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillId" Type="int" Nullable="false" />
+          <Property Name="JobPostId" Type="int" Nullable="false" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobUgDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UgId" Type="int" Nullable="false" />
+          <Property Name="JobPostId" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedON" Type="datetime" />
+          <Property Name="Isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country_id" Type="int" Nullable="false" />
+          <Property Name="State_id" Type="int" Nullable="false" />
+          <Property Name="City_id" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Lookout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Personal_id" Type="int" Nullable="false" />
+          <Property Name="NoticePeriod" Type="int" />
+          <Property Name="LastWorkingDay" Type="date" />
+          <Property Name="IsPlaced" Type="bit" />
+          <Property Name="LastActive" Type="datetime" />
+          <Property Name="Package" Type="decimal" Precision="9" Scale="2" />
+        </EntityType>
+        <EntityType Name="PersonalInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Skill_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PG">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PGQualification" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PlanMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
+          <Property Name="Price" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="NoClicks" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PreferredCompanies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lookout_id" Type="int" Nullable="false" />
+          <Property Name="Company_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreferredLocations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lookout_id" Type="int" Nullable="false" />
+          <Property Name="Location_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PremiumColldetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserDetails_id" Type="int" Nullable="false" />
+          <Property Name="UserEducation_id" Type="int" Nullable="false" />
+          <Property Name="premium_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="primecollege">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PremiumInstituteNames" Type="nvarchar" MaxLength="100" />
+          <Property Name="ShortForms" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Recruiter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="200" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="IndusTyId" Type="int" Nullable="false" />
+          <Property Name="Consultant" Type="bit" />
+          <Property Name="ContactPersonName" Type="varchar" MaxLength="100" />
+          <Property Name="OfficeAddress" Type="varchar" MaxLength="400" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="AlternativEmaiId" Type="varchar" MaxLength="300" />
+          <Property Name="RecruiterImage" Type="varchar" MaxLength="500" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="Company" Type="bit" />
+          <Property Name="Designation" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNo" Type="bigint" />
+        </EntityType>
+        <EntityType Name="RecruiterPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecruiterId" Type="int" Nullable="false" />
+          <Property Name="PlanMasterId" Type="int" Nullable="false" />
+          <Property Name="SubUserCount" Type="int" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RecruiterPlanDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecruiterPlanId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="8" />
+          <Property Name="ContactNo" Type="bigint" />
+          <Property Name="EmailId" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleType" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Shifts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShiftName" Type="varchar" MaxLength="50" />
+          <Property Name="Timefrom" Type="time" Precision="7" />
+          <Property Name="TimeTo" Type="time" Precision="7" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillName" Type="varchar" MaxLength="100" />
+          <Property Name="SkillLevel" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UG">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UQqualification" Type="varchar" MaxLength="100" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="CreatedON" Type="datetime" />
+          <Property Name="ModifiedON" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="User_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usertype_id" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="400" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_no" Type="bigint" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="UserImage" Type="varchar" MaxLength="300" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserEducation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserDetails_id" Type="int" Nullable="false" />
+          <Property Name="Course" Type="nvarchar" MaxLength="50" />
+          <Property Name="Board" Type="nvarchar" MaxLength="50" />
+          <Property Name="InstituteName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartYear" Type="int" />
+          <Property Name="EndYear" Type="int" />
+          <Property Name="CourseType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Percentage" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserExperience">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Company_id" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="Enddate" Type="date" />
+          <Property Name="CurrentSalary" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="JobRole" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyLocation" Type="varchar" MaxLength="300" />
+          <Property Name="NoofprojectsDone" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WorkShift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shift_Id" Type="int" Nullable="false" />
+          <Property Name="Lookout_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_BusinessStream">
+          <End Role="IndustryType" Type="Self.IndustryType" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobLocDet_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="JobLocDet" Type="Self.JobLocDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobLocDet">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobLocDet_JobPost">
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="1" />
+          <End Role="JobLocDet" Type="Self.JobLocDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobLocDet">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPgDet_JobPost">
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="1" />
+          <End Role="JobPgDet" Type="Self.JobPgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPgDet">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPgDet_PG">
+          <End Role="PG" Type="Self.PG" Multiplicity="1" />
+          <End Role="JobPgDet" Type="Self.JobPgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PG">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPgDet">
+              <PropertyRef Name="PGiD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPost_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPost_FunctionalArea">
+          <End Role="FunctionalArea" Type="Self.FunctionalArea" Multiplicity="0..1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FunctionalArea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="FunctionalAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPost_IndustryType">
+          <End Role="IndustryType" Type="Self.IndustryType" Multiplicity="1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPost_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPostActivity_JobPostActivity">
+          <End Role="JobPostActivity" Type="Self.JobPostActivity" Multiplicity="1" />
+          <End Role="JobPostActivity1" Type="Self.JobPostActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPostActivity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPostActivity1">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPostSkills_JobPost">
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="1" />
+          <End Role="JobPostSkills" Type="Self.JobPostSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPostSkills">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPostSkills_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="JobPostSkills" Type="Self.JobPostSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="JobPostSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobUgDet_JobPost">
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="1" />
+          <End Role="JobUgDet" Type="Self.JobUgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobUgDet">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobUgDet_UG">
+          <End Role="UG" Type="Self.UG" Multiplicity="1" />
+          <End Role="JobUgDet" Type="Self.JobUgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UG">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobUgDet">
+              <PropertyRef Name="UgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="Country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="State_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookout_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="Lookout" Type="Self.Lookout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lookout">
+              <PropertyRef Name="Personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredCompanies_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PreferredCompanies" Type="Self.PreferredCompanies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreferredCompanies">
+              <PropertyRef Name="Company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredCompanies_Lookout">
+          <End Role="Lookout" Type="Self.Lookout" Multiplicity="1" />
+          <End Role="PreferredCompanies" Type="Self.PreferredCompanies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookout">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreferredCompanies">
+              <PropertyRef Name="Lookout_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredLocations_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="PreferredLocations" Type="Self.PreferredLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PreferredLocations">
+              <PropertyRef Name="Location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredLocations_Lookout">
+          <End Role="Lookout" Type="Self.Lookout" Multiplicity="1" />
+          <End Role="PreferredLocations" Type="Self.PreferredLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookout">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreferredLocations">
+              <PropertyRef Name="Lookout_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremiumCollege_primecollege">
+          <End Role="primecollege" Type="Self.primecollege" Multiplicity="1" />
+          <End Role="PremiumColldetail" Type="Self.PremiumColldetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="primecollege">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PremiumColldetail">
+              <PropertyRef Name="premium_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremiumCollege_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="PremiumColldetail" Type="Self.PremiumColldetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PremiumColldetail">
+              <PropertyRef Name="UserDetails_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremiumCollege_UserEducation">
+          <End Role="UserEducation" Type="Self.UserEducation" Multiplicity="1" />
+          <End Role="PremiumColldetail" Type="Self.PremiumColldetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserEducation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PremiumColldetail">
+              <PropertyRef Name="UserEducation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_IndustryType">
+          <End Role="IndustryType" Type="Self.IndustryType" Multiplicity="1" />
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="IndusTyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_State1">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecruiterPlan_PlanMaster">
+          <End Role="PlanMaster" Type="Self.PlanMaster" Multiplicity="1" />
+          <End Role="RecruiterPlan" Type="Self.RecruiterPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecruiterPlan">
+              <PropertyRef Name="PlanMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecruiterPlan_Recruiter">
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="1" />
+          <End Role="RecruiterPlan" Type="Self.RecruiterPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecruiterPlan">
+              <PropertyRef Name="RecruiterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecruiterPlanDet_RecruiterPlan">
+          <End Role="RecruiterPlan" Type="Self.RecruiterPlan" Multiplicity="1" />
+          <End Role="RecruiterPlanDet" Type="Self.RecruiterPlanDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecruiterPlan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecruiterPlanDet">
+              <PropertyRef Name="RecruiterPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_PersonalInfo">
+          <End Role="PersonalInfo" Type="Self.PersonalInfo" Multiplicity="1" />
+          <End Role="Certification" Type="Self.Certification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Certification">
+              <PropertyRef Name="PersonalInfo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetails_User_type">
+          <End Role="User_type" Type="Self.User_type" Multiplicity="1" />
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="Usertype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEducation_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="UserEducation" Type="Self.UserEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEducation">
+              <PropertyRef Name="UserDetails_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserExperience_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="UserExperience" Type="Self.UserExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserExperience">
+              <PropertyRef Name="Company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserExperience_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="UserExperience" Type="Self.UserExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserExperience">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSkilldet_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="PersonalInfo" Type="Self.PersonalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PersonalInfo">
+              <PropertyRef Name="Skill_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSkilldet_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="PersonalInfo" Type="Self.PersonalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonalInfo">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkShift_Lookout">
+          <End Role="Lookout" Type="Self.Lookout" Multiplicity="1" />
+          <End Role="WorkShift" Type="Self.WorkShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookout">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkShift">
+              <PropertyRef Name="Lookout_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkShift_Shift">
+          <End Role="Shifts" Type="Self.Shifts" Multiplicity="1" />
+          <End Role="WorkShift" Type="Self.WorkShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shifts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkShift">
+              <PropertyRef Name="Shift_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JobPortalModelStoreContainer">
+          <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FunctionalArea" EntityType="Self.FunctionalArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndustryType" EntityType="Self.IndustryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobLocDet" EntityType="Self.JobLocDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPgDet" EntityType="Self.JobPgDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPost" EntityType="Self.JobPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPostActivity" EntityType="Self.JobPostActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPostSkills" EntityType="Self.JobPostSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobUgDet" EntityType="Self.JobUgDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lookout" EntityType="Self.Lookout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonalInfo" EntityType="Self.PersonalInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PG" EntityType="Self.PG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanMaster" EntityType="Self.PlanMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreferredCompanies" EntityType="Self.PreferredCompanies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreferredLocations" EntityType="Self.PreferredLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremiumColldetail" EntityType="Self.PremiumColldetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="primecollege" EntityType="Self.primecollege" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recruiter" EntityType="Self.Recruiter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecruiterPlan" EntityType="Self.RecruiterPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecruiterPlanDet" EntityType="Self.RecruiterPlanDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UG" EntityType="Self.UG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_type" EntityType="Self.User_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEducation" EntityType="Self.UserEducation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserExperience" EntityType="Self.UserExperience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkShift" EntityType="Self.WorkShift" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_BusinessStream" Association="Self.FK_Company_BusinessStream">
+            <End Role="IndustryType" EntitySet="IndustryType" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobLocDet_City" Association="Self.FK_JobLocDet_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="JobLocDet" EntitySet="JobLocDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobLocDet_JobPost" Association="Self.FK_JobLocDet_JobPost">
+            <End Role="JobPost" EntitySet="JobPost" />
+            <End Role="JobLocDet" EntitySet="JobLocDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPgDet_JobPost" Association="Self.FK_JobPgDet_JobPost">
+            <End Role="JobPost" EntitySet="JobPost" />
+            <End Role="JobPgDet" EntitySet="JobPgDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPgDet_PG" Association="Self.FK_JobPgDet_PG">
+            <End Role="PG" EntitySet="PG" />
+            <End Role="JobPgDet" EntitySet="JobPgDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPost_Company" Association="Self.FK_JobPost_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPost_FunctionalArea" Association="Self.FK_JobPost_FunctionalArea">
+            <End Role="FunctionalArea" EntitySet="FunctionalArea" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPost_IndustryType" Association="Self.FK_JobPost_IndustryType">
+            <End Role="IndustryType" EntitySet="IndustryType" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPost_Role" Association="Self.FK_JobPost_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPostActivity_JobPostActivity" Association="Self.FK_JobPostActivity_JobPostActivity">
+            <End Role="JobPostActivity" EntitySet="JobPostActivity" />
+            <End Role="JobPostActivity1" EntitySet="JobPostActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPostSkills_JobPost" Association="Self.FK_JobPostSkills_JobPost">
+            <End Role="JobPost" EntitySet="JobPost" />
+            <End Role="JobPostSkills" EntitySet="JobPostSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPostSkills_Skills" Association="Self.FK_JobPostSkills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="JobPostSkills" EntitySet="JobPostSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobUgDet_JobPost" Association="Self.FK_JobUgDet_JobPost">
+            <End Role="JobPost" EntitySet="JobPost" />
+            <End Role="JobUgDet" EntitySet="JobUgDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobUgDet_UG" Association="Self.FK_JobUgDet_UG">
+            <End Role="UG" EntitySet="UG" />
+            <End Role="JobUgDet" EntitySet="JobUgDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_City" Association="Self.FK_Location_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Country" Association="Self.FK_Location_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_State" Association="Self.FK_Location_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookout_UserDetails" Association="Self.FK_Lookout_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Lookout" EntitySet="Lookout" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredCompanies_Company" Association="Self.FK_PreferredCompanies_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PreferredCompanies" EntitySet="PreferredCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredCompanies_Lookout" Association="Self.FK_PreferredCompanies_Lookout">
+            <End Role="Lookout" EntitySet="Lookout" />
+            <End Role="PreferredCompanies" EntitySet="PreferredCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredLocations_Location" Association="Self.FK_PreferredLocations_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="PreferredLocations" EntitySet="PreferredLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredLocations_Lookout" Association="Self.FK_PreferredLocations_Lookout">
+            <End Role="Lookout" EntitySet="Lookout" />
+            <End Role="PreferredLocations" EntitySet="PreferredLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremiumCollege_primecollege" Association="Self.FK_PremiumCollege_primecollege">
+            <End Role="primecollege" EntitySet="primecollege" />
+            <End Role="PremiumColldetail" EntitySet="PremiumColldetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremiumCollege_UserDetails" Association="Self.FK_PremiumCollege_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="PremiumColldetail" EntitySet="PremiumColldetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremiumCollege_UserEducation" Association="Self.FK_PremiumCollege_UserEducation">
+            <End Role="UserEducation" EntitySet="UserEducation" />
+            <End Role="PremiumColldetail" EntitySet="PremiumColldetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_City" Association="Self.FK_Recruiter_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Recruiter" EntitySet="Recruiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_Country" Association="Self.FK_Recruiter_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Recruiter" EntitySet="Recruiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_IndustryType" Association="Self.FK_Recruiter_IndustryType">
+            <End Role="IndustryType" EntitySet="IndustryType" />
+            <End Role="Recruiter" EntitySet="Recruiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_State1" Association="Self.FK_Recruiter_State1">
+            <End Role="State" EntitySet="State" />
+            <End Role="Recruiter" EntitySet="Recruiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecruiterPlan_PlanMaster" Association="Self.FK_RecruiterPlan_PlanMaster">
+            <End Role="PlanMaster" EntitySet="PlanMaster" />
+            <End Role="RecruiterPlan" EntitySet="RecruiterPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecruiterPlan_Recruiter" Association="Self.FK_RecruiterPlan_Recruiter">
+            <End Role="Recruiter" EntitySet="Recruiter" />
+            <End Role="RecruiterPlan" EntitySet="RecruiterPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecruiterPlanDet_RecruiterPlan" Association="Self.FK_RecruiterPlanDet_RecruiterPlan">
+            <End Role="RecruiterPlan" EntitySet="RecruiterPlan" />
+            <End Role="RecruiterPlanDet" EntitySet="RecruiterPlanDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_PersonalInfo" Association="Self.FK_Table_1_PersonalInfo">
+            <End Role="PersonalInfo" EntitySet="PersonalInfo" />
+            <End Role="Certification" EntitySet="Certification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_User_type" Association="Self.FK_UserDetails_User_type">
+            <End Role="User_type" EntitySet="User_type" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEducation_UserDetails" Association="Self.FK_UserEducation_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserEducation" EntitySet="UserEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserExperience_Company" Association="Self.FK_UserExperience_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="UserExperience" EntitySet="UserExperience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserExperience_UserDetails" Association="Self.FK_UserExperience_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserExperience" EntitySet="UserExperience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSkilldet_Skills" Association="Self.FK_UserSkilldet_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="PersonalInfo" EntitySet="PersonalInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSkilldet_UserDetails" Association="Self.FK_UserSkilldet_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="PersonalInfo" EntitySet="PersonalInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkShift_Lookout" Association="Self.FK_WorkShift_Lookout">
+            <End Role="Lookout" EntitySet="Lookout" />
+            <End Role="WorkShift" EntitySet="WorkShift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkShift_Shift" Association="Self.FK_WorkShift_Shift">
+            <End Role="Shifts" EntitySet="Shifts" />
+            <End Role="WorkShift" EntitySet="WorkShift" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JobPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="JobPostSkill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <Property Name="JobPostId" Type="Int32" Nullable="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_JobPostSkills_Skills" FromRole="JobPostSkills" ToRole="Skills" />
+          <NavigationProperty Name="JobPost" Relationship="JobPortalModel.FK_JobPostSkills_JobPost" FromRole="JobPostSkill" ToRole="JobPost" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobPosts" Relationship="JobPortalModel.FK_JobPost_Role" FromRole="Role" ToRole="JobPost" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SkillLevel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JobPostSkills" Relationship="Self.FK_JobPostSkills_Skills" FromRole="Skills" ToRole="JobPostSkills" />
+          <NavigationProperty Name="PersonalInfoes" Relationship="JobPortalModel.FK_UserSkilldet_Skills" FromRole="Skill" ToRole="PersonalInfo" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_JobPostSkills_Skills">
+          <End Role="Skills" Type="Self.Skill" Multiplicity="1" />
+          <End Role="JobPostSkills" Type="Self.JobPostSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="JobPostSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JobPortalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="JobPostSkills" EntityType="Self.JobPostSkill" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_JobPostSkills_Skills" Association="Self.FK_JobPostSkills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="JobPostSkills" EntitySet="JobPostSkills" />
+          </AssociationSet>
+          <EntitySet Name="Cities" EntityType="JobPortalModel.City" />
+          <EntitySet Name="Countries" EntityType="JobPortalModel.Country" />
+          <EntitySet Name="States" EntityType="JobPortalModel.State" />
+          <AssociationSet Name="FK_City_State" Association="JobPortalModel.FK_City_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="JobPortalModel.FK_State_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <EntitySet Name="Recruiters" EntityType="JobPortalModel.Recruiter" />
+          <AssociationSet Name="FK_Recruiter_City" Association="JobPortalModel.FK_Recruiter_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Recruiter" EntitySet="Recruiters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_Country" Association="JobPortalModel.FK_Recruiter_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Recruiter" EntitySet="Recruiters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_State1" Association="JobPortalModel.FK_Recruiter_State1">
+            <End Role="State" EntitySet="States" />
+            <End Role="Recruiter" EntitySet="Recruiters" />
+          </AssociationSet>
+          <EntitySet Name="RecruiterPlans" EntityType="JobPortalModel.RecruiterPlan" />
+          <AssociationSet Name="FK_RecruiterPlan_Recruiter" Association="JobPortalModel.FK_RecruiterPlan_Recruiter">
+            <End Role="Recruiter" EntitySet="Recruiters" />
+            <End Role="RecruiterPlan" EntitySet="RecruiterPlans" />
+          </AssociationSet>
+          <EntitySet Name="RecruiterPlanDets" EntityType="JobPortalModel.RecruiterPlanDet" />
+          <AssociationSet Name="FK_RecruiterPlanDet_RecruiterPlan" Association="JobPortalModel.FK_RecruiterPlanDet_RecruiterPlan">
+            <End Role="RecruiterPlan" EntitySet="RecruiterPlans" />
+            <End Role="RecruiterPlanDet" EntitySet="RecruiterPlanDets" />
+          </AssociationSet>
+          <EntitySet Name="PlanMasters" EntityType="JobPortalModel.PlanMaster" />
+          <AssociationSet Name="FK_RecruiterPlan_PlanMaster" Association="JobPortalModel.FK_RecruiterPlan_PlanMaster">
+            <End Role="PlanMaster" EntitySet="PlanMasters" />
+            <End Role="RecruiterPlan" EntitySet="RecruiterPlans" />
+          </AssociationSet>
+          <EntitySet Name="FunctionalAreas" EntityType="JobPortalModel.FunctionalArea" />
+          <EntitySet Name="PGs" EntityType="JobPortalModel.PG" />
+          <EntitySet Name="UGs" EntityType="JobPortalModel.UG" />
+          <EntitySet Name="JobLocDets" EntityType="JobPortalModel.JobLocDet" />
+          <EntitySet Name="JobPgDets" EntityType="JobPortalModel.JobPgDet" />
+          <EntitySet Name="JobUgDets" EntityType="JobPortalModel.JobUgDet" />
+          <AssociationSet Name="FK_JobLocDet_City" Association="JobPortalModel.FK_JobLocDet_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="JobLocDet" EntitySet="JobLocDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPgDet_PG" Association="JobPortalModel.FK_JobPgDet_PG">
+            <End Role="PG" EntitySet="PGs" />
+            <End Role="JobPgDet" EntitySet="JobPgDets" />
+          </AssociationSet>
+          <EntitySet Name="JobPosts" EntityType="JobPortalModel.JobPost" />
+          <AssociationSet Name="FK_JobPost_FunctionalArea" Association="JobPortalModel.FK_JobPost_FunctionalArea">
+            <End Role="FunctionalArea" EntitySet="FunctionalAreas" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobLocDet_JobPost" Association="JobPortalModel.FK_JobLocDet_JobPost">
+            <End Role="JobPost" EntitySet="JobPosts" />
+            <End Role="JobLocDet" EntitySet="JobLocDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPgDet_JobPost" Association="JobPortalModel.FK_JobPgDet_JobPost">
+            <End Role="JobPost" EntitySet="JobPosts" />
+            <End Role="JobPgDet" EntitySet="JobPgDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPost_Role" Association="JobPortalModel.FK_JobPost_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPostSkills_JobPost" Association="JobPortalModel.FK_JobPostSkills_JobPost">
+            <End Role="JobPost" EntitySet="JobPosts" />
+            <End Role="JobPostSkill" EntitySet="JobPostSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobUgDet_JobPost" Association="JobPortalModel.FK_JobUgDet_JobPost">
+            <End Role="JobPost" EntitySet="JobPosts" />
+            <End Role="JobUgDet" EntitySet="JobUgDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobUgDet_UG" Association="JobPortalModel.FK_JobUgDet_UG">
+            <End Role="UG" EntitySet="UGs" />
+            <End Role="JobUgDet" EntitySet="JobUgDets" />
+          </AssociationSet>
+          <EntitySet Name="Certifications" EntityType="JobPortalModel.Certification" />
+          <EntitySet Name="Locations" EntityType="JobPortalModel.Location" />
+          <EntitySet Name="Lookouts" EntityType="JobPortalModel.Lookout" />
+          <EntitySet Name="PersonalInfoes" EntityType="JobPortalModel.PersonalInfo" />
+          <EntitySet Name="PreferredCompanies" EntityType="JobPortalModel.PreferredCompany" />
+          <EntitySet Name="PreferredLocations" EntityType="JobPortalModel.PreferredLocation" />
+          <EntitySet Name="PremiumColldetails" EntityType="JobPortalModel.PremiumColldetail" />
+          <EntitySet Name="primecolleges" EntityType="JobPortalModel.primecollege" />
+          <EntitySet Name="Shifts" EntityType="JobPortalModel.Shift" />
+          <EntitySet Name="User_type" EntityType="JobPortalModel.User_type" />
+          <EntitySet Name="UserDetails" EntityType="JobPortalModel.UserDetail" />
+          <EntitySet Name="UserEducations" EntityType="JobPortalModel.UserEducation" />
+          <EntitySet Name="UserExperiences" EntityType="JobPortalModel.UserExperience" />
+          <EntitySet Name="WorkShifts" EntityType="JobPortalModel.WorkShift" />
+          <AssociationSet Name="FK_Table_1_PersonalInfo" Association="JobPortalModel.FK_Table_1_PersonalInfo">
+            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+            <End Role="Certification" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_City" Association="JobPortalModel.FK_Location_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Country" Association="JobPortalModel.FK_Location_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_State" Association="JobPortalModel.FK_Location_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredLocations_Location" Association="JobPortalModel.FK_PreferredLocations_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PreferredLocation" EntitySet="PreferredLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookout_UserDetails" Association="JobPortalModel.FK_Lookout_UserDetails">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="Lookout" EntitySet="Lookouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredCompanies_Lookout" Association="JobPortalModel.FK_PreferredCompanies_Lookout">
+            <End Role="Lookout" EntitySet="Lookouts" />
+            <End Role="PreferredCompany" EntitySet="PreferredCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredLocations_Lookout" Association="JobPortalModel.FK_PreferredLocations_Lookout">
+            <End Role="Lookout" EntitySet="Lookouts" />
+            <End Role="PreferredLocation" EntitySet="PreferredLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkShift_Lookout" Association="JobPortalModel.FK_WorkShift_Lookout">
+            <End Role="Lookout" EntitySet="Lookouts" />
+            <End Role="WorkShift" EntitySet="WorkShifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSkilldet_Skills" Association="JobPortalModel.FK_UserSkilldet_Skills">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSkilldet_UserDetails" Association="JobPortalModel.FK_UserSkilldet_UserDetails">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremiumCollege_primecollege" Association="JobPortalModel.FK_PremiumCollege_primecollege">
+            <End Role="primecollege" EntitySet="primecolleges" />
+            <End Role="PremiumColldetail" EntitySet="PremiumColldetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremiumCollege_UserDetails" Association="JobPortalModel.FK_PremiumCollege_UserDetails">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="PremiumColldetail" EntitySet="PremiumColldetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremiumCollege_UserEducation" Association="JobPortalModel.FK_PremiumCollege_UserEducation">
+            <End Role="UserEducation" EntitySet="UserEducations" />
+            <End Role="PremiumColldetail" EntitySet="PremiumColldetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkShift_Shift" Association="JobPortalModel.FK_WorkShift_Shift">
+            <End Role="Shift" EntitySet="Shifts" />
+            <End Role="WorkShift" EntitySet="WorkShifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_User_type" Association="JobPortalModel.FK_UserDetails_User_type">
+            <End Role="User_type" EntitySet="User_type" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEducation_UserDetails" Association="JobPortalModel.FK_UserEducation_UserDetails">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="UserEducation" EntitySet="UserEducations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserExperience_UserDetails" Association="JobPortalModel.FK_UserExperience_UserDetails">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="UserExperience" EntitySet="UserExperiences" />
+          </AssociationSet>
+          <EntitySet Name="IndustryTypes" EntityType="JobPortalModel.IndustryType" />
+          <EntitySet Name="JobPostActivities" EntityType="JobPortalModel.JobPostActivity" />
+          <AssociationSet Name="FK_JobPost_IndustryType" Association="JobPortalModel.FK_JobPost_IndustryType">
+            <End Role="IndustryType" EntitySet="IndustryTypes" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_IndustryType" Association="JobPortalModel.FK_Recruiter_IndustryType">
+            <End Role="IndustryType" EntitySet="IndustryTypes" />
+            <End Role="Recruiter" EntitySet="Recruiters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPostActivity_JobPostActivity" Association="JobPortalModel.FK_JobPostActivity_JobPostActivity">
+            <End Role="JobPostActivity" EntitySet="JobPostActivities" />
+            <End Role="JobPostActivity1" EntitySet="JobPostActivities" />
+          </AssociationSet>
+          <EntitySet Name="Companies" EntityType="JobPortalModel.Company" />
+          <AssociationSet Name="FK_Company_BusinessStream" Association="JobPortalModel.FK_Company_BusinessStream">
+            <End Role="IndustryType" EntitySet="IndustryTypes" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPost_Company" Association="JobPortalModel.FK_JobPost_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredCompanies_Company" Association="JobPortalModel.FK_PreferredCompanies_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PreferredCompany" EntitySet="PreferredCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserExperience_Company" Association="JobPortalModel.FK_UserExperience_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="UserExperience" EntitySet="UserExperiences" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <NavigationProperty Name="State" Relationship="JobPortalModel.FK_City_State" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="Recruiters" Relationship="JobPortalModel.FK_Recruiter_City" FromRole="City" ToRole="Recruiter" />
+          <NavigationProperty Name="JobLocDets" Relationship="JobPortalModel.FK_JobLocDet_City" FromRole="City" ToRole="JobLocDet" />
+          <NavigationProperty Name="Locations" Relationship="JobPortalModel.FK_Location_City" FromRole="City" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <NavigationProperty Name="States" Relationship="JobPortalModel.FK_State_Country" FromRole="Country" ToRole="State" />
+          <NavigationProperty Name="Recruiters" Relationship="JobPortalModel.FK_Recruiter_Country" FromRole="Country" ToRole="Recruiter" />
+          <NavigationProperty Name="Locations" Relationship="JobPortalModel.FK_Location_Country" FromRole="Country" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <NavigationProperty Name="Cities" Relationship="JobPortalModel.FK_City_State" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="JobPortalModel.FK_State_Country" FromRole="State" ToRole="Country" />
+          <NavigationProperty Name="Recruiters" Relationship="JobPortalModel.FK_Recruiter_State1" FromRole="State" ToRole="Recruiter" />
+          <NavigationProperty Name="Locations" Relationship="JobPortalModel.FK_Location_State" FromRole="State" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_City_State">
+          <End Type="JobPortalModel.State" Role="State" Multiplicity="1" />
+          <End Type="JobPortalModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Type="JobPortalModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="JobPortalModel.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Recruiter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IndusTyId" Type="Int32" Nullable="false" />
+          <Property Name="Consultant" Type="Boolean" />
+          <Property Name="ContactPersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="AlternativEmaiId" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RecruiterImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="Company" Type="Boolean" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="Int64" />
+          <NavigationProperty Name="City" Relationship="JobPortalModel.FK_Recruiter_City" FromRole="Recruiter" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="JobPortalModel.FK_Recruiter_Country" FromRole="Recruiter" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="JobPortalModel.FK_Recruiter_State1" FromRole="Recruiter" ToRole="State" />
+          <NavigationProperty Name="RecruiterPlans" Relationship="JobPortalModel.FK_RecruiterPlan_Recruiter" FromRole="Recruiter" ToRole="RecruiterPlan" />
+          <NavigationProperty Name="IndustryType" Relationship="JobPortalModel.FK_Recruiter_IndustryType" FromRole="Recruiter" ToRole="IndustryType" />
+        </EntityType>
+        <Association Name="FK_Recruiter_City">
+          <End Type="JobPortalModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="JobPortalModel.Recruiter" Role="Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_Country">
+          <End Type="JobPortalModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="JobPortalModel.Recruiter" Role="Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_State1">
+          <End Type="JobPortalModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="JobPortalModel.Recruiter" Role="Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RecruiterPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecruiterId" Type="Int32" Nullable="false" />
+          <Property Name="PlanMasterId" Type="Int32" Nullable="false" />
+          <Property Name="SubUserCount" Type="Int32" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Recruiter" Relationship="JobPortalModel.FK_RecruiterPlan_Recruiter" FromRole="RecruiterPlan" ToRole="Recruiter" />
+          <NavigationProperty Name="RecruiterPlanDets" Relationship="JobPortalModel.FK_RecruiterPlanDet_RecruiterPlan" FromRole="RecruiterPlan" ToRole="RecruiterPlanDet" />
+          <NavigationProperty Name="PlanMaster" Relationship="JobPortalModel.FK_RecruiterPlan_PlanMaster" FromRole="RecruiterPlan" ToRole="PlanMaster" />
+        </EntityType>
+        <Association Name="FK_RecruiterPlan_Recruiter">
+          <End Type="JobPortalModel.Recruiter" Role="Recruiter" Multiplicity="1" />
+          <End Type="JobPortalModel.RecruiterPlan" Role="RecruiterPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecruiterPlan">
+              <PropertyRef Name="RecruiterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RecruiterPlanDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecruiterPlanId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="Int64" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RecruiterPlan" Relationship="JobPortalModel.FK_RecruiterPlanDet_RecruiterPlan" FromRole="RecruiterPlanDet" ToRole="RecruiterPlan" />
+        </EntityType>
+        <Association Name="FK_RecruiterPlanDet_RecruiterPlan">
+          <End Type="JobPortalModel.RecruiterPlan" Role="RecruiterPlan" Multiplicity="1" />
+          <End Type="JobPortalModel.RecruiterPlanDet" Role="RecruiterPlanDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecruiterPlan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecruiterPlanDet">
+              <PropertyRef Name="RecruiterPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PlanMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="NoClicks" Type="Int64" />
+          <NavigationProperty Name="RecruiterPlans" Relationship="JobPortalModel.FK_RecruiterPlan_PlanMaster" FromRole="PlanMaster" ToRole="RecruiterPlan" />
+        </EntityType>
+        <Association Name="FK_RecruiterPlan_PlanMaster">
+          <End Type="JobPortalModel.PlanMaster" Role="PlanMaster" Multiplicity="1" />
+          <End Type="JobPortalModel.RecruiterPlan" Role="RecruiterPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecruiterPlan">
+              <PropertyRef Name="PlanMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FunctionalArea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FunctionalAreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobPosts" Relationship="JobPortalModel.FK_JobPost_FunctionalArea" FromRole="FunctionalArea" ToRole="JobPost" />
+        </EntityType>
+        <EntityType Name="PG">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PGQualification" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobPgDets" Relationship="JobPortalModel.FK_JobPgDet_PG" FromRole="PG" ToRole="JobPgDet" />
+        </EntityType>
+        <EntityType Name="UG">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UQqualification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedON" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedON" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="JobUgDets" Relationship="JobPortalModel.FK_JobUgDet_UG" FromRole="UG" ToRole="JobUgDet" />
+        </EntityType>
+        <EntityType Name="JobLocDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobPostId" Type="Int32" Nullable="false" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="City" Relationship="JobPortalModel.FK_JobLocDet_City" FromRole="JobLocDet" ToRole="City" />
+          <NavigationProperty Name="JobPost" Relationship="JobPortalModel.FK_JobLocDet_JobPost" FromRole="JobLocDet" ToRole="JobPost" />
+        </EntityType>
+        <EntityType Name="JobPgDet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PGiD" Type="Int32" Nullable="false" />
+          <Property Name="JobPostId" Type="Int32" Nullable="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PG" Relationship="JobPortalModel.FK_JobPgDet_PG" FromRole="JobPgDet" ToRole="PG" />
+          <NavigationProperty Name="JobPost" Relationship="JobPortalModel.FK_JobPgDet_JobPost" FromRole="JobPgDet" ToRole="JobPost" />
+        </EntityType>
+        <EntityType Name="JobUgDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UgId" Type="Int32" Nullable="false" />
+          <Property Name="JobPostId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedON" Type="DateTime" Precision="3" />
+          <Property Name="Isactive" Type="Boolean" />
+          <NavigationProperty Name="JobPost" Relationship="JobPortalModel.FK_JobUgDet_JobPost" FromRole="JobUgDet" ToRole="JobPost" />
+          <NavigationProperty Name="UG" Relationship="JobPortalModel.FK_JobUgDet_UG" FromRole="JobUgDet" ToRole="UG" />
+        </EntityType>
+        <Association Name="FK_JobLocDet_City">
+          <End Type="JobPortalModel.City" Role="City" Multiplicity="1" />
+          <End Type="JobPortalModel.JobLocDet" Role="JobLocDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobLocDet">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPgDet_PG">
+          <End Type="JobPortalModel.PG" Role="PG" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPgDet" Role="JobPgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PG">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPgDet">
+              <PropertyRef Name="PGiD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobPost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="RecruiterId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="NoOfvacancies" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="Requirement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SpecifyDoc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IndustryId" Type="Int32" Nullable="false" />
+          <Property Name="FunctionalAreaId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ExpFrom" Type="Int32" />
+          <Property Name="ExpTo" Type="Int32" />
+          <Property Name="CTCFrom" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="CTCTo" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="JobTittle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FunctionalArea" Relationship="JobPortalModel.FK_JobPost_FunctionalArea" FromRole="JobPost" ToRole="FunctionalArea" />
+          <NavigationProperty Name="JobLocDets" Relationship="JobPortalModel.FK_JobLocDet_JobPost" FromRole="JobPost" ToRole="JobLocDet" />
+          <NavigationProperty Name="JobPgDets" Relationship="JobPortalModel.FK_JobPgDet_JobPost" FromRole="JobPost" ToRole="JobPgDet" />
+          <NavigationProperty Name="Role" Relationship="JobPortalModel.FK_JobPost_Role" FromRole="JobPost" ToRole="Role" />
+          <NavigationProperty Name="JobPostSkills" Relationship="JobPortalModel.FK_JobPostSkills_JobPost" FromRole="JobPost" ToRole="JobPostSkill" />
+          <NavigationProperty Name="JobUgDets" Relationship="JobPortalModel.FK_JobUgDet_JobPost" FromRole="JobPost" ToRole="JobUgDet" />
+          <NavigationProperty Name="IndustryType" Relationship="JobPortalModel.FK_JobPost_IndustryType" FromRole="JobPost" ToRole="IndustryType" />
+          <NavigationProperty Name="Company" Relationship="JobPortalModel.FK_JobPost_Company" FromRole="JobPost" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_JobPost_FunctionalArea">
+          <End Type="JobPortalModel.FunctionalArea" Role="FunctionalArea" Multiplicity="0..1" />
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FunctionalArea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="FunctionalAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobLocDet_JobPost">
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="1" />
+          <End Type="JobPortalModel.JobLocDet" Role="JobLocDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobLocDet">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPgDet_JobPost">
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPgDet" Role="JobPgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPgDet">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPost_Role">
+          <End Type="JobPortalModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPostSkills_JobPost">
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPostSkill" Role="JobPostSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPostSkill">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobUgDet_JobPost">
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="1" />
+          <End Type="JobPortalModel.JobUgDet" Role="JobUgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobUgDet">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobUgDet_UG">
+          <End Type="JobPortalModel.UG" Role="UG" Multiplicity="1" />
+          <End Type="JobPortalModel.JobUgDet" Role="JobUgDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UG">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobUgDet">
+              <PropertyRef Name="UgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Certification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValidDate" Type="DateTime" Precision="3" />
+          <Property Name="PersonalInfo_id" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PersonalInfo" Relationship="JobPortalModel.FK_Table_1_PersonalInfo" FromRole="Certification" ToRole="PersonalInfo" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country_id" Type="Int32" Nullable="false" />
+          <Property Name="State_id" Type="Int32" Nullable="false" />
+          <Property Name="City_id" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="City" Relationship="JobPortalModel.FK_Location_City" FromRole="Location" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="JobPortalModel.FK_Location_Country" FromRole="Location" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="JobPortalModel.FK_Location_State" FromRole="Location" ToRole="State" />
+          <NavigationProperty Name="PreferredLocations" Relationship="JobPortalModel.FK_PreferredLocations_Location" FromRole="Location" ToRole="PreferredLocation" />
+        </EntityType>
+        <EntityType Name="Lookout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Personal_id" Type="Int32" Nullable="false" />
+          <Property Name="NoticePeriod" Type="Int32" />
+          <Property Name="LastWorkingDay" Type="DateTime" Precision="0" />
+          <Property Name="IsPlaced" Type="Boolean" />
+          <Property Name="LastActive" Type="DateTime" Precision="3" />
+          <Property Name="Package" Type="Decimal" Precision="9" Scale="2" />
+          <NavigationProperty Name="UserDetail" Relationship="JobPortalModel.FK_Lookout_UserDetails" FromRole="Lookout" ToRole="UserDetail" />
+          <NavigationProperty Name="PreferredCompanies" Relationship="JobPortalModel.FK_PreferredCompanies_Lookout" FromRole="Lookout" ToRole="PreferredCompany" />
+          <NavigationProperty Name="PreferredLocations" Relationship="JobPortalModel.FK_PreferredLocations_Lookout" FromRole="Lookout" ToRole="PreferredLocation" />
+          <NavigationProperty Name="WorkShifts" Relationship="JobPortalModel.FK_WorkShift_Lookout" FromRole="Lookout" ToRole="WorkShift" />
+        </EntityType>
+        <EntityType Name="PersonalInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Skill_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Certifications" Relationship="JobPortalModel.FK_Table_1_PersonalInfo" FromRole="PersonalInfo" ToRole="Certification" />
+          <NavigationProperty Name="Skill" Relationship="JobPortalModel.FK_UserSkilldet_Skills" FromRole="PersonalInfo" ToRole="Skill" />
+          <NavigationProperty Name="UserDetail" Relationship="JobPortalModel.FK_UserSkilldet_UserDetails" FromRole="PersonalInfo" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="PreferredCompany">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lookout_id" Type="Int32" Nullable="false" />
+          <Property Name="Company_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lookout" Relationship="JobPortalModel.FK_PreferredCompanies_Lookout" FromRole="PreferredCompany" ToRole="Lookout" />
+          <NavigationProperty Name="Company" Relationship="JobPortalModel.FK_PreferredCompanies_Company" FromRole="PreferredCompany" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="PreferredLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lookout_id" Type="Int32" Nullable="false" />
+          <Property Name="Location_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="JobPortalModel.FK_PreferredLocations_Location" FromRole="PreferredLocation" ToRole="Location" />
+          <NavigationProperty Name="Lookout" Relationship="JobPortalModel.FK_PreferredLocations_Lookout" FromRole="PreferredLocation" ToRole="Lookout" />
+        </EntityType>
+        <EntityType Name="PremiumColldetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserDetails_id" Type="Int32" Nullable="false" />
+          <Property Name="UserEducation_id" Type="Int32" Nullable="false" />
+          <Property Name="premium_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="primecollege" Relationship="JobPortalModel.FK_PremiumCollege_primecollege" FromRole="PremiumColldetail" ToRole="primecollege" />
+          <NavigationProperty Name="UserDetail" Relationship="JobPortalModel.FK_PremiumCollege_UserDetails" FromRole="PremiumColldetail" ToRole="UserDetail" />
+          <NavigationProperty Name="UserEducation" Relationship="JobPortalModel.FK_PremiumCollege_UserEducation" FromRole="PremiumColldetail" ToRole="UserEducation" />
+        </EntityType>
+        <EntityType Name="primecollege">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PremiumInstituteNames" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortForms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PremiumColldetails" Relationship="JobPortalModel.FK_PremiumCollege_primecollege" FromRole="primecollege" ToRole="PremiumColldetail" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Timefrom" Type="Time" Precision="7" />
+          <Property Name="TimeTo" Type="Time" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="WorkShifts" Relationship="JobPortalModel.FK_WorkShift_Shift" FromRole="Shift" ToRole="WorkShift" />
+        </EntityType>
+        <EntityType Name="User_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserDetails" Relationship="JobPortalModel.FK_UserDetails_User_type" FromRole="User_type" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usertype_id" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_no" Type="Int64" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserImage" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Lookouts" Relationship="JobPortalModel.FK_Lookout_UserDetails" FromRole="UserDetail" ToRole="Lookout" />
+          <NavigationProperty Name="PersonalInfoes" Relationship="JobPortalModel.FK_UserSkilldet_UserDetails" FromRole="UserDetail" ToRole="PersonalInfo" />
+          <NavigationProperty Name="PremiumColldetails" Relationship="JobPortalModel.FK_PremiumCollege_UserDetails" FromRole="UserDetail" ToRole="PremiumColldetail" />
+          <NavigationProperty Name="User_type" Relationship="JobPortalModel.FK_UserDetails_User_type" FromRole="UserDetail" ToRole="User_type" />
+          <NavigationProperty Name="UserEducations" Relationship="JobPortalModel.FK_UserEducation_UserDetails" FromRole="UserDetail" ToRole="UserEducation" />
+          <NavigationProperty Name="UserExperiences" Relationship="JobPortalModel.FK_UserExperience_UserDetails" FromRole="UserDetail" ToRole="UserExperience" />
+        </EntityType>
+        <EntityType Name="UserEducation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserDetails_id" Type="Int32" Nullable="false" />
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Board" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InstituteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartYear" Type="Int32" />
+          <Property Name="EndYear" Type="Int32" />
+          <Property Name="CourseType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Percentage" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PremiumColldetails" Relationship="JobPortalModel.FK_PremiumCollege_UserEducation" FromRole="UserEducation" ToRole="PremiumColldetail" />
+          <NavigationProperty Name="UserDetail" Relationship="JobPortalModel.FK_UserEducation_UserDetails" FromRole="UserEducation" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="UserExperience">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Company_id" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="Enddate" Type="DateTime" Precision="0" />
+          <Property Name="CurrentSalary" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="JobRole" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyLocation" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="NoofprojectsDone" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserDetail" Relationship="JobPortalModel.FK_UserExperience_UserDetails" FromRole="UserExperience" ToRole="UserDetail" />
+          <NavigationProperty Name="Company" Relationship="JobPortalModel.FK_UserExperience_Company" FromRole="UserExperience" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="WorkShift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shift_Id" Type="Int32" Nullable="false" />
+          <Property Name="Lookout_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lookout" Relationship="JobPortalModel.FK_WorkShift_Lookout" FromRole="WorkShift" ToRole="Lookout" />
+          <NavigationProperty Name="Shift" Relationship="JobPortalModel.FK_WorkShift_Shift" FromRole="WorkShift" ToRole="Shift" />
+        </EntityType>
+        <Association Name="FK_Table_1_PersonalInfo">
+          <End Type="JobPortalModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
+          <End Type="JobPortalModel.Certification" Role="Certification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Certification">
+              <PropertyRef Name="PersonalInfo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_City">
+          <End Type="JobPortalModel.City" Role="City" Multiplicity="1" />
+          <End Type="JobPortalModel.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Country">
+          <End Type="JobPortalModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="JobPortalModel.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="Country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_State">
+          <End Type="JobPortalModel.State" Role="State" Multiplicity="1" />
+          <End Type="JobPortalModel.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="State_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredLocations_Location">
+          <End Type="JobPortalModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="JobPortalModel.PreferredLocation" Role="PreferredLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PreferredLocation">
+              <PropertyRef Name="Location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookout_UserDetails">
+          <End Type="JobPortalModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="JobPortalModel.Lookout" Role="Lookout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lookout">
+              <PropertyRef Name="Personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredCompanies_Lookout">
+          <End Type="JobPortalModel.Lookout" Role="Lookout" Multiplicity="1" />
+          <End Type="JobPortalModel.PreferredCompany" Role="PreferredCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookout">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreferredCompany">
+              <PropertyRef Name="Lookout_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredLocations_Lookout">
+          <End Type="JobPortalModel.Lookout" Role="Lookout" Multiplicity="1" />
+          <End Type="JobPortalModel.PreferredLocation" Role="PreferredLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookout">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreferredLocation">
+              <PropertyRef Name="Lookout_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkShift_Lookout">
+          <End Type="JobPortalModel.Lookout" Role="Lookout" Multiplicity="1" />
+          <End Type="JobPortalModel.WorkShift" Role="WorkShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookout">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkShift">
+              <PropertyRef Name="Lookout_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSkilldet_Skills">
+          <End Type="JobPortalModel.Skill" Role="Skill" Multiplicity="1" />
+          <End Type="JobPortalModel.PersonalInfo" Role="PersonalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PersonalInfo">
+              <PropertyRef Name="Skill_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSkilldet_UserDetails">
+          <End Type="JobPortalModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="JobPortalModel.PersonalInfo" Role="PersonalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonalInfo">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremiumCollege_primecollege">
+          <End Type="JobPortalModel.primecollege" Role="primecollege" Multiplicity="1" />
+          <End Type="JobPortalModel.PremiumColldetail" Role="PremiumColldetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="primecollege">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PremiumColldetail">
+              <PropertyRef Name="premium_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremiumCollege_UserDetails">
+          <End Type="JobPortalModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="JobPortalModel.PremiumColldetail" Role="PremiumColldetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PremiumColldetail">
+              <PropertyRef Name="UserDetails_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremiumCollege_UserEducation">
+          <End Type="JobPortalModel.UserEducation" Role="UserEducation" Multiplicity="1" />
+          <End Type="JobPortalModel.PremiumColldetail" Role="PremiumColldetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserEducation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PremiumColldetail">
+              <PropertyRef Name="UserEducation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkShift_Shift">
+          <End Type="JobPortalModel.Shift" Role="Shift" Multiplicity="1" />
+          <End Type="JobPortalModel.WorkShift" Role="WorkShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkShift">
+              <PropertyRef Name="Shift_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetails_User_type">
+          <End Type="JobPortalModel.User_type" Role="User_type" Multiplicity="1" />
+          <End Type="JobPortalModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="Usertype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEducation_UserDetails">
+          <End Type="JobPortalModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="JobPortalModel.UserEducation" Role="UserEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEducation">
+              <PropertyRef Name="UserDetails_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserExperience_UserDetails">
+          <End Type="JobPortalModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="JobPortalModel.UserExperience" Role="UserExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserExperience">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IndustryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessStreamName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobPosts" Relationship="JobPortalModel.FK_JobPost_IndustryType" FromRole="IndustryType" ToRole="JobPost" />
+          <NavigationProperty Name="Recruiters" Relationship="JobPortalModel.FK_Recruiter_IndustryType" FromRole="IndustryType" ToRole="Recruiter" />
+          <NavigationProperty Name="Companies" Relationship="JobPortalModel.FK_Company_BusinessStream" FromRole="IndustryType" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="JobPostActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobPostId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="Isactive" Type="Boolean" />
+          <NavigationProperty Name="JobPostActivity1" Relationship="JobPortalModel.FK_JobPostActivity_JobPostActivity" FromRole="JobPostActivity" ToRole="JobPostActivity1" />
+          <NavigationProperty Name="JobPostActivity2" Relationship="JobPortalModel.FK_JobPostActivity_JobPostActivity" FromRole="JobPostActivity1" ToRole="JobPostActivity" />
+        </EntityType>
+        <Association Name="FK_JobPost_IndustryType">
+          <End Type="JobPortalModel.IndustryType" Role="IndustryType" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_IndustryType">
+          <End Type="JobPortalModel.IndustryType" Role="IndustryType" Multiplicity="1" />
+          <End Type="JobPortalModel.Recruiter" Role="Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recruiter">
+              <PropertyRef Name="IndusTyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPostActivity_JobPostActivity">
+          <End Type="JobPortalModel.JobPostActivity" Role="JobPostActivity" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPostActivity" Role="JobPostActivity1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPostActivity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPostActivity1">
+              <PropertyRef Name="JobPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IndustryId" Type="Int32" />
+          <Property Name="AboutCompany" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ComapnyWebsite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstablishmentDate" Type="DateTime" Precision="0" />
+          <Property Name="ContactPerson" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="Int64" />
+          <Property Name="CompanyImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyPresentation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyLogo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UploadPresentation" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IndustryType" Relationship="JobPortalModel.FK_Company_BusinessStream" FromRole="Company" ToRole="IndustryType" />
+          <NavigationProperty Name="JobPosts" Relationship="JobPortalModel.FK_JobPost_Company" FromRole="Company" ToRole="JobPost" />
+          <NavigationProperty Name="PreferredCompanies" Relationship="JobPortalModel.FK_PreferredCompanies_Company" FromRole="Company" ToRole="PreferredCompany" />
+          <NavigationProperty Name="UserExperiences" Relationship="JobPortalModel.FK_UserExperience_Company" FromRole="Company" ToRole="UserExperience" />
+        </EntityType>
+        <Association Name="FK_Company_BusinessStream">
+          <End Type="JobPortalModel.IndustryType" Role="IndustryType" Multiplicity="0..1" />
+          <End Type="JobPortalModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPost_Company">
+          <End Type="JobPortalModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="JobPortalModel.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredCompanies_Company">
+          <End Type="JobPortalModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="JobPortalModel.PreferredCompany" Role="PreferredCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreferredCompany">
+              <PropertyRef Name="Company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserExperience_Company">
+          <End Type="JobPortalModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="JobPortalModel.UserExperience" Role="UserExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserExperience">
+              <PropertyRef Name="Company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JobPortalModelStoreContainer" CdmEntityContainer="JobPortalEntities">
+          <EntitySetMapping Name="JobPostSkills">
+            <EntityTypeMapping TypeName="JobPortalModel.JobPostSkill">
+              <MappingFragment StoreEntitySet="JobPostSkills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="JobPostId" ColumnName="JobPostId" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="JobPortalModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="JobPortalModel.Skill">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="JobPortalModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="JobPortalModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="JobPortalModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="JobPortalModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recruiters">
+            <EntityTypeMapping TypeName="JobPortalModel.Recruiter">
+              <MappingFragment StoreEntitySet="Recruiter">
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="RecruiterImage" ColumnName="RecruiterImage" />
+                <ScalarProperty Name="AlternativEmaiId" ColumnName="AlternativEmaiId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="Consultant" ColumnName="Consultant" />
+                <ScalarProperty Name="IndusTyId" ColumnName="IndusTyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecruiterPlans">
+            <EntityTypeMapping TypeName="JobPortalModel.RecruiterPlan">
+              <MappingFragment StoreEntitySet="RecruiterPlan">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="SubUserCount" ColumnName="SubUserCount" />
+                <ScalarProperty Name="PlanMasterId" ColumnName="PlanMasterId" />
+                <ScalarProperty Name="RecruiterId" ColumnName="RecruiterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecruiterPlanDets">
+            <EntityTypeMapping TypeName="JobPortalModel.RecruiterPlanDet">
+              <MappingFragment StoreEntitySet="RecruiterPlanDet">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RecruiterPlanId" ColumnName="RecruiterPlanId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanMasters">
+            <EntityTypeMapping TypeName="JobPortalModel.PlanMaster">
+              <MappingFragment StoreEntitySet="PlanMaster">
+                <ScalarProperty Name="NoClicks" ColumnName="NoClicks" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FunctionalAreas">
+            <EntityTypeMapping TypeName="JobPortalModel.FunctionalArea">
+              <MappingFragment StoreEntitySet="FunctionalArea">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="FunctionalAreaName" ColumnName="FunctionalAreaName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PGs">
+            <EntityTypeMapping TypeName="JobPortalModel.PG">
+              <MappingFragment StoreEntitySet="PG">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="PGQualification" ColumnName="PGQualification" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UGs">
+            <EntityTypeMapping TypeName="JobPortalModel.UG">
+              <MappingFragment StoreEntitySet="UG">
+                <ScalarProperty Name="ModifiedON" ColumnName="ModifiedON" />
+                <ScalarProperty Name="CreatedON" ColumnName="CreatedON" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="UQqualification" ColumnName="UQqualification" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobLocDets">
+            <EntityTypeMapping TypeName="JobPortalModel.JobLocDet">
+              <MappingFragment StoreEntitySet="JobLocDet">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="JobPostId" ColumnName="JobPostId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobPgDets">
+            <EntityTypeMapping TypeName="JobPortalModel.JobPgDet">
+              <MappingFragment StoreEntitySet="JobPgDet">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="JobPostId" ColumnName="JobPostId" />
+                <ScalarProperty Name="PGiD" ColumnName="PGiD" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobUgDets">
+            <EntityTypeMapping TypeName="JobPortalModel.JobUgDet">
+              <MappingFragment StoreEntitySet="JobUgDet">
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="ModifiedON" ColumnName="ModifiedON" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="JobPostId" ColumnName="JobPostId" />
+                <ScalarProperty Name="UgId" ColumnName="UgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobPosts">
+            <EntityTypeMapping TypeName="JobPortalModel.JobPost">
+              <MappingFragment StoreEntitySet="JobPost">
+                <ScalarProperty Name="JobTittle" ColumnName="JobTittle" />
+                <ScalarProperty Name="CTCTo" ColumnName="CTCTo" />
+                <ScalarProperty Name="CTCFrom" ColumnName="CTCFrom" />
+                <ScalarProperty Name="ExpTo" ColumnName="ExpTo" />
+                <ScalarProperty Name="ExpFrom" ColumnName="ExpFrom" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FunctionalAreaId" ColumnName="FunctionalAreaId" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+                <ScalarProperty Name="SpecifyDoc" ColumnName="SpecifyDoc" />
+                <ScalarProperty Name="Requirement" ColumnName="Requirement" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="NoOfvacancies" ColumnName="NoOfvacancies" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RecruiterId" ColumnName="RecruiterId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certifications">
+            <EntityTypeMapping TypeName="JobPortalModel.Certification">
+              <MappingFragment StoreEntitySet="Certification">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PersonalInfo_id" ColumnName="PersonalInfo_id" />
+                <ScalarProperty Name="ValidDate" ColumnName="ValidDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="JobPortalModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="City_id" ColumnName="City_id" />
+                <ScalarProperty Name="State_id" ColumnName="State_id" />
+                <ScalarProperty Name="Country_id" ColumnName="Country_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookouts">
+            <EntityTypeMapping TypeName="JobPortalModel.Lookout">
+              <MappingFragment StoreEntitySet="Lookout">
+                <ScalarProperty Name="Package" ColumnName="Package" />
+                <ScalarProperty Name="LastActive" ColumnName="LastActive" />
+                <ScalarProperty Name="IsPlaced" ColumnName="IsPlaced" />
+                <ScalarProperty Name="LastWorkingDay" ColumnName="LastWorkingDay" />
+                <ScalarProperty Name="NoticePeriod" ColumnName="NoticePeriod" />
+                <ScalarProperty Name="Personal_id" ColumnName="Personal_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalInfoes">
+            <EntityTypeMapping TypeName="JobPortalModel.PersonalInfo">
+              <MappingFragment StoreEntitySet="PersonalInfo">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Skill_Id" ColumnName="Skill_Id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreferredCompanies">
+            <EntityTypeMapping TypeName="JobPortalModel.PreferredCompany">
+              <MappingFragment StoreEntitySet="PreferredCompanies">
+                <ScalarProperty Name="Company_id" ColumnName="Company_id" />
+                <ScalarProperty Name="Lookout_id" ColumnName="Lookout_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreferredLocations">
+            <EntityTypeMapping TypeName="JobPortalModel.PreferredLocation">
+              <MappingFragment StoreEntitySet="PreferredLocations">
+                <ScalarProperty Name="Location_id" ColumnName="Location_id" />
+                <ScalarProperty Name="Lookout_id" ColumnName="Lookout_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremiumColldetails">
+            <EntityTypeMapping TypeName="JobPortalModel.PremiumColldetail">
+              <MappingFragment StoreEntitySet="PremiumColldetail">
+                <ScalarProperty Name="premium_id" ColumnName="premium_id" />
+                <ScalarProperty Name="UserEducation_id" ColumnName="UserEducation_id" />
+                <ScalarProperty Name="UserDetails_id" ColumnName="UserDetails_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="primecolleges">
+            <EntityTypeMapping TypeName="JobPortalModel.primecollege">
+              <MappingFragment StoreEntitySet="primecollege">
+                <ScalarProperty Name="ShortForms" ColumnName="ShortForms" />
+                <ScalarProperty Name="PremiumInstituteNames" ColumnName="PremiumInstituteNames" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="JobPortalModel.Shift">
+              <MappingFragment StoreEntitySet="Shifts">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+                <ScalarProperty Name="Timefrom" ColumnName="Timefrom" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_type">
+            <EntityTypeMapping TypeName="JobPortalModel.User_type">
+              <MappingFragment StoreEntitySet="User_type">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="JobPortalModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Phone_no" ColumnName="Phone_no" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Usertype_id" ColumnName="Usertype_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEducations">
+            <EntityTypeMapping TypeName="JobPortalModel.UserEducation">
+              <MappingFragment StoreEntitySet="UserEducation">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="CourseType" ColumnName="CourseType" />
+                <ScalarProperty Name="EndYear" ColumnName="EndYear" />
+                <ScalarProperty Name="StartYear" ColumnName="StartYear" />
+                <ScalarProperty Name="InstituteName" ColumnName="InstituteName" />
+                <ScalarProperty Name="Board" ColumnName="Board" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="UserDetails_id" ColumnName="UserDetails_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserExperiences">
+            <EntityTypeMapping TypeName="JobPortalModel.UserExperience">
+              <MappingFragment StoreEntitySet="UserExperience">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NoofprojectsDone" ColumnName="NoofprojectsDone" />
+                <ScalarProperty Name="CompanyLocation" ColumnName="CompanyLocation" />
+                <ScalarProperty Name="JobRole" ColumnName="JobRole" />
+                <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+                <ScalarProperty Name="Enddate" ColumnName="Enddate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Company_id" ColumnName="Company_id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkShifts">
+            <EntityTypeMapping TypeName="JobPortalModel.WorkShift">
+              <MappingFragment StoreEntitySet="WorkShift">
+                <ScalarProperty Name="Lookout_Id" ColumnName="Lookout_Id" />
+                <ScalarProperty Name="Shift_Id" ColumnName="Shift_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndustryTypes">
+            <EntityTypeMapping TypeName="JobPortalModel.IndustryType">
+              <MappingFragment StoreEntitySet="IndustryType">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="BusinessStreamName" ColumnName="BusinessStreamName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobPostActivities">
+            <EntityTypeMapping TypeName="JobPortalModel.JobPostActivity">
+              <MappingFragment StoreEntitySet="JobPostActivity">
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="JobPostId" ColumnName="JobPostId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="JobPortalModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="UploadPresentation" ColumnName="UploadPresentation" />
+                <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
+                <ScalarProperty Name="CompanyPresentation" ColumnName="CompanyPresentation" />
+                <ScalarProperty Name="CompanyImage" ColumnName="CompanyImage" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="EstablishmentDate" ColumnName="EstablishmentDate" />
+                <ScalarProperty Name="ComapnyWebsite" ColumnName="ComapnyWebsite" />
+                <ScalarProperty Name="AboutCompany" ColumnName="AboutCompany" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

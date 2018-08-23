@@ -1,0 +1,81 @@
+﻿@model JobPortal.Models.UserExperience
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enddate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enddate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobRole)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobRole)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoofprojectsDone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoofprojectsDone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Companyname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.Companyname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

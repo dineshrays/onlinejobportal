@@ -1,0 +1,236 @@
+﻿@model JobPortal.Models.Recruiter
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div class="form-horizontal">
+    <h2>Recruiter</h2>
+    <hr />
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    <div class="form-group">
+
+        @*@Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email Id", @style = "height:50px", @id="EmailID" } })
+            @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "from-control", @style = "height:50px;width:740px", @placeholder = "Password" ,@id="PassId"} })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div> 
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Name", @style = "height:50px" ,@id="CompID"} })
+            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IndusTyId, ViewData["industype"] as SelectList, "Industry Type", new { @class = "form-control", @id ="indutype", @style = "width:90%;height:50px" })
+            @Html.ValidationMessageFor(model => model.IndusTyId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact Person's Name", @style = "height:50px" ,@id= "contacID" } })
+            @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Designation", @style = "height:50px",@id="desg" } })
+            @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.OfficeAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Office Address", @style = "height:60px" ,@id= "office" } })
+            @Html.ValidationMessageFor(model => model.OfficeAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CountryId, ViewData["countrlist"] as SelectList, "Country", new { @class = "form-control", @id = "cid", @style = "width:140px;height:50px" })
+            @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.StateId, ViewData["statelists"] as SelectList, "State", new { @class = "form-control", @id = "stateId", @style = "width:140px;height:50px;margin - right:-200px", @placeholder = "State" })
+            @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CityId, ViewData["citylist"] as SelectList, "City", new { @class = "form-control", @id = "CityId", @style = "width:140px;height:50px", @placeholder = "City" })
+            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AlternativEmaiId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Alternate EmailId", @style = "height:50px",@id="AlterID" } })
+            @Html.ValidationMessageFor(model => model.AlternativEmaiId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mobile Number", @style = "height:50px",@id= "phonenum" } })
+            @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Register Now" class="btn btn-info" id="RegisterID" />
+        </div>
+    </div>
+</div>
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+<script>
+    $("#cid").change(
+        function () {
+            var Id = $("#cid").val();
+        
+
+            var newUrl = '@Url.Action("Index", "PurchaseOrder")';
+             $.ajax({
+
+                url:'/Recruiters/GetCity',
+             dataType: "json",
+                data: JSON.stringify({ sid: Id }),
+             type:"POST",
+             contentType: "application/json; charset=utf-8",
+              success: function (result)
+              {
+                  
+
+                  $('#stateId').empty();
+                 $.each(result, function (i, state)
+                 {
+                     $("#stateId").append('<option value=" ' + state.Value + '">' + state.Text + '</option>');
+
+
+                 });
+          },
+        error: function (xhr) {
+            alert("error");
+
+        }
+        });
+    });
+</script>
+
+<script>
+    $("#stateId").change(
+        function () {
+            var Id = $("#stateId").val();
+        
+
+            var newUrl = '@Url.Action("Index", "PurchaseOrder")';
+             $.ajax({
+
+                 url:'/Recruiters/GetValue',
+             dataType: "json",
+                data: JSON.stringify({ cid: Id }),
+             type:"POST",
+             contentType: "application/json; charset=utf-8",
+              success: function (result)
+              {
+
+
+                  $('#CityId').empty();
+                 $.each(result, function (i, city)
+                 {
+                     $("#CityId").append('<option value=" ' + city.Value + '">' + city.Text + '</option>');
+
+
+                 });
+          },
+        error: function (xhr) {
+            alert("error");
+
+        }
+        });
+    });
+</script>
+
+
+<script>
+
+    $("#RegisterID").click(function () {
+        var email = $("#EmailID").val();
+        var password = $("#PassId").val();
+        var ComapnyNAme = $("#CompID").val();
+
+        var Industype = $("#indutype").val();
+        var contactperson = $("#contacID").val();
+        var designation = $("#desg").val();
+        var officeadd = $("#office").val();
+        var country = $("#cid").val();
+        var state = $("#stateId").val();
+        var city = $("#CityId").val();
+        var alternateemail = $("#AlterID").val();
+        var mobilnum = $("#phonenum").val();
+
+
+
+        
+
+        var newUrl = '@Url.Action("ListOfPlan", "Recruiters")';
+
+
+        var mod = { EmailId: email, Password: password, CompanyName: ComapnyNAme, IndusTyId: Industype, ContactPersonName: contactperson, Designation: designation,
+            OfficeAddress: officeadd, CountryId: country, StateId: state, CityId: city, AlternativEmaiId: alternateemail, PhoneNo: mobilnum};
+
+        $.ajax({
+            url:  '@Url.Action("Create1", "Recruiters")',
+                    dataType: "json",
+            data: JSON.stringify({ recruiter:mod}),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        alert("Successfully Created");
+                        window.location.href = newUrl;
+                   
+                    },
+                    error: function (xhr) {
+                        alert("Error");
+                    }
+                });
+    });
+</script>

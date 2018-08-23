@@ -1,0 +1,67 @@
+﻿@model JobPortal.Models.Lookout
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lookout</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoticePeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoticePeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastWorkingDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastWorkingDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPlaced)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPlaced)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,145 @@
+﻿@model Jobportal.Models.Company
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Company</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id,new { @class = "form-control-label", @id = "compid" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Companyname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Companyname, new { htmlAttributes = new { @class = "form-control", @id = "compname" } })
+                @Html.ValidationMessageFor(model => model.Companyname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BusinessStreamId, "BusinessStreamId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BusinessStreamId", null, htmlAttributes: new { @class = "form-control", @id = "busid" })
+                @Html.ValidationMessageFor(model => model.BusinessStreamId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "compdes" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CompanyWebsite, new { htmlAttributes = new { @class = "form-control", @id = "compweb" } })
+                @Html.ValidationMessageFor(model => model.CompanyWebsite, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EstablishmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EstablishmentDate, new { htmlAttributes = new { @class = "form-control", @id = "compest" } })
+                @Html.ValidationMessageFor(model => model.EstablishmentDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+
+            <input type="file" id="uploadEditorImage" enctype="multipart/form-data" />
+            <input type="text" id="imgpath" />
+            <div class="displayimg">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" id="btnreg" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script>
+         $(function () {
+             $("#uploadEditorImage").change(function () {
+                 var data = new FormData();
+                 var files = $("#uploadEditorImage").get(0).files;
+                 if (files.length > 0) {
+                     data.append("HelpSectionImages", files[0]);
+                 }
+                 fileValue = data;
+               //  alert(fileValue);
+                 $.ajax({
+                     url: '@Url.Action("StoreImage", "Companies")',
+                    type: "POST",
+                    processData: false,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                    //  alert(response.filepath)
+                    $("#imgpath").val(response.filepath);
+                    //code after success
+                    $(".displayimg").append("<img src=" + response.filepath+" height=15% width=35%>");
+
+                    },
+                    error: function (er) {
+                    alert(er);
+                    }
+                    });
+                    });
+                    });
+</script>
+
+
+<script>
+    $("#btnreg").click(function () {
+        var compid = $("#compid").val();
+        var compname = $("#compname").val();
+        var busid = $("#busid").val();
+        var compdes = $("#compdes").val();
+        //alert(compdes);
+        var compweb = $("#compweb").val();
+        var compest = $("#compest").val();
+        var image = $("#imgpath").val();
+      //  alert(image);
+        var newUrl = '@Url.Action("Index", "Companies")';
+        var comp = { id: compid, Companyname: compname, BusinessStreamId: busid, Description: compdes, CompanyWebsite: compweb, EstablishmentDate: compest, CompanyImage: image }
+   $.ajax({
+            url: '@Url.Action("Edit", "Companies")',
+       dataType: "json",
+       data: JSON.stringify({ id: compid, company: comp }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                alert("Successfully Updated");
+                window.location.href = newUrl;
+            },
+            error: function (xhr) {
+                alert("error");
+            }
+        });
+    });
+</script>

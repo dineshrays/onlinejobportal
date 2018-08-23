@@ -1,0 +1,52 @@
+﻿@model IEnumerable<JobPortal.Models.RecruiterPlan>
+
+@{
+    ViewBag.Title = "ListOfSelectedPlan";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2>ListOfSelectedPlan</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(RecruiterId)*@
+            Recruiter Id
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PlanMaster.Name)*@
+            Plan Name
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.SubUserCount)
+        </th>
+       
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recruiter.EmailId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlanMaster.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubUserCount)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edits", new { id = item.Id }) |
+            @Html.ActionLink("Detail", "Detail", new { id = item.Id })|
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

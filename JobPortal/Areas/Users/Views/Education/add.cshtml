@@ -1,0 +1,162 @@
+﻿@model Jobportal.ViewModel.JobPortalViewModel
+@{
+    ViewBag.Title = "add";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<div class="row form-group">
+    <div class="col-md-3">
+        @Html.Label("User Name")
+    </div>
+
+    <div class="col-12 col-md-9">
+        @Html.DropDownListFor(model => model.userdetails.ID, ViewData["userlist"] as SelectList, new { @class = "form-control", @id = "userid", style = "width:30%" })
+        <input type="text" id="userid" style="display:none">
+    </div>
+</div>
+
+<table id="tblid" class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("Course")
+            </th>
+            <th>
+                @Html.Label("Board")
+            </th>
+            <th>
+                @Html.Label("Institution Name")
+            </th>
+            <th>
+                @Html.Label("Start Year")
+            </th>
+            <th>
+                @Html.Label("End Year")
+            </th>
+            <th>
+                @Html.Label("Course Type")
+            </th>
+            <th>
+                @Html.Label("PERCENTAGE")
+            </th>
+        </tr>
+    </thead>
+    <tbody id="tblbodyid" >
+        <tr class="gh">
+            <td>
+                <input type="text" id="course_0" name="course" />
+            </td>
+            <td>
+                <input type="text" id="board_0" name="board" />
+            </td>
+
+            <td>
+                <input type="text" id="instiname_0" name="instiname" />
+            </td>
+
+            <td>
+                <input type="text" id="startyr_0" name="startyr" />
+            </td>
+
+            <td>
+                <input type="text" id="endyr_0" name="endyr" />
+            </td>
+            <td>
+                <input type="text" id="cousetype_0" name="cousetype" />
+            </td>
+
+            <td>
+                <input type="text" id="percent_0" name="percent" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="margin-top:10px;">
+    <input type="button" id="Add" style="align" value="Add New Educational Detail" />
+</div>
+
+<div class="col-12 col-md-9">
+    <input type="submit" value="Save" id="btnsav" style="margin-top:10px" class="btn btn-success" />
+</div>
+
+
+<script>
+ $("#btnsav").click(function () {
+     var userdetid = $("#userid").val();
+
+        var newUrl = '@Url.Action("Index", "Education")';
+
+     var item = [];
+
+
+     var n = $("#tblbodyid").find("tr").length;
+     //alert(n);
+     var course, board, instiname, startyear, endyear, coursetyp, percent, value="";
+     for (var i = 0; i < n; i++) {
+         course = $("#course_" + i).val();
+       //  alert(course);
+         board = $("#board_" + i).val();
+         instiname = $("#instiname_" + i).val();
+         startyear = $("#startyr_" + i).val();
+         endyear = $("#endyr_" + i).val();
+         coursetyp = $("#cousetype_" + i).val();
+         percent = $("#percent_" + i).val();
+         value = { UserDetails_id: userdetid, Course: course, Board: board, InstituteName: instiname, StartYear: startyear, EndYear: endyear, CourseType: coursetyp, Percentage: percent }
+         item.push(value);
+     }
+        $.ajax({
+            url:  '@Url.Action("add", "Education")',
+            dataType: "json",
+            data: JSON.stringify({ ue: item }),
+        type:"POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (result)
+        {
+            alert("Successfully Inserted");
+            window.location.href = newUrl;
+
+        },
+        error: function (xhr) {
+        alert("error");
+        }
+        });
+        });
+
+</script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#Add").click(function () {
+                    var Index = $("#tblbodyid").find("tr").length;
+                    var markup = "<tr class='gh'>"
+                        + "<td>"
+                        + "<input type='text' id='course_" + Index + "' name='course' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='board_" + Index + "' name='board' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='instiname_" + Index + "' name='instiname' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='startyr_" + Index + "' name='startyr' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='endyr_" + Index + "' name='endyr' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='cousetype_" + Index + "' name='cousetype' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='percent_" + Index + "' name='percent' />"
+                        + "</td>"
+                        + "</tr>";
+                    $("#tblbodyid").append(markup);
+                });
+            });
+</script>
+

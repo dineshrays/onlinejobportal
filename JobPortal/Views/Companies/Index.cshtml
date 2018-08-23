@@ -1,0 +1,68 @@
+﻿@model IEnumerable<JobPortal.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComapnyWebsite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstablishmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyImage)
+        </th>
+       
+        
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessStream.BusinessStream1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComapnyWebsite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstablishmentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyImage)
+        </td>
+      
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessStream.BusinessStream1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            X   
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

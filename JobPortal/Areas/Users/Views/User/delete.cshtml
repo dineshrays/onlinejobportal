@@ -1,0 +1,123 @@
+﻿@model Jobportal.Models.UserDetail
+@{
+    ViewBag.Title = "delete";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@Html.HiddenFor(model => model.ID, new { @class = "form-control", @id = "userid", style = "width:30%" })
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Usertype_id)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Usertype_id)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Phone_no)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Phone_no)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Age)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Age)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Gender)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Gender)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.UserImage)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserImage)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.RegistrationDate)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.RegistrationDate)
+    </dd>
+
+
+
+</dl>
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" id="btndel" class="btn btn-danger" /> |
+</div>
+<div class="btn btn-default" style="margin-top:20px">
+    @Html.ActionLink("Bact to List ", "Index")
+</div>
+<script>
+
+    $("#btndel").click(function () {
+
+        var eid = $("#userid").val();
+                var newUrl= '@Url.Action("Index", "User")';
+
+               var mod = { ID: eid };
+                $.ajax({
+                url: '@Url.Action("delete", "User")',
+                dataType: "json",
+                    data: JSON.stringify({
+                        ud:mod,  id: eid
+                }),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                alert("deleted Successfully");
+
+                window.location.href = newUrl;
+                },
+                error: function (xhr) {
+                alert("error");
+                }
+                });
+                });
+</script>
+
+
+

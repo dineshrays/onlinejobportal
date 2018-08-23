@@ -1,0 +1,130 @@
+﻿@model JobPortal.Models.Company
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<div class="form-horizontal">
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Company Name")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control", @id = "compname", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Business Stream")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.DropDownListFor(model => model.IndustryId, ViewData["busns"] as SelectList, new { @class = "form-control", @id = "busid", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Company Website")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.ComapnyWebsite, new { @class = "form-control", @id = "compweb", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Company Established Date")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.EditorFor(model => model.EstablishmentDate, new { @class = "form-control", @id = "compest", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Company Image")
+            <div>
+
+                <input type="file" id="uploadEditorImage" enctype="multipart/form-data" />
+                <input type="text" id="imgpath" />
+                <div class="displayimg">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" id="btnreg" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+         $(function () {
+             $("#uploadEditorImage").change(function () {
+                 var data = new FormData();
+                 var files = $("#uploadEditorImage").get(0).files;
+                 if (files.length > 0) {
+                     data.append("HelpSectionImages", files[0]);
+                 }
+                 fileValue = data;
+                 $.ajax({
+                     url: '@Url.Action("StoreImage", "Companies")',
+                    type: "POST",
+                    processData: false,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                    $("#imgpath").val(response.filepath);
+                    $(".displayimg").append("<img src=" + response.filepath+" height=15% width=35%>");
+
+                    },
+                    error: function (er) {
+                    alert(er);
+                    }
+                    });
+                    });
+                    });
+</script>
+
+<script>
+    $("#btnreg").click(function () {
+        var compname = $("#compname").val();
+        var busid = $("#busid").val();
+        var compweb = $("#compweb").val();
+        var compest = $("#compest").val();
+        var image = $("#imgpath").val();
+        alert(image);
+        var newUrl = '@Url.Action("Index", "Companies")';
+        var comp = { CompanyName: compname, IndustryId: busid, ComapnyWebsite: compweb, EstablishmentDate: compest, CompanyImage: image }
+   $.ajax({
+            url: '@Url.Action("Create", "Companies")',
+       dataType: "json",
+       data: JSON.stringify({ company: comp }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                alert("Successfully Inserted");
+                window.location.href = newUrl;
+            },
+            error: function (xhr) {
+                alert("error");
+            }
+        });
+    });
+</script>

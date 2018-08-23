@@ -1,0 +1,128 @@
+﻿@model JobPortal.Models.Location
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Country_id, "Country_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Country_id", null, htmlAttributes: new { @class = "form-control", @id = "countid" })
+            @Html.ValidationMessageFor(model => model.Country_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.State_id, "State_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("State_id", null, htmlAttributes: new { @class = "form-control", @id = "statid" })
+            @Html.ValidationMessageFor(model => model.State_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.City_id, "City_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("City_id", null, htmlAttributes: new { @class = "form-control", @id = "cityid" })
+            @Html.ValidationMessageFor(model => model.City_id, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.IsActive)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" id="btnadd" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    $("#countid").change(
+        function () {
+            var countid = $("#countid").val();
+            $.ajax({
+                url: "/Locations/getdroplist",
+                dataType: "json",
+                data: JSON.stringify({ id: countid }),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    $('#statid').empty();
+                    $.each(result, function (i, State) {
+                        $('#statid').append('<option value="' + State.Value + '">' + State.Text + '</option>');
+
+                    });
+                },
+                error: function (xhr) {
+                    alert("error");
+                }
+            });
+        }
+    );
+
+    $("#statid").change(
+        function () {
+            var statid = $("#statid").val();
+            $.ajax({
+                url: "/Locations/getcitylist",
+                dataType: "json",
+                data: JSON.stringify({ id: statid }),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    $('#cityid').empty();
+                    $.each(result, function (i, City) {
+                        $('#cityid').append('<option value="' + City.Value + '">' + City.Text + '</option>');
+
+                    });
+                },
+                error: function (xhr) {
+                    alert("error");
+                }
+            });
+        }
+    );
+
+</script>
+
+
+<script>
+    $("#btnadd").click(function () {
+        var cityid = $("#cityid").val();
+        var statid = $("#statid").val();
+        var countid = $("#countid").val();
+        
+        var newUrl = '@Url.Action("Index", "Locations")';
+        var mod = { Country_id: countid, State_id: statid, City_id: cityid }
+        
+        $.ajax({
+            url:  '@Url.Action("Create", "Locations")',
+            dataType: "json",
+            data: JSON.stringify({ location: mod }),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        alert("Successfully Inserted");
+                           window.location.href = newUrl;
+                    },
+                    error: function (xhr) {
+                        alert("error");
+                    }
+        });
+    });
+
+ </script>

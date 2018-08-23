@@ -1,0 +1,88 @@
+﻿@model IEnumerable<JobPortal.Models.UserDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<h2>Index</h2>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("User Name")
+        </th>
+        <th>
+            @Html.Label("Phone Number")
+        </th>
+        <th>
+            @Html.Label("Gender")
+        </th>
+        <th>
+            @Html.Label("Email")
+        </th>
+        <th>
+            @Html.Label("Age")
+        </th>
+        <th>
+            @Html.Label("Registered Date")
+        </th>
+        <th>
+            @Html.Label("User Image Path")
+        </th>
+        <th>
+            @Html.Label("Actions")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone_no)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UserImage)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                @Html.ActionLink("Delete", "delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

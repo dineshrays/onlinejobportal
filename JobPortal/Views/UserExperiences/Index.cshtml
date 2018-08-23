@@ -1,0 +1,77 @@
+﻿@model IEnumerable<JobPortal.Models.UserExperience>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enddate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoofprojectsDone)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Company.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserDetail.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enddate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobRole)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoofprojectsDone)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserDetail.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

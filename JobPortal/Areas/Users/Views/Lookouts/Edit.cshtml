@@ -1,0 +1,122 @@
+﻿@model Jobportal.ViewModel.JobPortalViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.lookout.Id, new { @class = "form-control-label", @id = "lookid" })
+        @Html.HiddenFor(model=>model.workshifts.Id,new { @class="form-control-label",@id="workid"})
+
+        <div class="row form-group">
+            <div class="col-md-3">
+                @Html.Label("Userid")
+            </div>
+            <div class="col-12 col-md-9">
+                @Html.DropDownListFor(model => model.lookout.Personal_id, ViewData["userlist"] as SelectList, new { @class = "form-control", @id = "userid", style = "width:30%" })
+                <input type="text" id="userid" style="display:none">
+
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-3">
+                @Html.Label("Edit Notice Period")
+            </div>
+            <div class="col-12 col-md-9">
+                @Html.TextBoxFor(model => model.lookout.NoticePeriod, new { @class = "form-control", @id = "noticep", style = "width:30%" })
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-3">
+                @Html.Label("Edit Last working Day")
+            </div>
+            <div class="col-12 col-md-9">
+                @Html.EditorFor(model => model.lookout.LastWorkingDay, new { htmlAttributes = new { @class = "form-control", @id = "lastw", style = "width:30%" } })
+                @Html.ValidationMessageFor(model => model.lookout.LastWorkingDay, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-3">
+                @Html.Label("Edit Candidate placed or not")
+            </div>
+            <div class="col-md-10">
+                <div class="col-12 col-md-9">
+                    @Html.TextBoxFor(model => model.lookout.IsPlaced, new { @class = "form-control", @id = "isplaced", style = "width:30%" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-3">
+                @Html.Label("Edit Package")
+            </div>
+            <div class="col-12 col-md-9">
+                @Html.TextBoxFor(model => model.lookout.Package, new { @class = "form-control", @id = "packg", style = "width:30%" })
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <div class="col-md-3">
+                @Html.Label("Prefered Shift")
+            </div>
+            <div class="col-12 col-md-9">
+                @Html.DropDownListFor(model => model.shift.id, ViewData["shiflist"] as SelectList, new { @class = "form-control", @id = "shiftid", style = "width:30%" })
+                <input type="text" id="userid" style="display:none">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" id="btnreg" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script>
+        $("#btnreg").click(function () {
+            var lookid = $("#lookid").val();
+        var userid = $("#userid").val();
+        var notice = $("#noticep").val();
+            var lastwd = $("#lastw").val();
+           
+        var isplaced = $("#isplaced").val();
+        var package = $("#packg").val();
+        var shiftid = $("#shiftid").val();
+            var workid = $("#workid").val();
+         //   alert(workid)
+            var mod = { Id: lookid, Personal_id: userid, NoticePeriod: notice, LastWorkingDay: lastwd, IsPlaced: isplaced, Package: package }
+
+
+        var newUrl = '@Url.Action("Index", "Lookouts")';
+
+        $.ajax({
+            url:  '@Url.Action("Edit", "Lookouts")',
+            dataType: "json",
+            data: JSON.stringify({ id: lookid, lookout: mod, s: shiftid }),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        alert("Successfully Updated");
+                           window.location.href = newUrl;
+                    },
+                    error: function (xhr) {
+                        alert("error");
+                    }
+        });
+    });
+    </script>

@@ -1,0 +1,90 @@
+﻿@model Jobportal.ViewModel.JobPortalViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@Html.HiddenFor(model => model.lookout.Id, new { @class = "form-control", @id = "lookid", style = "width:30%" })
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.lookout.NoticePeriod)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.lookout.NoticePeriod)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.lookout.LastWorkingDay)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.lookout.LastWorkingDay)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.lookout.LastActive)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.lookout.LastActive)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.lookout.Package)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.lookout.Package)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.lookout.UserDetail.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.lookout.UserDetail.Email)
+    </dd>
+
+</dl>
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" id="btndel" class="btn btn-default" /> |
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script>
+
+    $("#btndel").click(function () {
+
+        var lookid = $("#lookid").val();
+        var newUrl = '@Url.Action("Index", "Lookouts")';
+        alert(lookid)
+        var mod = { Id: lookid };
+                $.ajax({
+                url: '@Url.Action("Delete", "Lookouts")',
+                dataType: "json",
+                    data: JSON.stringify({
+                        id: mod, s: lookid
+                }),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                alert("deleted Successfully");
+                     window.location.href = newUrl;
+                },
+                error: function (xhr) {
+                alert("error");
+                }
+                });
+                });
+</script>
+
+

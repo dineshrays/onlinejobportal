@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0644d8fe632442da8bf4dc5c7e55e34b" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="JobPortalModel.JobPostSkill" Width="1.5" PointX="19.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobPortalModel.Role" Width="1.5" PointX="15.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobPortalModel.Skill" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobPortalModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPostSkills_Skills" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JobPortalModel.City" Width="1.5" PointX="12.875" PointY="1" />
+        <EntityTypeShape EntityType="JobPortalModel.Country" Width="1.5" PointX="8.375" PointY="1.125" />
+        <EntityTypeShape EntityType="JobPortalModel.State" Width="1.5" PointX="10.625" PointY="0.875" />
+        <AssociationConnector Association="JobPortalModel.FK_City_State" />
+        <AssociationConnector Association="JobPortalModel.FK_State_Country" />
+        <EntityTypeShape EntityType="JobPortalModel.Recruiter" Width="1.5" PointX="16.125" PointY="0.75" />
+        <AssociationConnector Association="JobPortalModel.FK_Recruiter_City" />
+        <AssociationConnector Association="JobPortalModel.FK_Recruiter_Country" />
+        <AssociationConnector Association="JobPortalModel.FK_Recruiter_State1" />
+        <EntityTypeShape EntityType="JobPortalModel.RecruiterPlan" Width="1.5" PointX="18.375" PointY="0.75" />
+        <AssociationConnector Association="JobPortalModel.FK_RecruiterPlan_Recruiter" />
+        <EntityTypeShape EntityType="JobPortalModel.RecruiterPlanDet" Width="1.5" PointX="20.625" PointY="8.875" />
+        <AssociationConnector Association="JobPortalModel.FK_RecruiterPlanDet_RecruiterPlan" />
+        <EntityTypeShape EntityType="JobPortalModel.PlanMaster" Width="1.5" PointX="0.75" PointY="13" />
+        <AssociationConnector Association="JobPortalModel.FK_RecruiterPlan_PlanMaster" />
+        <EntityTypeShape EntityType="JobPortalModel.FunctionalArea" Width="1.5" PointX="15.25" PointY="10.25" />
+        <EntityTypeShape EntityType="JobPortalModel.PG" Width="1.5" PointX="15.25" PointY="16.125" />
+        <EntityTypeShape EntityType="JobPortalModel.UG" Width="1.5" PointX="15.25" PointY="13.25" />
+        <EntityTypeShape EntityType="JobPortalModel.JobLocDet" Width="1.5" PointX="23.125" PointY="5" />
+        <EntityTypeShape EntityType="JobPortalModel.JobPgDet" Width="1.5" PointX="20.125" PointY="13" />
+        <EntityTypeShape EntityType="JobPortalModel.JobUgDet" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="JobPortalModel.FK_JobLocDet_City" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPgDet_PG" />
+        <EntityTypeShape EntityType="JobPortalModel.JobPost" Width="1.5" PointX="17.5" PointY="7.625" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPost_FunctionalArea" />
+        <AssociationConnector Association="JobPortalModel.FK_JobLocDet_JobPost" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPgDet_JobPost" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPost_Role" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPostSkills_JobPost" />
+        <AssociationConnector Association="JobPortalModel.FK_JobUgDet_JobPost" />
+        <AssociationConnector Association="JobPortalModel.FK_JobUgDet_UG" />
+        <EntityTypeShape EntityType="JobPortalModel.Certification" Width="1.5" PointX="10.5" PointY="14" />
+        <EntityTypeShape EntityType="JobPortalModel.Location" Width="1.5" PointX="10.875" PointY="39.75" />
+        <EntityTypeShape EntityType="JobPortalModel.Lookout" Width="1.5" PointX="7.875" PointY="34.75" />
+        <EntityTypeShape EntityType="JobPortalModel.PersonalInfo" Width="1.5" PointX="8.25" PointY="13.875" />
+        <EntityTypeShape EntityType="JobPortalModel.PreferredCompany" Width="1.5" PointX="15.625" PointY="24" />
+        <EntityTypeShape EntityType="JobPortalModel.PreferredLocation" Width="1.5" PointX="13.125" PointY="35.375" />
+        <EntityTypeShape EntityType="JobPortalModel.PremiumColldetail" Width="1.5" PointX="10.125" PointY="32.5" />
+        <EntityTypeShape EntityType="JobPortalModel.primecollege" Width="1.5" PointX="7.875" PointY="31.875" />
+        <EntityTypeShape EntityType="JobPortalModel.Shift" Width="1.5" PointX="7.875" PointY="43.25" />
+        <EntityTypeShape EntityType="JobPortalModel.User_type" Width="1.5" PointX="3.375" PointY="26.375" />
+        <EntityTypeShape EntityType="JobPortalModel.UserDetail" Width="1.5" PointX="5.625" PointY="25.125" />
+        <EntityTypeShape EntityType="JobPortalModel.UserEducation" Width="1.5" PointX="7.875" PointY="38.625" />
+        <EntityTypeShape EntityType="JobPortalModel.UserExperience" Width="1.5" PointX="15.625" PointY="19" />
+        <EntityTypeShape EntityType="JobPortalModel.WorkShift" Width="1.5" PointX="10.125" PointY="36.375" />
+        <AssociationConnector Association="JobPortalModel.FK_Table_1_PersonalInfo" />
+        <AssociationConnector Association="JobPortalModel.FK_Location_City" />
+        <AssociationConnector Association="JobPortalModel.FK_Location_Country" />
+        <AssociationConnector Association="JobPortalModel.FK_Location_State" />
+        <AssociationConnector Association="JobPortalModel.FK_PreferredLocations_Location" />
+        <AssociationConnector Association="JobPortalModel.FK_Lookout_UserDetails" />
+        <AssociationConnector Association="JobPortalModel.FK_PreferredCompanies_Lookout" />
+        <AssociationConnector Association="JobPortalModel.FK_PreferredLocations_Lookout" />
+        <AssociationConnector Association="JobPortalModel.FK_WorkShift_Lookout" />
+        <AssociationConnector Association="JobPortalModel.FK_UserSkilldet_Skills" />
+        <AssociationConnector Association="JobPortalModel.FK_UserSkilldet_UserDetails" />
+        <AssociationConnector Association="JobPortalModel.FK_PremiumCollege_primecollege" />
+        <AssociationConnector Association="JobPortalModel.FK_PremiumCollege_UserDetails" />
+        <AssociationConnector Association="JobPortalModel.FK_PremiumCollege_UserEducation" />
+        <AssociationConnector Association="JobPortalModel.FK_WorkShift_Shift" />
+        <AssociationConnector Association="JobPortalModel.FK_UserDetails_User_type" />
+        <AssociationConnector Association="JobPortalModel.FK_UserEducation_UserDetails" />
+        <AssociationConnector Association="JobPortalModel.FK_UserExperience_UserDetails" />
+        <EntityTypeShape EntityType="JobPortalModel.IndustryType" Width="1.5" PointX="11.125" PointY="6.25" />
+        <EntityTypeShape EntityType="JobPortalModel.JobPostActivity" Width="1.5" PointX="3.375" PointY="3.75" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPost_IndustryType" />
+        <AssociationConnector Association="JobPortalModel.FK_Recruiter_IndustryType" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPostActivity_JobPostActivity" />
+        <EntityTypeShape EntityType="JobPortalModel.Company" Width="1.5" PointX="13.375" PointY="19.125" />
+        <AssociationConnector Association="JobPortalModel.FK_Company_BusinessStream" />
+        <AssociationConnector Association="JobPortalModel.FK_JobPost_Company" />
+        <AssociationConnector Association="JobPortalModel.FK_PreferredCompanies_Company" />
+        <AssociationConnector Association="JobPortalModel.FK_UserExperience_Company" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

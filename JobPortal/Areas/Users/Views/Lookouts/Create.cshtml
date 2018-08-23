@@ -1,0 +1,222 @@
+﻿@model Jobportal.ViewModel.JobPortalViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script src="https://dbrekalo.github.io/fastselect/dist/fastselect.standalone.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="https://dbrekalo.github.io/fastselect/dist/fastselect.min.css" rel="stylesheet" />
+
+
+
+<div class="form-horizontal">
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Userid")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.DropDownListFor(model => model.lookout.Personal_id, ViewData["userlist"] as SelectList, new { @class = "form-control", @id = "userid", style = "width:30%" })
+            <input type="text" id="userid" style="display:none">
+
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Notice Period")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.EditorFor(model => model.lookout.NoticePeriod, new { @class = "form-control", @id = "noticep", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Last working Day")
+        </div>
+        <div class="col-12 col-md-9">
+            
+            @Html.EditorFor(model => model.lookout.LastWorkingDay, new { htmlAttributes = new { @class = "form-control", @id = "lastw", style = "width:30%" } })
+            @Html.ValidationMessageFor(model => model.lookout.LastWorkingDay, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Candidate placed or not")
+        </div>
+
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.lookout.IsPlaced, new { @class = "form-control", @id = "isplaced", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Package")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.lookout.Package, new { @class = "form-control", @id = "packg", style = "width:30%" })
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Prefered Shift")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.DropDownListFor(model => model.shift.id, ViewData["shiflist"] as SelectList, new { @class = "form-control", @id = "shiftid", style = "width:30%" })
+            <input type="text" id="userid" style="display:none">
+
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Prefered Companies")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.DropDownListFor(model => model.company.id, ViewData["comp"] as SelectList, new { @class = "form-control", @id = "compid", style = "width:30%" })
+            <input type="text" id="companid" style="display:none">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add to preferedlist" id="btncart" class="btn btn-success" />
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Prefered Locations")
+        </div>
+        <div>
+            @*<input class="form-control" style="width:30%" id="locid" />
+                <input id="locaid" style="display:none" />
+                <input id="typid" style="display:none" />*@
+
+            <input type="text" ata-load-once="true" multiple class="multipleInputDynamic" data-url="http://localhost:3338/Lookouts/locatnname" name="language">
+
+            @*<input id="myAutocomplete" type="text" />*@
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" id="btnreg" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<table id="tblid" class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("Company Id")
+            </th>
+            <th>
+                @Html.Label("Company Name")
+
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    $("#btncart").click(function () {
+        var compid = $("#compid").val();
+
+        var newUrl = '@Url.Action("Index", "Lookouts")';
+
+        $.ajax({
+            url:"/Lookouts/getcomplist",
+            dataType: "json",
+            data: JSON.stringify({ id: compid }),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+            success: function (result) {
+
+                var comid = result.compid;
+                var comname = result.name;
+                var markup = "<tr><td>" + comid + "</td><td>" + comname + "</td></tr>";
+                $("#tblid").append(markup);
+
+                    },
+                    error: function (xhr) {
+                        alert("error");
+                    }
+        });
+    });
+</script>
+
+
+<script>
+    $("#btnreg").click(function () {
+        var userid = $("#userid").val();
+        var notice = $("#noticep").val();
+        var lastwd = $(".hello").val();
+        alert(lastwd)
+        var isplaced = $("#isplaced").val();
+        var package = $("#packg").val();
+        var shiftid = $("#shiftid").val();
+        var locatn = $(".multipleInputDynamic").val();
+      //  alert(locatn)
+
+        var loc = [];
+        var mod = { Personal_id: userid, NoticePeriod: notice, LastWorkingDay: lastwd, IsPlaced: isplaced, Package: package }
+        var item = [];
+        var n = $("#tblid").find("tr").length;
+
+        for (var i = 1; i < n; i++) {
+            var compaid = $("#tblid").find("tr").eq(i).find("td").eq(0).text();
+            var value = { Company_id: compaid }
+            item.push(value);
+        }
+
+        var newUrl = '@Url.Action("Index", "Lookouts")';
+
+        $.ajax({
+            url:  '@Url.Action("Create", "Lookouts")',
+            dataType: "json",
+            data: JSON.stringify({ lookout: mod, s: shiftid, pc: item, lkid: locatn }),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        alert("Successfully Inserted");
+                           window.location.href = newUrl;
+                    },
+                    error: function (xhr) {
+                        alert("error");
+                    }
+        });
+    });
+</script>
+
+<script>
+    $('.multipleInputDynamic').fastselect();
+</script>
+

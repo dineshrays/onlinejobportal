@@ -1,0 +1,251 @@
+﻿@model JobPortal.Models.Company
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div class="form-horizontal">
+    <h3>Company</h3>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", @id = "compid" } })
+            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.BusinessStreamId, "BusinessStreamId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BusinessStreamId", null, htmlAttributes: new { @class = "form-control", @id = "busistreamid" })
+                @Html.ValidationMessageFor(model => model.BusinessStreamId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ComapnyWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ComapnyWebsite, new { htmlAttributes = new { @class = "form-control", @id = "compwebsit" } })
+            @Html.ValidationMessageFor(model => model.ComapnyWebsite, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EstablishmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EstablishmentDate, new { htmlAttributes = new { @class = "form-control", @id = "establish" } })
+            @Html.ValidationMessageFor(model => model.EstablishmentDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ComapnyWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ComapnyWebsite, new { htmlAttributes = new { @class = "form-control", @id = "establish" } })
+            @Html.ValidationMessageFor(model => model.ComapnyWebsite, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyImage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.MovieImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MovieImage, "", new { @class = "text-danger" })*@
+            <div>
+
+                <input type="file" id="uploadEditorImage" enctype="multipart/form-data" />
+                <input type="text" id="imgpath" style="display:none" />
+                <div class="displayimg" style="display:none">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyLogo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <div>
+                <input type="file" id="uploadEditorImag" enctype="multipart/form-data" />
+                <input type="text" id="imgpathLogo" style="display:none" />
+                <div class="displayimge" style="display:none">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyPresentation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <div>
+                <input type="file" id="UploadFile" enctype="multipart/form-data" />
+                <input type="text" id="PresentFilePath" style="display:none" />
+                <div class="diaplypath" style="display:none">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" id="subId" />
+        </div>
+    </div>
+</div>
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+<script>
+
+    $("#subId").click(function () {
+        var image = $("#imgpath").val();
+        var comapnyname = $("#compid").val();
+        var businessstremid = $("#busistreamid").val();
+
+        var desc = $("#describes").val();
+        var compwebsite = $("#compwebsit").val();
+        var Esta = $("#establish").val();
+
+
+           alert("1");
+
+        var newUrl = '@Url.Action("Create1", "Companies")';
+
+
+        var mod = { CompanyImage: image, CompanyName: comapnyname, BusinessStreamId: businessstremid, Description: desc, ComapnyWebsite: compwebsite, EstablishmentDate: Esta};
+
+        $.ajax({
+            url:  '@Url.Action("Create1", "Recruiters")',
+                    dataType: "json",
+            data: JSON.stringify({ company:mod}),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                   alert("Successfully Created");
+                   window.location.href = newUrl;
+                    },
+                    error: function (xhr) {
+                        alert("Error");
+                    }
+                });
+    });
+</script>
+<script>
+         $(function () {
+             $("#uploadEditorImage").change(function () {
+                 var data = new FormData();
+                 var files = $("#uploadEditorImage").get(0).files;
+                 if (files.length > 0) {
+                     data.append("HelpSectionImages", files[0]);
+                 }
+                 fileValue = data;
+               //  alert(fileValue);
+                 $.ajax({
+                     url: '@Url.Action("StoreImage", "Companies")',
+                     type: "POST",
+                     processData: false,
+                     async: false,
+                     cache: false,
+                     contentType: false,
+                     data: data,
+                     success: function (response) {
+                       //  alert(response.filepath)
+                         $("#imgpath").val(response.filepath);
+                         //code after success
+                         $(".displayimg").append("<img src=" + response.filepath+" height=5% width=25%>");
+
+                     },
+                     error: function (er) {
+                         alert(er);
+                     }
+
+                 });
+             });
+         });
+</script>
+<script>
+         $(function () {
+             $("#uploadEditorImag").change(function () {
+                 var data = new FormData();
+                 var files = $("#uploadEditorImag").get(0).files;
+                 if (files.length > 0) {
+                     data.append("HelpSectionImages", files[0]);
+                 }
+                 fileValue = data;
+               //  alert(fileValue);
+                 $.ajax({
+                     url: '@Url.Action("StoreLogo", "JobPost")',
+                     type: "POST",
+                     processData: false,
+                     async: false,
+                     cache: false,
+                     contentType: false,
+                     data: data,
+                     success: function (response) {
+                       //  alert(response.filepath)
+                         $("#imgpathLogo").val(response.filepath);
+                         //code after success
+                         $(".displayimge").append("<img src=" + response.filepath+" height=5% width=25%>");
+
+                     },
+                     error: function (er) {
+                         alert(er);
+                     }
+
+                 });
+             });
+         });
+</script>
+<script>
+         $(function () {
+             $("#UploadFile").change(function () {
+                 var data = new FormData();
+                 var files = $("#UploadFile").get(0).files;
+                 if (files.length > 0) {
+                     data.append("HelpSectionImages", files[0]);
+                 }
+                 fileValue = data;
+               //  alert(fileValue);
+                 $.ajax({
+                     url: '@Url.Action("", "JobPost")',
+                     type: "POST",
+                     processData: false,
+                     async: false,
+                     cache: false,
+                     contentType: false,
+                     data: data,
+                     success: function (response) {
+                       //  alert(response.filepath)
+                         $("#PresentFilePath").val(response.filepath);
+                         //code after success
+                         $(".diaplypath").append("<img src=" + response.filepath+" height=5% width=25%>");
+
+                     },
+                     error: function (er) {
+                         alert(er);
+                     }
+
+                 });
+             });
+         });
+</script>

@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onlinejobportalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BusinessStream">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BussinessStream" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK_Company_BusinessStream" FromRole="BusinessStream" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Certification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ValidDate" Type="DateTime" Precision="3" />
+    <Property Name="PersonalInfo_id" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PersonalInfo" Relationship="Self.FK_Table_1_PersonalInfo" FromRole="Certification" ToRole="PersonalInfo" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State_id" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="City" ToRole="State" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Location_City" FromRole="City" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Companyname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BusinessStreamId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyWebsite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EstablishmentDate" Type="DateTime" Precision="0" />
+    <Property Name="CompanyImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BusinessStream" Relationship="Self.FK_Company_BusinessStream" FromRole="Company" ToRole="BusinessStream" />
+    <NavigationProperty Name="JobPosts" Relationship="Self.FK_JobPost_Company" FromRole="Company" ToRole="JobPost" />
+    <NavigationProperty Name="PreferredCompanies" Relationship="Self.FK_PreferredCompanies_Company" FromRole="Company" ToRole="PreferredCompanies" />
+    <NavigationProperty Name="UserExperiences" Relationship="Self.FK_UserExperience_Company" FromRole="Company" ToRole="UserExperience" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Location_Country" FromRole="Country" ToRole="Location" />
+    <NavigationProperty Name="States" Relationship="Self.FK_State_Country" FromRole="Country" ToRole="State" />
+  </EntityType>
+  <EntityType Name="JobPost">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="RecruiterId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NoOfSeats" Type="Int32" />
+    <Property Name="CTC" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <Property Name="Requirement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_JobPost_Company" FromRole="JobPost" ToRole="Company" />
+    <NavigationProperty Name="Recruiter" Relationship="Self.FK_JobPost_Recruiter" FromRole="JobPost" ToRole="Recruiter" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_JobPost_Role" FromRole="JobPost" ToRole="Role" />
+    <NavigationProperty Name="JobPostActivities" Relationship="Self.FK_JobPostActivity_JobPost" FromRole="JobPost" ToRole="JobPostActivity" />
+    <NavigationProperty Name="jobpostskills" Relationship="Self.FK_jobpostskill_JobPost" FromRole="JobPost" ToRole="jobpostskill" />
+  </EntityType>
+  <EntityType Name="JobPostActivity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobpostId" Type="Int32" Nullable="false" />
+    <Property Name="UserdetailsId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="JobPost" Relationship="Self.FK_JobPostActivity_JobPost" FromRole="JobPostActivity" ToRole="JobPost" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_JobPostActivity_UserDetails" FromRole="JobPostActivity" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="jobpostskill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Skillid" Type="Int32" Nullable="false" />
+    <Property Name="JobPostId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="JobPost" Relationship="Self.FK_jobpostskill_JobPost" FromRole="jobpostskill" ToRole="JobPost" />
+    <NavigationProperty Name="Skill" Relationship="Self.FK_jobpostskill_Skills" FromRole="jobpostskill" ToRole="Skills" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Country_id" Type="Int32" Nullable="false" />
+    <Property Name="State_id" Type="Int32" Nullable="false" />
+    <Property Name="City_id" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Location_City" FromRole="Location" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Location_Country" FromRole="Location" ToRole="Country" />
+    <NavigationProperty Name="State" Relationship="Self.FK_Location_State" FromRole="Location" ToRole="State" />
+    <NavigationProperty Name="PreferredLocations" Relationship="Self.FK_PreferredLocations_Location" FromRole="Location" ToRole="PreferredLocations" />
+  </EntityType>
+  <EntityType Name="Lookout">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Personal_id" Type="Int32" Nullable="false" />
+    <Property Name="NoticePeriod" Type="Int32" />
+    <Property Name="LastWorkingDay" Type="DateTime" Precision="0" />
+    <Property Name="IsPlaced" Type="Boolean" />
+    <Property Name="LastActive" Type="DateTime" Precision="3" />
+    <Property Name="Package" Type="Decimal" Precision="9" Scale="2" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_Lookout_UserDetails" FromRole="Lookout" ToRole="UserDetails" />
+    <NavigationProperty Name="PreferredCompanies" Relationship="Self.FK_PreferredCompanies_Lookout" FromRole="Lookout" ToRole="PreferredCompanies" />
+    <NavigationProperty Name="PreferredLocations" Relationship="Self.FK_PreferredLocations_Lookout" FromRole="Lookout" ToRole="PreferredLocations" />
+    <NavigationProperty Name="WorkShifts" Relationship="Self.FK_WorkShift_Lookout" FromRole="Lookout" ToRole="WorkShift" />
+  </EntityType>
+  <EntityType Name="PersonalInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Skill_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Certifications" Relationship="Self.FK_Table_1_PersonalInfo" FromRole="PersonalInfo" ToRole="Certification" />
+    <NavigationProperty Name="Skill" Relationship="Self.FK_UserSkilldet_Skills" FromRole="PersonalInfo" ToRole="Skills" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserSkilldet_UserDetails" FromRole="PersonalInfo" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="PreferredCompany">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Lookout_id" Type="Int32" Nullable="false" />
+    <Property Name="Company_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_PreferredCompanies_Company" FromRole="PreferredCompanies" ToRole="Company" />
+    <NavigationProperty Name="Lookout" Relationship="Self.FK_PreferredCompanies_Lookout" FromRole="PreferredCompanies" ToRole="Lookout" />
+  </EntityType>
+  <EntityType Name="PreferredLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Lookout_id" Type="Int32" Nullable="false" />
+    <Property Name="Location_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_PreferredLocations_Location" FromRole="PreferredLocations" ToRole="Location" />
+    <NavigationProperty Name="Lookout" Relationship="Self.FK_PreferredLocations_Lookout" FromRole="PreferredLocations" ToRole="Lookout" />
+  </EntityType>
+  <EntityType Name="PremiumColldetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserDetails_id" Type="Int32" Nullable="false" />
+    <Property Name="UserEducation_id" Type="Int32" Nullable="false" />
+    <Property Name="premium_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="primecollege" Relationship="Self.FK_PremiumCollege_primecollege" FromRole="PremiumColldetail" ToRole="primecollege" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_PremiumCollege_UserDetails" FromRole="PremiumColldetail" ToRole="UserDetails" />
+    <NavigationProperty Name="UserEducation" Relationship="Self.FK_PremiumCollege_UserEducation" FromRole="PremiumColldetail" ToRole="UserEducation" />
+  </EntityType>
+  <EntityType Name="primecollege">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PremiumInstituteNames" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShortForms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PremiumColldetails" Relationship="Self.FK_PremiumCollege_primecollege" FromRole="primecollege" ToRole="PremiumColldetail" />
+  </EntityType>
+  <EntityType Name="Recruiter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNo" Type="Int64" />
+    <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="JobPosts" Relationship="Self.FK_JobPost_Recruiter" FromRole="Recruiter" ToRole="JobPost" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="JobPosts" Relationship="Self.FK_JobPost_Role" FromRole="Role" ToRole="JobPost" />
+  </EntityType>
+  <EntityType Name="Shift">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Timefrom" Type="Time" Precision="7" />
+    <Property Name="TimeTo" Type="Time" Precision="7" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="WorkShifts" Relationship="Self.FK_WorkShift_Shift" FromRole="Shifts" ToRole="WorkShift" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SkillLevel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="jobpostskills" Relationship="Self.FK_jobpostskill_Skills" FromRole="Skills" ToRole="jobpostskill" />
+    <NavigationProperty Name="PersonalInfoes" Relationship="Self.FK_UserSkilldet_Skills" FromRole="Skills" ToRole="PersonalInfo" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_City_State" FromRole="State" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_State_Country" FromRole="State" ToRole="Country" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Location_State" FromRole="State" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="User_type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_User_type" FromRole="User_type" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usertype_id" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_no" Type="Int64" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserImage" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="JobPostActivities" Relationship="Self.FK_JobPostActivity_UserDetails" FromRole="UserDetails" ToRole="JobPostActivity" />
+    <NavigationProperty Name="Lookouts" Relationship="Self.FK_Lookout_UserDetails" FromRole="UserDetails" ToRole="Lookout" />
+    <NavigationProperty Name="PersonalInfoes" Relationship="Self.FK_UserSkilldet_UserDetails" FromRole="UserDetails" ToRole="PersonalInfo" />
+    <NavigationProperty Name="PremiumColldetails" Relationship="Self.FK_PremiumCollege_UserDetails" FromRole="UserDetails" ToRole="PremiumColldetail" />
+    <NavigationProperty Name="User_type" Relationship="Self.FK_UserDetails_User_type" FromRole="UserDetails" ToRole="User_type" />
+    <NavigationProperty Name="UserEducations" Relationship="Self.FK_UserEducation_UserDetails" FromRole="UserDetails" ToRole="UserEducation" />
+    <NavigationProperty Name="UserExperiences" Relationship="Self.FK_UserExperience_UserDetails" FromRole="UserDetails" ToRole="UserExperience" />
+  </EntityType>
+  <EntityType Name="UserEducation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserDetails_id" Type="Int32" Nullable="false" />
+    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Board" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InstituteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartYear" Type="Int32" />
+    <Property Name="EndYear" Type="Int32" />
+    <Property Name="CourseType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Percentage" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PremiumColldetails" Relationship="Self.FK_PremiumCollege_UserEducation" FromRole="UserEducation" ToRole="PremiumColldetail" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserEducation_UserDetails" FromRole="UserEducation" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="UserExperience">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Company_id" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="Enddate" Type="DateTime" Precision="0" />
+    <Property Name="CurrentSalary" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="JobRole" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyLocation" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="NoofprojectsDone" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_UserExperience_Company" FromRole="UserExperience" ToRole="Company" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserExperience_UserDetails" FromRole="UserExperience" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="WorkShift">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Shift_Id" Type="Int32" Nullable="false" />
+    <Property Name="Lookout_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Lookout" Relationship="Self.FK_WorkShift_Lookout" FromRole="WorkShift" ToRole="Lookout" />
+    <NavigationProperty Name="Shift" Relationship="Self.FK_WorkShift_Shift" FromRole="WorkShift" ToRole="Shifts" />
+  </EntityType>
+  <Association Name="FK_Company_BusinessStream">
+    <End Role="BusinessStream" Type="Self.BusinessStream" Multiplicity="1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusinessStream">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="BusinessStreamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_1_PersonalInfo">
+    <End Role="PersonalInfo" Type="Self.PersonalInfo" Multiplicity="1" />
+    <End Role="Certification" Type="Self.Certification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonalInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Certification">
+        <PropertyRef Name="PersonalInfo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="State_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="City_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobPost_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="JobPost">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreferredCompanies_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="PreferredCompanies" Type="Self.PreferredCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PreferredCompanies">
+        <PropertyRef Name="Company_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserExperience_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="UserExperience" Type="Self.UserExperience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserExperience">
+        <PropertyRef Name="Company_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="Country_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_State_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="Country_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobPost_Recruiter">
+    <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="1" />
+    <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recruiter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobPost">
+        <PropertyRef Name="RecruiterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobPost_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="JobPost">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobPostActivity_JobPost">
+    <End Role="JobPost" Type="Self.JobPost" Multiplicity="1" />
+    <End Role="JobPostActivity" Type="Self.JobPostActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobPost">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobPostActivity">
+        <PropertyRef Name="JobpostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_jobpostskill_JobPost">
+    <End Role="JobPost" Type="Self.JobPost" Multiplicity="1" />
+    <End Role="jobpostskill" Type="Self.jobpostskill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobPost">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="jobpostskill">
+        <PropertyRef Name="JobPostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobPostActivity_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="JobPostActivity" Type="Self.JobPostActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="JobPostActivity">
+        <PropertyRef Name="UserdetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_jobpostskill_Skills">
+    <End Role="Skills" Type="Self.Skill" Multiplicity="1" />
+    <End Role="jobpostskill" Type="Self.jobpostskill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skills">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="jobpostskill">
+        <PropertyRef Name="Skillid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="State_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreferredLocations_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="PreferredLocations" Type="Self.PreferredLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PreferredLocations">
+        <PropertyRef Name="Location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lookout_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="Lookout" Type="Self.Lookout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Lookout">
+        <PropertyRef Name="Personal_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreferredCompanies_Lookout">
+    <End Role="Lookout" Type="Self.Lookout" Multiplicity="1" />
+    <End Role="PreferredCompanies" Type="Self.PreferredCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookout">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreferredCompanies">
+        <PropertyRef Name="Lookout_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreferredLocations_Lookout">
+    <End Role="Lookout" Type="Self.Lookout" Multiplicity="1" />
+    <End Role="PreferredLocations" Type="Self.PreferredLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookout">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreferredLocations">
+        <PropertyRef Name="Lookout_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkShift_Lookout">
+    <End Role="Lookout" Type="Self.Lookout" Multiplicity="1" />
+    <End Role="WorkShift" Type="Self.WorkShift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lookout">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkShift">
+        <PropertyRef Name="Lookout_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSkilldet_Skills">
+    <End Role="Skills" Type="Self.Skill" Multiplicity="1" />
+    <End Role="PersonalInfo" Type="Self.PersonalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skills">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PersonalInfo">
+        <PropertyRef Name="Skill_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSkilldet_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="PersonalInfo" Type="Self.PersonalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PersonalInfo">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PremiumCollege_primecollege">
+    <End Role="primecollege" Type="Self.primecollege" Multiplicity="1" />
+    <End Role="PremiumColldetail" Type="Self.PremiumColldetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="primecollege">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PremiumColldetail">
+        <PropertyRef Name="premium_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PremiumCollege_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="PremiumColldetail" Type="Self.PremiumColldetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PremiumColldetail">
+        <PropertyRef Name="UserDetails_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PremiumCollege_UserEducation">
+    <End Role="UserEducation" Type="Self.UserEducation" Multiplicity="1" />
+    <End Role="PremiumColldetail" Type="Self.PremiumColldetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserEducation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PremiumColldetail">
+        <PropertyRef Name="UserEducation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkShift_Shift">
+    <End Role="Shifts" Type="Self.Shift" Multiplicity="1" />
+    <End Role="WorkShift" Type="Self.WorkShift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shifts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="WorkShift">
+        <PropertyRef Name="Shift_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_User_type">
+    <End Role="User_type" Type="Self.User_type" Multiplicity="1" />
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserDetails">
+        <PropertyRef Name="Usertype_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEducation_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="UserEducation" Type="Self.UserEducation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserEducation">
+        <PropertyRef Name="UserDetails_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserExperience_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="UserExperience" Type="Self.UserExperience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserExperience">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="onlinejobportalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BusinessStreams" EntityType="Self.BusinessStream" />
+    <EntitySet Name="Certifications" EntityType="Self.Certification" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="JobPosts" EntityType="Self.JobPost" />
+    <EntitySet Name="JobPostActivities" EntityType="Self.JobPostActivity" />
+    <EntitySet Name="jobpostskills" EntityType="Self.jobpostskill" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="Lookouts" EntityType="Self.Lookout" />
+    <EntitySet Name="PersonalInfoes" EntityType="Self.PersonalInfo" />
+    <EntitySet Name="PreferredCompanies" EntityType="Self.PreferredCompany" />
+    <EntitySet Name="PreferredLocations" EntityType="Self.PreferredLocation" />
+    <EntitySet Name="PremiumColldetails" EntityType="Self.PremiumColldetail" />
+    <EntitySet Name="primecolleges" EntityType="Self.primecollege" />
+    <EntitySet Name="Recruiters" EntityType="Self.Recruiter" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Shifts" EntityType="Self.Shift" />
+    <EntitySet Name="Skills" EntityType="Self.Skill" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="User_type" EntityType="Self.User_type" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <EntitySet Name="UserEducations" EntityType="Self.UserEducation" />
+    <EntitySet Name="UserExperiences" EntityType="Self.UserExperience" />
+    <EntitySet Name="WorkShifts" EntityType="Self.WorkShift" />
+    <AssociationSet Name="FK_Company_BusinessStream" Association="Self.FK_Company_BusinessStream">
+      <End Role="BusinessStream" EntitySet="BusinessStreams" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_1_PersonalInfo" Association="Self.FK_Table_1_PersonalInfo">
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+      <End Role="Certification" EntitySet="Certifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_City" Association="Self.FK_Location_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobPost_Company" Association="Self.FK_JobPost_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="JobPost" EntitySet="JobPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreferredCompanies_Company" Association="Self.FK_PreferredCompanies_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="PreferredCompanies" EntitySet="PreferredCompanies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserExperience_Company" Association="Self.FK_UserExperience_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="UserExperience" EntitySet="UserExperiences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_Country" Association="Self.FK_Location_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="State" EntitySet="States" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobPost_Recruiter" Association="Self.FK_JobPost_Recruiter">
+      <End Role="Recruiter" EntitySet="Recruiters" />
+      <End Role="JobPost" EntitySet="JobPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobPost_Role" Association="Self.FK_JobPost_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="JobPost" EntitySet="JobPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobPostActivity_JobPost" Association="Self.FK_JobPostActivity_JobPost">
+      <End Role="JobPost" EntitySet="JobPosts" />
+      <End Role="JobPostActivity" EntitySet="JobPostActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_jobpostskill_JobPost" Association="Self.FK_jobpostskill_JobPost">
+      <End Role="JobPost" EntitySet="JobPosts" />
+      <End Role="jobpostskill" EntitySet="jobpostskills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobPostActivity_UserDetails" Association="Self.FK_JobPostActivity_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="JobPostActivity" EntitySet="JobPostActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_jobpostskill_Skills" Association="Self.FK_jobpostskill_Skills">
+      <End Role="Skills" EntitySet="Skills" />
+      <End Role="jobpostskill" EntitySet="jobpostskills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_State" Association="Self.FK_Location_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreferredLocations_Location" Association="Self.FK_PreferredLocations_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="PreferredLocations" EntitySet="PreferredLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lookout_UserDetails" Association="Self.FK_Lookout_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Lookout" EntitySet="Lookouts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreferredCompanies_Lookout" Association="Self.FK_PreferredCompanies_Lookout">
+      <End Role="Lookout" EntitySet="Lookouts" />
+      <End Role="PreferredCompanies" EntitySet="PreferredCompanies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreferredLocations_Lookout" Association="Self.FK_PreferredLocations_Lookout">
+      <End Role="Lookout" EntitySet="Lookouts" />
+      <End Role="PreferredLocations" EntitySet="PreferredLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkShift_Lookout" Association="Self.FK_WorkShift_Lookout">
+      <End Role="Lookout" EntitySet="Lookouts" />
+      <End Role="WorkShift" EntitySet="WorkShifts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSkilldet_Skills" Association="Self.FK_UserSkilldet_Skills">
+      <End Role="Skills" EntitySet="Skills" />
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSkilldet_UserDetails" Association="Self.FK_UserSkilldet_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PremiumCollege_primecollege" Association="Self.FK_PremiumCollege_primecollege">
+      <End Role="primecollege" EntitySet="primecolleges" />
+      <End Role="PremiumColldetail" EntitySet="PremiumColldetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PremiumCollege_UserDetails" Association="Self.FK_PremiumCollege_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="PremiumColldetail" EntitySet="PremiumColldetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PremiumCollege_UserEducation" Association="Self.FK_PremiumCollege_UserEducation">
+      <End Role="UserEducation" EntitySet="UserEducations" />
+      <End Role="PremiumColldetail" EntitySet="PremiumColldetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkShift_Shift" Association="Self.FK_WorkShift_Shift">
+      <End Role="Shifts" EntitySet="Shifts" />
+      <End Role="WorkShift" EntitySet="WorkShifts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_User_type" Association="Self.FK_UserDetails_User_type">
+      <End Role="User_type" EntitySet="User_type" />
+      <End Role="UserDetails" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEducation_UserDetails" Association="Self.FK_UserEducation_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserEducation" EntitySet="UserEducations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserExperience_UserDetails" Association="Self.FK_UserExperience_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserExperience" EntitySet="UserExperiences" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

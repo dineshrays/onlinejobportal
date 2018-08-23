@@ -1,0 +1,124 @@
+﻿@model JobPortal.Models.PlanMaster
+
+@{
+    ViewBag.Title = "ListOFPlan";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2>ListOFPlan</h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+@*<table class="table">
+
+
+    @foreach (var item in Model) {
+        <tr>
+            <th>
+                <a href="@Url.Action("PlanDetails", "Recruiters", new { id = @item.Id })">
+                    <img src="~/MovieImages/logo.png" alt="image" id="ImgID" width="10%" />
+                </a>
+                <br />
+                <b>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </b>
+            </th>
+
+
+        </tr>
+    }
+
+    </table>*@
+
+
+@Html.DropDownListFor(model => model.Name, ViewData["Planlistview"] as SelectList, "Plan Name", new { @class = "form-control", @id = "planlistId" })
+
+
+
+<script>
+    $("#planlistId").change(
+        function () {
+            var Id = $("#planlistId").val();
+
+
+            var newUrl ='/Recruiters/Index'
+                @*'@Url.Action("Index", "Recruiters")';*@
+             $.ajax({
+
+                 url:'/Recruiters/ListOFPlan',
+             dataType: "json",
+                data: JSON.stringify({ pid: Id }),
+             type:"POST",
+             contentType: "application/json; charset=utf-8",
+              success: function (result)
+              {
+
+
+
+                  $.each(result, function (i, allotrow) {
+                      //var value = "<td><input type='text'  value=" + allotrow. + "></td>";
+
+                      var markup = "<tr><td>" + "<br/>" + allotrow.Name + "<br/>" + allotrow.ValidFrom + "<br/>" + allotrow.ValidTo + "<br/>" + allotrow.Price +"<br/>" +allotrow.NoClicks + "</td></tr>";
+                      $("#tblid").append(markup);
+
+                      
+
+
+                  })
+                  $("#displaymain").show();
+          },
+        error: function (xhr) {
+            alert("error");
+
+        }
+        });
+    });
+</script>
+
+<table id="tblid" class="table table-striped"></table>
+
+
+<div id="displaymain" style="display:none">
+
+    <input type="text" placeholder="No of SubUser" id="NoofSub" class="form-control" />
+    <br />  
+    <input type="submit" value="Select Plan" id="Selectplan" class="btn btn-success" />
+
+</div>
+
+
+
+
+<script>
+
+    $("#Selectplan").click(function () {
+
+        var Planlistid = $("#planlistId").val();
+        var NoofCounts = $("#NoofSub").val();
+       
+
+
+        var newUrl = '@Url.Action("ListSubUser", "Recruiters")';
+
+
+        var mod = { PlanMasterId: Planlistid, SubUserCount: NoofCounts};
+        
+        $.ajax({
+            url:  '@Url.Action("PlanSelect", "Recruiters")',
+                    dataType: "json",
+            data: JSON.stringify({ plan:mod}),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        alert("Successfully Created");
+                        window.location.href = newUrl;
+
+                    },
+                    error: function (xhr) {
+                        alert("Error");
+                    }
+                });
+    });
+</script>

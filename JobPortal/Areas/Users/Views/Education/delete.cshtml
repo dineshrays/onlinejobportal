@@ -1,0 +1,115 @@
+﻿@model Jobportal.Models.UserEducation
+
+@{
+    ViewBag.Title = "delete";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@Html.HiddenFor(model => model.Id, new { @class = "form-control-label", @id = "eduid" })
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Board)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Board)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InstituteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstituteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Percentage)
+        </dd>
+
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.UserName)
+        </dd>
+
+    </dl>
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" id="btndel" class="btn btn-danger" /> |
+</div>
+<div class="btn btn-default" style="margin-top:20px">
+    @Html.ActionLink("Bact to List ", "Index")
+</div>
+<script>
+
+    $("#btndel").click(function () {
+        var educatid = $("#eduid").val();
+    
+                var newUrl= '@Url.Action("Index", "Education")';
+
+        var mod = { Id: educatid };
+                $.ajax({
+                url: '@Url.Action("delete", "Education")',
+                dataType: "json",
+                    data: JSON.stringify({
+                        ue: mod, id: educatid
+                }),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                alert("deleted Successfully");
+
+                window.location.href = newUrl;
+                },
+                error: function (xhr) {
+                alert("error");
+                }
+                });
+                });
+</script>
+

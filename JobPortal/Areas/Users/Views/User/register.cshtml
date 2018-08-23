@@ -1,0 +1,189 @@
+﻿@model JobPortal.ViewModel.JobPortalViewModel
+@{
+    ViewBag.Title = "register";
+    // Layout = "~/Views/Shared/LayoutPage.cshtml";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<div class="row form-group">
+    <div class="col-md-3">
+        @Html.Label("UserType")
+    </div>
+    <div class="col-12 col-md-9">
+        @Html.DropDownListFor(model => model.usertype.ID, ViewData["userlist"] as SelectList, new { @class = "form-control", @id = "usertype", style = "width:30%" })
+        <input type="text" id="userid" style="display:none">
+    </div>
+</div>
+
+
+
+<div class="mydisplay" style="display:none">
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter User Name")
+        </div>
+
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.userdetails.UserName, new { @class = "form-control", @id = "username", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Set Password")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.PasswordFor(model => model.userdetails.Password, new { @class = "form-control", @id = "userpswd", style = "width:50%" })
+            @Html.ValidationMessageFor(model => model.userdetails.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Confirm Password")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.PasswordFor(model => model.userdetails.Password, new { @class = "form-control", @id = "cpswd", style = "width:30%" })
+            @Html.ValidationMessageFor(model => model.userdetails.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Email")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.userdetails.Email, new { @class = "form-control", @id = "usermail", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Phone Number")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.userdetails.Phone_no, new { @class = "form-control", @id = "userphoneno", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Age")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.userdetails.Age, new { @class = "form-control", @id = "userage", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Gender")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.TextBoxFor(model => model.userdetails.Gender, new { @class = "form-control", @id = "usergender", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Insert User Image")
+        </div>
+
+        <div>
+            <input type="file" id="uploadEditorImage" enctype="multipart/form-data" />
+            <input type="text" id="imgpath" />
+            <div class="displayimg">
+            </div>
+        </div>
+        </div>
+
+        <div class="col-12 col-md-9">
+            <input type="submit" value="Register" id="btnreg" class="btn btn-success" />
+
+        </div>
+
+    </div>
+    <script>
+
+        $("#usertype").change(function () {
+            var usertype = $("#usertype").val();
+            if (usertype == 3)
+                $(".mydisplay").show();
+        });
+    </script>
+    <script>
+         $(function () {
+             $("#uploadEditorImage").change(function () {
+                 var data = new FormData();
+                 var files = $("#uploadEditorImage").get(0).files;
+                 if (files.length > 0) {
+                     data.append("HelpSectionImages", files[0]);
+                 }
+                 fileValue = data;
+               //  alert(fileValue);
+                 $.ajax({
+                     url: '@Url.Action("StoreImage", "User")',
+                    type: "POST",
+                    processData: false,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                    //  alert(response.filepath)
+                    $("#imgpath").val(response.filepath);
+                    //code after success
+                    $(".displayimg").append("<img src=" + response.filepath+" height=15% width=35%>");
+
+                    },
+                    error: function (er) {
+                    alert(er);
+                    }
+                    });
+                    });
+                    });
+    </script>
+
+
+
+    <script>
+         $("#btnreg").click(function () {
+            var usertype = $("#usertype").val();
+            var username = $("#username").val();
+             var password = $("#userpswd").val();
+            var cpswrd = $("#cpswd").val();
+            var email = $("#usermail").val();
+            var gender = $("#usergender").val();
+             var phoneno = $("#userphoneno").val();
+             var age = $("#userage").val();
+            var image = $("#imgpath").val();
+             var newUrl = '@Url.Action("Index", "User")';
+    //         alert(password)
+             if (password == cpswrd) {
+                 var userdet = { Usertype_id: usertype, UserName: username, Password: password, Email: email, Gender: gender, Age: age, Phone_no: phoneno, UserImage: image }
+             }
+             else { alert("please enter same password") }
+                $.ajax({
+            url: '@Url.Action("create", "User")',
+                   dataType: "json",
+                   data: JSON.stringify({ ud: userdet }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                alert("Successfully Inserted");
+                window.location.href = newUrl;
+            },
+            error: function (xhr) {
+                alert("error");
+            }
+        });
+
+    });
+    </script>
