@@ -281,9 +281,6 @@
     <Compile Include="Models\State.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

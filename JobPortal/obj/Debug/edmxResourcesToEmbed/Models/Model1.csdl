@@ -34,16 +34,6 @@
     <NavigationProperty Name="JobPostSkills" Relationship="Self.FK_JobPostSkills_Skills" FromRole="Skills" ToRole="JobPostSkills" />
     <NavigationProperty Name="PersonalInfoes" Relationship="JobPortalModel.FK_UserSkilldet_Skills" FromRole="Skill" ToRole="PersonalInfo" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <Association Name="FK_JobPostSkills_Skills">
     <End Role="Skills" Type="Self.Skill" Multiplicity="1" />
     <End Role="JobPostSkills" Type="Self.JobPostSkill" Multiplicity="*" />
@@ -60,7 +50,6 @@
     <EntitySet Name="JobPostSkills" EntityType="Self.JobPostSkill" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Skills" EntityType="Self.Skill" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK_JobPostSkills_Skills" Association="Self.FK_JobPostSkills_Skills">
       <End Role="Skills" EntitySet="Skills" />
       <End Role="JobPostSkills" EntitySet="JobPostSkills" />

@@ -28,7 +28,6 @@ namespace JobPortal.Models
         public virtual DbSet<JobPostSkill> JobPostSkills { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<State> States { get; set; }

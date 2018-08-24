@@ -17,7 +17,6 @@ namespace JobPortal.Models
         public int Id { get; set; }
         public int RecruiterPlanId { get; set; }
         public string UserName { get; set; }
-        public int SubUserCount { get; set; }
         public string Password { get; set; }
         public Nullable<long> ContactNo { get; set; }
         public string EmailId { get; set; }

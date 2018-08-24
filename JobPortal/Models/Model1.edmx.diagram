@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="JobPortalModel.JobPostSkill" Width="1.5" PointX="19.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="JobPortalModel.Role" Width="1.5" PointX="15.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="JobPortalModel.Skill" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JobPortalModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="JobPortalModel.FK_JobPostSkills_Skills" ManuallyRouted="false" />
         <EntityTypeShape EntityType="JobPortalModel.City" Width="1.5" PointX="12.875" PointY="1" />
         <EntityTypeShape EntityType="JobPortalModel.Country" Width="1.5" PointX="8.375" PointY="1.125" />
