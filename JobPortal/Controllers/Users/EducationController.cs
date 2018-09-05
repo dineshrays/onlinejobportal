@@ -80,9 +80,11 @@ namespace Jobportal.User.Controllers
         [HttpPost]
         public ActionResult edit(int id, UserEducation ue)
         {
-            UserEducation ues = db.UserEducations.Find(id);
-            ues.ModifiedOn = System.DateTime.Now;
-            db.Entry(ues).CurrentValues.SetValues(ue);
+          //  UserEducation ues = db.UserEducations.Find(id);
+            ue.ModifiedOn = System.DateTime.Now;
+            ue.IsActive = true;
+            //    db.Entry(ues).CurrentValues.SetValues(ue);
+            db.Entry(ue).State = EntityState.Modified;
             db.SaveChanges();
             return Json("", JsonRequestBehavior.AllowGet);
         }

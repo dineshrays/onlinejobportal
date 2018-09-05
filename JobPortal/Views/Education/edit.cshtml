@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>edit</h2>
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -12,139 +11,146 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
 
-    <div class="row form-group">
-        <div class="col-12 col-md-9">
-            @Html.HiddenFor(model => model.userdetails.ID, new { @class = "form-control-label", @id = "userid" })
-            @Html.HiddenFor(model => model.education.Id, new { @class = "form-control-label", @id = "eduid" })
+<div class="card">
+    <div class="card-body">
+
+        <div class="row form-group">
+            <div class="col-12 col-md-9">
+                @Html.HiddenFor(model => model.education.UserDetails_id, new { @class = "form-control-label", @id = "userid" })
+                @Html.HiddenFor(model => model.education.Id, new { @class = "form-control-label", @id = "eduid" })
+            </div>
         </div>
-    </div>
 
 
-    <table id="tblid" class="table table-bordered table-condensed">
-        <thead>
-            <tr>
-                <th>
-                    @Html.Label("Course")
-                </th>
-                <th>
-                    @Html.Label("Board")
-                </th>
-                <th>
-                    @Html.Label("Institution Name")
-                </th>
-                <th>
-                    @Html.Label("Start Year")
-                </th>
-                <th>
-                    @Html.Label("End Year")
-                </th>
-                <th>
-                    @Html.Label("Course Type")
-                </th>
-                <th>
-                    @Html.Label("PERCENTAGE")
-                </th>
-            </tr>
-        </thead>
-        <tbody id="tblbodyid">
-            <tr class="gh">
-                
-                @*<td>
-                
-                <input type='text' id='course_'  name='course' />
-                               </td>
-                 <td>
-                <input type='text' id='board_' name='board' />
-                     </td>
-                <td>
-                    <input type='text' id='instiname_' name='instiname' />
+        <table id="tblid" class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.Label("Course")
+                    </th>
+                    <th>
+                        @Html.Label("Board")
+                    </th>
+                    <th>
+                        @Html.Label("Institution Name")
+                    </th>
+                    <th>
+                        @Html.Label("Start Year")
+                    </th>
+                    <th>
+                        @Html.Label("End Year")
+                    </th>
+                    <th>
+                        @Html.Label("Course Type")
+                    </th>
+                    <th>
+                        @Html.Label("PERCENTAGE")
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tblbodyid">
+                <tr class="gh">
+
+                    @*<td>
+
+                            <input type='text' id='course_'  name='course' />
+                                           </td>
+                             <td>
+                            <input type='text' id='board_' name='board' />
+                                 </td>
+                            <td>
+                                <input type='text' id='instiname_' name='instiname' />
+                                </td>
+                            <td>
+                            <input type='text' id='startyr_' name='startyr' />
+                                           </td>
+                            <td>
+                            <input type='text' id='endyr_' name='endyr' />
+                            </td>
+
+                            <td>
+                             <input type='text' id='cousetype_' name='cousetype' /></td>
+
+                            <td>
+                            <input type='text' id='percent_' name='percent' />
+
+                            </td>
+
+                        </tr>*@
+
+                    <td>
+                        @Html.TextBoxFor(model => model.education.Course,new { @id = "course_" })
                     </td>
-                <td>
-                <input type='text' id='startyr_' name='startyr' />
-                               </td>
-                <td>
-                <input type='text' id='endyr_' name='endyr' />
-                </td>
-                
-                <td>
-                 <input type='text' id='cousetype_' name='cousetype' /></td>
-                
-                <td>
-                <input type='text' id='percent_' name='percent' />
-                
-                </td>
-                
-            </tr>*@
+                    <td>
+                        @Html.TextBoxFor(model => model.education.Board,new{ @id = "board_" })
+                    </td>
 
-<td>
-                    @Html.TextBoxFor(model => model.education.Course)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.education.Board)
-                </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.education.InstituteName, new { @id = "instiname_" })
+                    </td>
 
-                <td>
-                    @Html.TextBoxFor(model => model.education.InstituteName)
-                </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.education.StartYear, new { @id = "startyr_" })
+                    </td>
 
-                <td>
-                    @Html.TextBoxFor(model => model.education.StartYear)
-                </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.education.EndYear, new { @id = "endyr_" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.education.CourseType, new { @id = "cousetype_" })
+                    </td>
 
-                <td>
-                    @Html.TextBoxFor(model => model.education.EndYear)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.education.CourseType)
-                </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.education.Percentage,new{ @id = "percent_" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                <td>
-                    @Html.TextBoxFor(model => model.education.Percentage)
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div style="margin-top:10px;">
+            <input type="button" id="Add" align="right" value="Add New Educational Detail" />
+        </div>
 
-    <div style="margin-top:10px;">
-        <input type="button" id="Add" align="right" value="Add New Educational Detail" />
+        <div class="col-12 col-md-9">
+            <input type="submit" value="Update" id="btnsav" style="margin-top:10px" class="btn btn-success" />
+        </div>
+</div>
     </div>
+        @*}*@
 
-    <div class="col-12 col-md-9">
-        <input type="submit" value="Update" id="btnsav" style="margin-top:10px" class="btn btn-success" />
-    </div>
-
-}
-    <script>
+        <script>
  $("#btnsav").click(function () {
      var userdetid = $("#userid").val();
+     alert(userdetid)
      var educatid = $("#eduid").val();
         var newUrl = '@Url.Action("Index", "Education")';
 
-     var item = [];
+    // var item = [];
 
      var n = $("#tblbodyid").find("tr").length;
-    alert(n);
+    //alert(n);
      var course, board, instiname, startyear, endyear, coursetyp, percent, value="";
-     for (var i = 0; i < n; i++) {
-         course = $("#course_" + i).val();
-         alert(course);
-         board = $("#board_" + i).val();
-         instiname = $("#instiname_" + i).val();
-         startyear = $("#startyr_" + i).val();
-         endyear = $("#endyr_" + i).val();
-         coursetyp = $("#cousetype_" + i).val();
-         percent = $("#percent_" + i).val();
+  //   for (var i = 0; i < n; i++) {
+         course = $("#course_" ).val();
+      //   alert(course);
+     board = $("#board_").val();
+     //alert(board)
+         instiname = $("#instiname_" ).val();
+         startyear = $("#startyr_" ).val();
+         endyear = $("#endyr_" ).val();
+         coursetyp = $("#cousetype_" ).val();
+         percent = $("#percent_" ).val();
          value = { Id: educatid, UserDetails_id: userdetid, Course: course, Board: board, InstituteName: instiname, StartYear: startyear, EndYear: endyear, CourseType: coursetyp, Percentage: percent }
-         item.push(value);
-     }
+        // item.push(value);
+  //   }
         $.ajax({
             url:  '@Url.Action("edit", "Education")',
             dataType: "json",
-            data: JSON.stringify({ id: educatid, ue: item }),
+            data: JSON.stringify({ id: educatid, ue: value }),
         type:"POST",
         contentType: "application/json; charset=utf-8",
         success: function (result)
@@ -159,39 +165,39 @@
         });
         });
 
-    </script>
+        </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#Add").click(function () {
-                var currentObjIndex = $("#tblbodyid").find("tr").length;
-                alert(currentobj)
-                alert(currentObjIndex)
-                var markup = "<tr class='gh'>"
-                    + "<td>"
-                    + "<input type='text' id='course_" + currentObjIndex + "' name='course' />"
-                    + "</td>"
-                    + "<td>"
-                    + "<input type='text' id='board_" + currentObjIndex + "' name='board' />"
-                    + "</td>"
-                    + "<td>"
-                    + "<input type='text' id='instiname_" + currentObjIndex + "' name='instiname' />"
-                    + "</td>"
-                    + "<td>"
-                    + "<input type='text' id='startyr_" + currentObjIndex + "' name='startyr' />"
-                    + "</td>"
-                    + "<td>"
-                    + "<input type='text' id='endyr_" + currentObjIndex + "' name='endyr' />"
-                    + "</td>"
-                    + "<td>"
-                    + "<input type='text' id='cousetype_" + currentObjIndex + "' name='cousetype' />"
-                    + "</td>"
-                    + "<td>"
-                    + "<input type='text' id='percent_" + currentObjIndex + "' name='percent' />"
-                    + "</td>"
-                    + "</tr>";
-                $("#tblbodyid").append(markup);
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#Add").click(function () {
+                    var currentObjIndex = $("#tblbodyid").find("tr").length;
+                    alert(currentobj)
+                    alert(currentObjIndex)
+                    var markup = "<tr class='gh'>"
+                        + "<td>"
+                        + "<input type='text' id='course_" + currentObjIndex + "' name='course' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='board_" + currentObjIndex + "' name='board' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='instiname_" + currentObjIndex + "' name='instiname' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='startyr_" + currentObjIndex + "' name='startyr' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='endyr_" + currentObjIndex + "' name='endyr' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='cousetype_" + currentObjIndex + "' name='cousetype' />"
+                        + "</td>"
+                        + "<td>"
+                        + "<input type='text' id='percent_" + currentObjIndex + "' name='percent' />"
+                        + "</td>"
+                        + "</tr>";
+                    $("#tblbodyid").append(markup);
+                });
             });
-        });
-    </script>
+        </script>
 

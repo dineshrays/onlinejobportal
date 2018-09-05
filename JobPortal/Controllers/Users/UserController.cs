@@ -37,8 +37,8 @@ namespace Jobportal.Areas.Users.Controllers
             db.UserDetails.Add(ud);
             db.SaveChanges();
             return Json("", JsonRequestBehavior.AllowGet);
-
         }
+        
 
         [HttpPost]
         public ActionResult StoreImage(HttpPostedFileBase file)
@@ -106,9 +106,6 @@ namespace Jobportal.Areas.Users.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
 
         }
-
-
-
-
+        
     }
 }

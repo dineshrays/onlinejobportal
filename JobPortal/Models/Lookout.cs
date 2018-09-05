@@ -11,7 +11,7 @@ namespace JobPortal.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Lookout
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,8 +25,14 @@ namespace JobPortal.Models
         public int Id { get; set; }
         public int Personal_id { get; set; }
         public Nullable<int> NoticePeriod { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> LastWorkingDay { get; set; }
         public Nullable<bool> IsPlaced { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> LastActive { get; set; }
         public Nullable<decimal> Package { get; set; }
     

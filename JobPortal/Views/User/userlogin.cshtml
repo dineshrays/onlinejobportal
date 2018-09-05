@@ -1,0 +1,62 @@
+﻿@model JobPortal.Models.UserDetail
+@{
+    ViewBag.Title = "userlogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="mydisplay">
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter User Name")
+        </div>
+
+        <div class="col-12 col-md-9">
+        @Html.HiddenFor(model=>model.Usertype_id,new {@class= "form-control", @id = "usertyp", style = "width:30%" })
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "username", style = "width:30%" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.Label("Enter Password")
+        </div>
+        <div class="col-12 col-md-9">
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @id = "userpswd", style = "width:30%" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+<div class="col-12 col-md-9">
+    <input type="submit" value="Login" id="btnreg" class="btn btn-success" />
+
+</div>
+
+
+
+<script>
+         $("#btnreg").click(function () {
+          
+            var username = $("#username").val();
+             var password = $("#userpswd").val();
+             var usertype = $("#usertyp").val();
+                 var userdet = { Usertype_id: usertype, UserName: username, Password: password}
+          
+                $.ajax({
+            url: '@Url.Action("userlogin", "User")',
+                   dataType: "json",
+                   data: JSON.stringify({ ud: userdet }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                alert("Valid User");
+                window.location.href = newUrl;
+            },
+            error: function (xhr) {
+                alert("error");
+            }
+        });
+
+    });
+</script>

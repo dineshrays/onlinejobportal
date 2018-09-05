@@ -1,4 +1,4 @@
-﻿@model JobPortal.ViewModel.JobPortalViewModel
+﻿@model JobPortal.Models.Lookout
 
 @{
     ViewBag.Title = "Delete";
@@ -10,53 +10,10 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-@Html.HiddenFor(model => model.lookout.Id, new { @class = "form-control", @id = "lookid", style = "width:30%" })
-
-<dl class="dl-horizontal">
-    <dt>
-        @Html.DisplayNameFor(model => model.lookout.NoticePeriod)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.lookout.NoticePeriod)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.lookout.LastWorkingDay)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.lookout.LastWorkingDay)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.lookout.LastActive)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.lookout.LastActive)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.lookout.Package)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.lookout.Package)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.lookout.UserDetail.Email)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.lookout.UserDetail.Email)
-    </dd>
-
-</dl>
+@Html.HiddenFor(model => model.Id, new { @class = "form-control", @id = "lookid", style = "width:30%" })
 
 <div class="form-actions no-color">
-    <input type="submit" value="Delete" id="btndel" class="btn btn-default" /> |
+    <input type="submit" value="Delete" id="btndel" class="btn btn-danger" /> |
     @Html.ActionLink("Back to List", "Index")
 </div>
 
@@ -66,6 +23,7 @@
     $("#btndel").click(function () {
 
         var lookid = $("#lookid").val();
+     //   var workid = $("s").val();
         var newUrl = '@Url.Action("Index", "Lookouts")';
         alert(lookid)
         var mod = { Id: lookid };
@@ -73,7 +31,7 @@
                 url: '@Url.Action("Delete", "Lookouts")',
                 dataType: "json",
                     data: JSON.stringify({
-                        id: mod, s: lookid
+                        id: mod, s: workid
                 }),
                 type: "POST",
                 contentType: "application/json; charset=utf-8",

@@ -1,0 +1,145 @@
+﻿@model JobPortal.Models.UserDetail
+@{
+    /**/
+
+    ViewBag.Title = "userlogin";
+    //    Layout = "~/Views/Shared/_Layout.cshtml";
+  //  Layout = "~/Views/Shared/ViewPage1.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin Free Bootstrap Admin Dashboard Template</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Scripts/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Scripts/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Scripts/vendors/css/vendor.bundle.addons.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Scripts/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/Scripts/images/favicon.png" />
+</head>
+
+<body>
+    <div class="container-scroller" >
+        <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+            <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+                <div class="row w-100">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auto-form-wrapper">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.Label("UserName")
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="username" placeholder="Username">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="mdi mdi-check-circle-outline"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.Label("Password")
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="userpswd" placeholder="*********">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="mdi mdi-check-circle-outline"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.Label("UserType")
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(model => model.Usertype_id, ViewData["userlist"] as SelectList, new { @class = "form-control", @id = "usertype", style = "width:30%" })
+                                        @*<input type="text" id="userid" style="display:none">*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary submit-btn btn-block" id="btnreg">Login</button>
+                                </div>
+                                
+                                <div class="text-block text-center my-3">
+                                    <a href="~/User/register" class="text-black text-small">Create new account</a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <p class="footer-text text-center">copyright © 2018 Bootstrapdash. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Scripts/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Scripts/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="~/Scripts/js/off-canvas.js"></script>
+    <script src="~/Scripts/js/misc.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>
+
+<script>
+         $("#btnreg").click(function () {
+    var username = $("#username").val();
+             var password = $("#userpswd").val();
+             var usertype = $("#usertype").val();
+   // alert (usertype)
+                 var userdet = { Usertype_id: usertype, UserName: username, Password: password}
+
+        var newUrl = '@Url.Action("Index", "User")';
+                $.ajax({
+            url: '@Url.Action("userlogin", "Login")',
+                   dataType: "json",
+                   data: JSON.stringify({ ud: userdet }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if ((result.Userid > 0) && (result.Usertype_id==3))
+                    {
+                    alert("Valid User");
+                    window.location.href = newUrl;
+                }
+                else {
+                    alert("Enter Valid Username and Password");
+                }
+            },
+            error: function (xhr) {
+                alert("Enter Valid Username and Password");
+            }
+        });
+
+    });
+</script>
+
+

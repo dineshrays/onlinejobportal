@@ -29,7 +29,8 @@
                 @Html.Label("Edit Password")
             </div>
             <div class="col-12 col-md-9">
-                @Html.TextBoxFor(model => model.userdetails.Password, new { @class = "form-control", @id = "userpswd", style = "width:30%" })
+                @Html.PasswordFor(model => model.userdetails.Password, new { @class = "form-control", @id = "userpswd", style = "width:30%" })
+                @Html.ValidationMessageFor(model => model.userdetails.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -38,7 +39,8 @@
                 @Html.Label("Confirm Password")
             </div>
             <div class="col-12 col-md-9">
-                @Html.TextBoxFor(model => model.userdetails.Password, new { @class = "form-control", @id = "cpswd", style = "width:30%" })
+                @Html.PasswordFor(model => model.userdetails.Password, new { @class = "form-control", @id = "cpswd", style = "width:30%" })
+                @Html.ValidationMessageFor(model => model.userdetails.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -136,9 +138,9 @@
     $("#btnupdate").click(function () {
         var username = $("#username").val();
         var usertype = $("#usertypeid").val();
-            var password = $("#userpswd").val();
-            var cpswrd = $("#cpswd").val();
-            var email = $("#usermail").val();
+        var password = $("#userpswd").val();
+        var cpswrd = $("#cpswd").val();
+         var email = $("#usermail").val();
         var gender = $("#usergender").val();
         var age = $("#userage").val();
         var phoneno = $("#userphoneno").val();

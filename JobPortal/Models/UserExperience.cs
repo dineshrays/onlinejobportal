@@ -11,13 +11,18 @@ namespace JobPortal.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class UserExperience
     {
         public int id { get; set; }
         public int UserId { get; set; }
         public int Company_id { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> StartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Enddate { get; set; }
         public Nullable<decimal> CurrentSalary { get; set; }
         public string JobRole { get; set; }

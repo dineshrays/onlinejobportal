@@ -44,7 +44,7 @@ namespace Jobportal.User.Controllers
             ViewData["userlist"] = userlist;
             var shiftlist = new SelectList(db.Shifts, "id", "ShiftName");
             ViewData["shiflist"] = shiftlist;
-            var compan = new SelectList(db.Companies, "id", "Companyname");
+            var compan = new SelectList(db.Companies, "Id", "CompanyName");
             ViewData["comp"] = compan;
             return View();
         }
@@ -167,6 +167,40 @@ namespace Jobportal.User.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult  complist(int id)
+        {
+            List<prefCompViewModel> prelist = (from prec in db.PreferredCompanies
+                                               join c in db.Companies
+                                               on prec.Company_id equals c.Id
+                                               where prec.Lookout_id == id
+                                               select new prefCompViewModel
+                                               {
+                                                   companyid = prec.Company_id,
+                                                   companyname = c.CompanyName
+                                               }).ToList();
+            return Json(prelist, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult loclist (int id)
+        {
+            List<preflocViewModel> preloc = (from prloc in db.PreferredLocations
+                                             join l in db.Locations
+                                             on prloc.Location_id equals l.id
+                                             where prloc.Lookout_id == id
+                                             select new preflocViewModel
+                                             {
+                                                 locid = prloc.Location_id,
+                                                 locname = l.City.CityName
+                                             }).ToList();
+            return Json(preloc, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
 
         // GET: Lookouts/Edit/5
         public ActionResult Edit(int id)
@@ -176,7 +210,8 @@ namespace Jobportal.User.Controllers
             ViewData["userlist"] = userlist;
             var shiftlist = new SelectList(db.Shifts, "id", "ShiftName");
             ViewData["shiflist"] = shiftlist;
-
+            var compan = new SelectList(db.Companies, "Id", "CompanyName");
+            ViewData["comp"] = compan;
             Lookout lookout = db.Lookouts.Find(id);
             lookout.LastActive = System.DateTime.Now;
             vm.lookout = lookout;
@@ -184,27 +219,53 @@ namespace Jobportal.User.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id,Lookout lookout,int s,List<PreferredCompany> pc)
+        public ActionResult Edit(int id,Lookout lookout,int s,List<PreferredCompany> pc, string locids)
         {
-            Lookout look = db.Lookouts.Find(id);
+            string[] nameslist = locids.Split(',');
             lookout.LastActive = System.DateTime.Now;
-            db.Entry(look).CurrentValues.SetValues(lookout);
+            db.Entry(lookout).State = EntityState.Modified;
             db.SaveChanges();
-            //    WorkShift ws = new WorkShift();
-            //      Shift sf = new Shift();
-            //        sf = db.Shifts.Find(s);
-            //          ws.Lookout_Id = look.Id;
-            //            ws.Shift_Id = sf.id;
             WorkShift ws = db.WorkShifts.FirstOrDefault(a => a.Lookout_Id==id);
-            WorkShift wst = new WorkShift();
             Shift sf = new Shift();
-              sf = db.Shifts.Find(s);
+             sf = db.Shifts.Find(s);
             ws.Shift_Id = sf.id;
-            db.Entry(ws).State = EntityState.Modified;
+            db.Entry(ws).State = System.Data.Entity.EntityState.Modified;  //EntityState.Modified;
             db.SaveChanges();
-        
-            
+            foreach (var list in pc)
+            {
+                PreferredCompany pcs = db.PreferredCompanies.FirstOrDefault(a => a.Lookout_id == list.Lookout_id);
+                db.Entry(pcs).CurrentValues.SetValues(pc);
+                db.SaveChanges();
+                
+            }
 
+            PreferredLocation pr = new PreferredLocation();
+            List<PreferredLocation> prl = db.PreferredLocations.Where(ax => ax.Lookout_id == lookout.Id).ToList();
+            foreach (var a in nameslist)
+            {
+                int c = Convert.ToInt16(a);
+                Location loc = db.Locations.FirstOrDefault(ax => ax.City_id == c);
+                //List<PreferredLocation> prl = db.PreferredLocations.Where(ax => ax.Lookout_id==lookout.Id).ToList();
+                foreach(var lis in prl)
+                {
+                    db.PreferredLocations.Remove(lis);
+                    db.SaveChanges();
+                }
+                var l = Convert.ToInt16(loc.id);
+                pr.Location_id = l;
+                pr.Lookout_id = lookout.Id;
+                db.PreferredLocations.Add(pr);
+                db.SaveChanges();
+                
+            //    var l = Convert.ToInt16(loc.id);
+            //    if (prl.Lookout_id == lookout.Id)
+            //    {
+            //        prl.Location_id=l;
+            //        db.Entry(prl).CurrentValues.SetValues(nameslist);
+            //        db.SaveChanges();
+            //    }
+            }
+            
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
@@ -217,19 +278,31 @@ namespace Jobportal.User.Controllers
 
         // POST: Lookouts/Delete/5
         [HttpPost]
-       
         public ActionResult Delete(int id,int s)
         {
             Lookout lookout = db.Lookouts.Find(id);
-            WorkShift ws = new WorkShift();
-            if (ws.Lookout_Id == lookout.Id)
+            List< WorkShift> ws = db.WorkShifts.Where(a => a.Lookout_Id == lookout.Id).ToList();
+            foreach(var lws in ws)
             {
-                db.WorkShifts.Remove(ws);
+                db.WorkShifts.Remove(lws);
                 db.SaveChanges();
+            }
+
+            List<PreferredCompany> pc = db.PreferredCompanies.Where(b => b.Lookout_id == lookout.Id).ToList();
+            foreach(var list in pc)
+            {
+                db.PreferredCompanies.Remove(list);
+                db.SaveChanges();
+            }
+
+            List<PreferredLocation> prl = db.PreferredLocations.Where(ax => ax.Lookout_id == lookout.Id).ToList();
+            foreach (var a in prl)
+            {
+                    db.PreferredLocations.Remove(a);
+                    db.SaveChanges();
             }
             db.Lookouts.Remove(lookout);
             db.SaveChanges();
-
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
