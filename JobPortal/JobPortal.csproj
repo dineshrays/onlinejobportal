@@ -301,8 +301,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CountryViewModel.cs" />
+    <Compile Include="ViewModel\JobLocDetViewModel.cs" />
     <Compile Include="ViewModel\JobPortalViewModel.cs" />
+    <Compile Include="ViewModel\JobPostFieldsViewModel.cs" />
     <Compile Include="ViewModel\JobPostViewModel.cs" />
+    <Compile Include="ViewModel\JobSkillDetViewModel.cs" />
+    <Compile Include="ViewModel\ListOfJobPost.cs" />
     <Compile Include="ViewModel\locationViewModel.cs" />
     <Compile Include="ViewModel\PGViewModel.cs" />
     <Compile Include="ViewModel\PlanMasterModel.cs" />
@@ -4458,6 +4462,9 @@
     <Content Include="Views\UserBusinessStreams\Index.cshtml" />
     <Content Include="Views\UserCompanies\Index.cshtml" />
     <Content Include="Views\UserCompanies\Create.cshtml" />
+    <Content Include="Views\JobPost\Edit.cshtml" />
+    <Content Include="Views\JobPost\ListAllJobPost.cshtml" />
+    <Content Include="Views\JobPost\ListOfJobPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
