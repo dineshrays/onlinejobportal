@@ -44,168 +44,217 @@
     <link rel="stylesheet" href="~/Scripts/vendors/css/vendor.bundle.addons.css">
 
 </head>
-
+<style>
+    .outer {
+        width: 960px;
+        color: black;
+        border: 1px solid black;
+        align-content:center;
+        padding: 1px;
+    }
+</style> 
+<style>
+    .al{
+       
+    }
+</style>
+ 
 <h4>JobPost</h4>
 
-
+<div class="panel panel-info">
+    <div class="panel-heading">
+        Preffered Jobs
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.JobTittle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.jobPost.JobTittle, ViewData["Jobtit"] as SelectList, new { @class = "form-control", @id = "RelatedId", style = "width:30%" })
+                @Html.ValidationMessageFor(model => model.jobPost.JobTittle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    </div>
 
 <div class="form-horizontal">
-    
 
-
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-<div class="form-group">
-                @Html.LabelFor(model => model.jobPost.JobTittle, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.jobPost.JobTittle, new { htmlAttributes = new { @id = "jobtittle", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.jobPost.JobTittle, "", new { @class = "text-danger" })
-                </div>
-</div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.Description, new { htmlAttributes = new { @id = "Description", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.jobPost.Description, "", new { @class = "text-danger" })
+    <hr />
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Job Details
         </div>
-    </div>
-
-    <div>
-        <label class="control-label col-md-2"> KeySkills</label>
-        <input type="text" ata-load-once="true" multiple class="multipleInputDynamic" data-url="http://localhost:56700/JobPost/GetSkillName" name="language">
-    </div>
-
-    <script>
-        $('.multipleInputDynamic').fastselect();
-
-    </script>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.ExpFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.ExpFrom, new { htmlAttributes = new { @id = "expfrom", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.jobPost.ExpFrom, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.ExpTo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.ExpTo, new { htmlAttributes = new { @id = "Expto", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.jobPost.ExpTo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.CTCFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.CTCFrom, new { htmlAttributes = new { @class = "form-control", @id = "ctcfrom" } })
-            @Html.ValidationMessageFor(model => model.jobPost.CTCFrom, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.CTCTo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.CTCTo, new { htmlAttributes = new { @class = "form-control", @id = "CTCto" } })
-            @Html.ValidationMessageFor(model => model.jobPost.CTCTo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.NoOfvacancies, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.NoOfvacancies, new { htmlAttributes = new { @class = "form-control", @id = "NoOfVacnId" } })
-            @Html.ValidationMessageFor(model => model.jobPost.NoOfvacancies, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div>
-        <label class="control-label col-md-2"> Location</label>
-        <input type="text" ata-load-once="true" multiple class="multipleInput" data-url="http://localhost:56700/JobPost/GetName" name="language">
-    </div>
-
-    <script>
-        $('.multipleInput').fastselect();
-
-    </script>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.jobPost.IndustryId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.JobTittle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.jobPost.IndustryId, ViewData["industlist"] as SelectList, new { @class = "form-control", @id = "IndustId", style = "width:30%" })
-                @Html.ValidationMessageFor(model => model.jobPost.IndustryId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.jobPost.JobTittle, new { htmlAttributes = new { @id = "jobtittle", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.jobPost.JobTittle, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.functionalArea.FunctionalAreaName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.functionalArea.Id, ViewData["funclist"] as SelectList, "Function Area ", new { @class = "form-control", @id = "functionId", style = "width:30%" })
-            @Html.ValidationMessageFor(model => model.functionalArea.Id, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.Description, new { htmlAttributes = new { @id = "Description", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.jobPost.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            <label class="control-label col-md-2"> KeySkills</label>
+            <input type="text" ata-load-once="true" multiple class="multipleInputDynamic" data-url="http://localhost:56700/JobPost/GetSkillName" name="language">
+        </div>
+
+        <script>
+            $('.multipleInputDynamic').fastselect();
+
+        </script>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.ExpFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.ExpFrom, new { htmlAttributes = new { @id = "expfrom", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.jobPost.ExpFrom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.ExpTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.ExpTo, new { htmlAttributes = new { @id = "Expto", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.jobPost.ExpTo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.CTCFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.CTCFrom, new { htmlAttributes = new { @class = "form-control", @id = "ctcfrom" } })
+                @Html.ValidationMessageFor(model => model.jobPost.CTCFrom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.CTCTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.CTCTo, new { htmlAttributes = new { @class = "form-control", @id = "CTCto" } })
+                @Html.ValidationMessageFor(model => model.jobPost.CTCTo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.NoOfvacancies, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.NoOfvacancies, new { htmlAttributes = new { @class = "form-control", @id = "NoOfVacnId" } })
+                @Html.ValidationMessageFor(model => model.jobPost.NoOfvacancies, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
 
+    <br />
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Location details
+        </div>
+        <br />
+        <div>
+            <label class="control-label col-md-2"> Location</label>
+            <input type="text" ata-load-once="true" multiple class="multipleInput" data-url="http://localhost:56700/JobPost/GetName" name="language">
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.role.RoleType, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.role.Id, ViewData["rolelistview"] as SelectList, "Designtion ", new { @class = "form-control", @id = "roleId", style = "width:30%" })
-            @Html.ValidationMessageFor(model => model.role.Id, "", new { @class = "text-danger" })
+        <script>
+            $('.multipleInput').fastselect();
+
+        </script>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.jobPost.IndustryId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.jobPost.IndustryId, ViewData["industlist"] as SelectList, new { @class = "form-control", @id = "IndustId", style = "width:30%" })
+                    @Html.ValidationMessageFor(model => model.jobPost.IndustryId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.functionalArea.FunctionalAreaName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.functionalArea.Id, ViewData["funclist"] as SelectList, "Function Area ", new { @class = "form-control", @id = "functionId", style = "width:30%" })
+                @Html.ValidationMessageFor(model => model.functionalArea.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.role.RoleType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.role.Id, ViewData["rolelistview"] as SelectList, "Designtion ", new { @class = "form-control", @id = "roleId", style = "width:30%" })
+                @Html.ValidationMessageFor(model => model.role.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Education details
+        </div>
+        <br />
+        <div>
+            <label class="control-label col-md-2"> PG</label>
+            <input type="text" ata-load-once="true" multiple class="multipleInputDynami" data-url="http://localhost:56700/JobPost/GetPgName" name="language">
+        </div>
+
+        <script>
+            $('.multipleInputDynami').fastselect();
+
+        </script>
+
+        <div>
+            <label class="control-label col-md-2"> UG</label>
+            <input type="text" ata-load-once="true" multiple class="multipleInputDynam" data-url="http://localhost:56700/JobPost/GetUgName" name="language">
+        </div>
+
+        <script>
+            $('.multipleInputDynam').fastselect();
+
+        </script>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.SpecifyDoc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.SpecifyDoc, new { htmlAttributes = new { @class = "form-control", @id = "specifyId" } })
+                @Html.ValidationMessageFor(model => model.jobPost.SpecifyDoc, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
-
-    <div>
-        <label class="control-label col-md-2"> PG</label>
-        <input type="text" ata-load-once="true" multiple class="multipleInputDynami" data-url="http://localhost:56700/JobPost/GetPgName" name="language">
-    </div>
-
-    <script>
-        $('.multipleInputDynami').fastselect();
-
-    </script>
-
-    <div>
-        <label class="control-label col-md-2"> UG</label>
-        <input type="text" ata-load-once="true" multiple class="multipleInputDynam" data-url="http://localhost:56700/JobPost/GetUgName" name="language">
-    </div>
-
-    <script>
-        $('.multipleInputDynam').fastselect();
-
-    </script>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.SpecifyDoc, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.SpecifyDoc, new { htmlAttributes = new { @class = "form-control", @id = "specifyId" } })
-            @Html.ValidationMessageFor(model => model.jobPost.SpecifyDoc, "", new { @class = "text-danger" })
+    <br />
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Company details
         </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.company.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.company.CompanyName, new { htmlAttributes = new { @class = "form-control", @id = "CompNameId" } })
-            @Html.ValidationMessageFor(model => model.company.CompanyName, "", new { @class = "text-danger" })
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.company.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.company.CompanyName, new { htmlAttributes = new { @class = "form-control", @id = "CompNameId" } })
+                @Html.ValidationMessageFor(model => model.company.CompanyName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.jobPost.Requirement, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.jobPost.Requirement, new { htmlAttributes = new { @class = "form-control", @id = "requirement" } })
-            @Html.ValidationMessageFor(model => model.jobPost.Requirement, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobPost.Requirement, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobPost.Requirement, new { htmlAttributes = new { @class = "form-control", @id = "requirement" } })
+                @Html.ValidationMessageFor(model => model.jobPost.Requirement, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <form>
+
         <div class="form-group">
             @Html.LabelFor(model => model.company.ComapnyWebsite, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -260,8 +309,9 @@
                 @Html.ValidationMessageFor(model => model.company.ContactPerson, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
+    <br />
 
-    </form>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-primary" id="SubmitId" />
@@ -272,7 +322,7 @@
 
 
 
-<script>
+    <script>
          $(function () {
              $("#uploadEditorImage").change(function () {
                  var data = new FormData();
@@ -294,7 +344,7 @@
                         alert(response.filepath)
 
                          $("#imgpath").val(response.filepath);
-                        
+
                          //code after success
                          $(".displayimg").append("<img src=" + response.filepath+" height=5% width=25%>");
 
@@ -306,8 +356,8 @@
                  });
              });
          });
-</script>
-<script>
+    </script>
+    <script>
          $(function () {
              $("#uploadEditorImag").change(function () {
                  var data = new FormData();
@@ -339,8 +389,8 @@
                  });
              });
          });
-</script>
-<script>
+    </script>
+    <script>
          $(function () {
              $("#UploadFile").change(function () {
                  var data = new FormData();
@@ -372,8 +422,8 @@
                  });
              });
          });
-</script>
-<script>
+    </script>
+    <script>
 
     $("#SubmitId").click(function () {
 
@@ -386,8 +436,8 @@
         //var func = $("functionId").val()
 
         var image = $("#imgpath").val();
-        
-        
+
+
         var logo = $("#imgpathLogo").val();
         var present = $("#PresentFilePath").val();
         var compname = $("#CompNameId").val();
@@ -427,4 +477,62 @@
                     }
                 });
     });
-</script>
+    </script>
+
+    <script>
+
+        $("#RelatedId").change(function () {
+
+     
+
+        //var role = $("roleId").val()
+        //var func = $("functionId").val()
+
+        var image = $("#imgpath").val();
+
+        var id = $("#RelatedId").val();
+       
+
+       
+        $.ajax({
+            url:  '@Url.Action("RelatedJob", "JobPost")',
+            dataType: "json",
+            data: JSON.stringify({ Id:id }),
+                type: "POST", 
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                $.each(result.JobPostfields, function (i, joblst)
+                {
+                    alert(joblst.JobTittle);
+                    $("#jobtittle").val(joblst.JobTittle);
+                    $("#Description").val(joblst.Description);
+                    $("#Expto").val(joblst.ExpTo);
+                    $("#expfrom").val(joblst.ExpFrom);
+                    $("#ctcfrom").val(joblst.CTCFrom);
+                    $("#CTCto").val(joblst.CTCTo);
+                    $("#NoOfVacnId").val(joblst.NoOfvacancies);
+                    $("#functionareaid").val(joblst.FunctionalAreaId);
+                    $("#roleid").val(joblst.RoleId);
+                    $("#specifyId").val(joblst.SpecifyDoc);
+                    $("#CompNameId").val(joblst.CompanyName);
+                    $("#PresentFilePath").val(joblst.CompanyPresentation);
+                    $("#CompanyWebId").val(joblst.ComapnyWebsite);
+                    $("#ContactId").val(joblst.ContactPerson);
+                    $("#requirement").val(joblst.Requirement);
+                    $("#imgpath").val(joblst.CompanyImage);
+
+                })
+
+                $.each(result.jobPgDets, function (i, pglist)
+                {
+                    $('.multipleInput').val(pglist.value);  
+                })
+                    alert("Successfully Created");
+                   window.location.href = newUrl;
+                    },
+                    error: function (xhr) {
+                        alert("Error");
+                    }
+                });
+    });
+    </script>

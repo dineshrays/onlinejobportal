@@ -7,6 +7,8 @@
 <script src="~/Scripts/vendors/js/vendor.bundle.base.js"></script>
 <script src="~/Scripts/vendors/js/vendor.bundle.addons.js"></script>
 
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<a href="~/Content/bootstrap.min.css.map"></a>
 <script src="~/Scripts/js/off-canvas.js"></script>  
 <script src="~/Scripts/js/misc.js"></script>
 
@@ -20,26 +22,31 @@
     <tr>
         <a href="@Url.Action("Edit", "Jobpost", new { id =item.Id  })"><i class="menu-icon mdi mdi-account-edit">Edit</i></a>
     </tr>
+       
         <tbody class="card">
 
             <tr>
                 <td>
-                    @Html.DisplayFor(ModelItem => item.JobTittle, new { @style = "color:blue" })
+                   <div class="panel panel-info">
+                        <div class="panel-heading">
+                            @Html.DisplayFor(ModelItem => item.JobTittle, new { @style = "color:blue" })
+                        </div>
+                    </div>
                     <br />
                     @Html.DisplayFor(ModelItem => item.CompanyName)
                     <br />
                     @Html.DisplayFor(ModelItem => item.ExpFrom)-@Html.DisplayFor(ModelItem => item.ExpTo)
 
-                    &nbsp;&nbsp;
+                 &nbsp;&nbsp;
 
-                    @foreach (var locitem in Model.city)
-                    {
+                    @foreach(var locitem in Model.city)
+                                {
                         <i class="menu-icon mdi mdi-account-location"></i>
                         @Html.DisplayFor(ModelItem => locitem.CityName)
                         @Html.Label("/")
                     }
 
-                    <input type="submit" value="Register" class="form form-control" style="background:deepskyblue" /> &nbsp;<input type="submit" value="Apply" class="form form-control" style="background:gray" />
+                <input type="submit" value="Register" class="form form-control" style="background:deepskyblue" /> &nbsp;<input type="submit" value="Apply" class="form form-control" style="background:gray" />
 
                 </td>
             </tr>
