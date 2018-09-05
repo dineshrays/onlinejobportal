@@ -233,7 +233,7 @@ namespace JobPortal.Controllers
         {
              RecruiterPlanDet rplan = new RecruiterPlanDet();
             // RecruiterPlan rplan = new RecruiterPlan();
-            //rplan.SubUserCount = Convert.ToInt32(Session["count"]);
+            rplan.SubUserCount = Convert.ToInt32(Session["count"]);
             return View(rplan);
         }
         public ActionResult SaveDetails(List<RecruiterPlanDet>recruiterplan )
@@ -284,6 +284,7 @@ namespace JobPortal.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
 
         }
+         
 
 
     }

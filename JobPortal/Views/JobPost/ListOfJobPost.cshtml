@@ -1,0 +1,123 @@
+﻿@model  JobPortal.ViewModel.ListOfJobPost
+
+@{
+    ViewBag.Title = "ListOfJobPost";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<script src="~/Scripts/vendors/js/vendor.bundle.base.js"></script>
+<script src="~/Scripts/vendors/js/vendor.bundle.addons.js"></script>
+
+<script src="~/Scripts/js/off-canvas.js"></script>  
+<script src="~/Scripts/js/misc.js"></script>
+
+
+
+@*<a href="@Url.Action("ListOfJobPost", "Jobpost", new { id =  })"><i class="menu-icon mdi mdi-account-edit">Edit</i></a>*@
+@*<i class="menu-icon mdi mdi-account-edit"></i>*@
+<table>
+    @foreach (var item in Model.JobPostfields)
+    {
+    <tr>
+        <a href="@Url.Action("Edit", "Jobpost", new { id =item.Id  })"><i class="menu-icon mdi mdi-account-edit">Edit</i></a>
+    </tr>
+        <tbody class="card">
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.JobTittle, new { @style = "color:blue" })
+                    <br />
+                    @Html.DisplayFor(ModelItem => item.CompanyName)
+                    <br />
+                    @Html.DisplayFor(ModelItem => item.ExpFrom)-@Html.DisplayFor(ModelItem => item.ExpTo)
+
+                    &nbsp;&nbsp;
+
+                    @foreach (var locitem in Model.city)
+                    {
+                        <i class="menu-icon mdi mdi-account-location"></i>
+                        @Html.DisplayFor(ModelItem => locitem.CityName)
+                        @Html.Label("/")
+                    }
+
+                    <input type="submit" value="Register" class="form form-control" style="background:deepskyblue" /> &nbsp;<input type="submit" value="Apply" class="form form-control" style="background:gray" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label style="color:dimgrey">KeySkill:</label>
+
+                    @foreach (var Skillitem in Model.jobPostSkill)
+                    {
+                        @Html.DisplayFor(ModelItem => Skillitem.SkillName)
+                        @Html.Label("/")
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+
+                    <br />
+                    <label style="color:dimgrey">Decription:</label>&nbsp;&nbsp;
+                    @Html.DisplayFor(ModelItem => item.Description)
+                    <br />
+                    <lable style="color:dimgrey">CTC:</lable>&nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(ModelItem => item.CTCFrom)-@Html.DisplayFor(ModelItem => item.CTCTo)
+                    <br />
+                    <lable style="color:dimgrey">Industry:</lable>&nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(ModelItem => item.BusinessStreamName)
+                    <br />
+                    <lable style="color:dimgrey">Functional Area:</lable>&nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(ModelItem => item.FunctionalAreaName)
+                    <br />
+                    <lable style="color:dimgrey">Role:</lable>&nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(ModelItem => item.RoleType)
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h5>
+                        Desired Candidate Profile
+                    </h5>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Eduction
+                    </p>
+                    <label style="color:dimgrey">UG:</label>&nbsp;&nbsp;&nbsp;
+
+                    @foreach (var Skillitem in Model.JobUgDet)
+                    {
+                        @Html.DisplayFor(ModelItem => Skillitem.text)
+                        @Html.Label("/")
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+
+                    <label style="color:dimgrey">PG:</label>&nbsp;&nbsp;&nbsp;
+
+                    @foreach (var Skillitem in Model.jobPgDets)
+                    {
+                        @Html.DisplayFor(ModelItem => Skillitem.text)
+                        @Html.Label("/")
+                    }
+                    <br />
+                    <h6>Company Profile:</h6>
+                    <br />
+                    @Html.DisplayFor(ModelItem => item.AboutCompany)
+                </td>
+
+            </tr>
+        </tbody>
+    }
+
+</table>
+

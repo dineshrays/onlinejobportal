@@ -34,8 +34,13 @@ namespace JobPortal.Controllers
         }
         public ActionResult Create()
         {
+
             //var industlist = new SelectList(db.IndustryTypes.ToList(), "Id", "BusinessStreamName");
             //ViewData["industliss"] = industlist;
+
+            var jobtitlist = new SelectList(db.JobPosts.ToList(), "Id", "JobTittle");
+            ViewData["Jobtit"] = jobtitlist;
+
 
             var rolelist = new SelectList(db.Roles.ToList(), "Id", "RoleType");
             ViewData["rolelistview"] = rolelist;
@@ -98,9 +103,10 @@ namespace JobPortal.Controllers
 
             db.Companies.Add(comp);
             db.SaveChanges();
-
-            comp.Id = jbps.CompanyId;
-
+            var id = comp.Id;
+            jbps.CompanyId = id;
+            jbps.IndustryId = 1;
+            jbps.CreatedOn = DateTime.Now;
             db.JobPosts.Add(jbps);
             db.SaveChanges();
 
@@ -111,10 +117,11 @@ namespace JobPortal.Controllers
             foreach (string listid in split)
             {
                 JobPostSkill jobpostskill = new JobPostSkill();
-                jobpostskill.Id = int.Parse(listid);
+                jobpostskill.SkillId = int.Parse(listid);
                 jobpostskill.Isactive = true;
                 jobpostskill.JobPostId = jbps.Id;
                 db.JobPostSkills.Add(jobpostskill);
+                db.SaveChanges();
 
             }
             // List<JobLocDet> joblocdet = new List<JobLocDet>();
@@ -129,6 +136,7 @@ namespace JobPortal.Controllers
                 job.JobPostId = jbps.Id;
                 // joblocdet.Add(job);
                 db.JobLocDets.Add(job);
+                db.SaveChanges();
             }
 
             string[] splitted = uid.Split(',');
@@ -140,6 +148,7 @@ namespace JobPortal.Controllers
                 ug.CreatedOn = DateTime.Now;
                 ug.JobPostId = jbps.Id;
                 db.JobUgDets.Add(ug);
+                db.SaveChanges();
             }
             string[] spl = pid.Split(',');
             //string[] splitpg = jbps.jobPgDet.splitPgId.Split(',');
@@ -151,6 +160,7 @@ namespace JobPortal.Controllers
                 jobpg.CreatedOn = DateTime.Now;
                 jobpg.JobPostId = jbps.Id;
                 db.JobPgDets.Add(jobpg);
+                db.SaveChanges();
             }
             return Json("", JsonRequestBehavior.AllowGet);
 
@@ -248,6 +258,312 @@ namespace JobPortal.Controllers
 
             return Json(new { filepath = path }, JsonRequestBehavior.AllowGet);
 
+        }
+        public ActionResult ListAllJobPost( )
+        {
+            ListOfJobPost listofpost = new ListOfJobPost();
+            
+
+              List<JobLocDetViewModel> loc = (from l in db.Cities
+                                    join j in db.JobLocDets
+                                    on l.Id equals j.CityID
+                                    select new JobLocDetViewModel
+                                    {
+                                        Id=j.CityID,
+                                        CityName=l.CityName,
+                                        JobPostId=j.JobPostId
+                                    }).ToList();
+
+            List<JobSkillDetViewModel> Skill = (from S in db.Skills
+                                            join j in db.JobPostSkills
+                                            on S.id  equals j.SkillId
+                                            select new JobSkillDetViewModel
+                                            {
+                                                Id = j.SkillId,
+                                                SkillName = S.SkillName,
+                                                JobPostId = j.JobPostId
+                                            }).ToList();
+
+           List<JobPost> jbp = db.JobPosts.ToList();
+
+            listofpost.city = loc;
+            listofpost.jobPostSkill = Skill;
+            //listofpost.jobPgDets = Pgdet;
+            listofpost.JobPost = jbp;
+
+            return View(listofpost);
+        }
+        public ActionResult ListOfJobPost(int id)
+        {
+
+            ListOfJobPost listofpost = new ListOfJobPost();
+            List<JobPostFieldsViewModel> jbp = (from j in db.JobPosts
+                                 join f in db.FunctionalAreas
+                                 on j.FunctionalAreaId equals f.Id
+                                 join i in db.IndustryTypes
+                                 on j.IndustryId equals i.Id
+                                 join r in db.Roles
+                                 on j.RoleId equals r.Id
+                                 join c in db.Companies
+                                 on j.CompanyId equals c.Id
+                                 where j.Id==id
+                                 
+                                 select new JobPostFieldsViewModel
+                                 {
+                                     Id=j.Id,
+                                     JobTittle=j.JobTittle,
+                                     ExpFrom=j.ExpFrom,
+                                     ExpTo=j.ExpTo,
+                                     CTCFrom=j.CTCFrom,
+                                     CTCTo=j.CTCTo,
+                                     Description=j.Description,
+                                     FunctionalAreaName=f.FunctionalAreaName,
+                                     BusinessStreamName=i.BusinessStreamName,
+                                     RoleType=r.RoleType,
+                                     CompanyName= c.CompanyName,
+                                     AboutCompany=c.AboutCompany
+                                     
+
+                                 }).ToList();
+                
+             // db.JobPosts.Where(a => a.Id == id).ToList();
+            listofpost.JobPostfields = jbp;
+
+            List<JobLocDetViewModel> loc = (from l in db.Cities
+                                            join j in db.JobLocDets
+                                            on l.Id equals j.CityID
+                                            where j.JobPostId==id
+                                            select new JobLocDetViewModel
+                                            {
+                                                Id = j.CityID,
+                                                CityName = l.CityName,
+                                                JobPostId = j.JobPostId
+                                            }).ToList();
+
+            listofpost.city = loc;
+            List<JobSkillDetViewModel> Skill = (from S in db.Skills
+                                                join j in db.JobPostSkills
+                                                on S.id equals j.SkillId
+                                                where j.JobPostId == id
+                                                select new JobSkillDetViewModel
+                                                {
+                                                    Id = j.SkillId,
+                                                    SkillName = S.SkillName,
+                                                    JobPostId = j.JobPostId
+                                                }).ToList();
+            listofpost.jobPostSkill = Skill;
+            List<UGViewModel> ug = (from u in db.UGs
+                                    join j in db.JobUgDets
+                                    on u.Id equals j.UgId
+                                    where j.JobPostId == id
+                                    select new UGViewModel
+                                    {
+                                        value=j.UgId,
+                                        text=u.UQqualification
+
+                                  }).ToList();
+            listofpost.JobUgDet = ug;
+            List<PGViewModel> pg = (from p in db.PGs
+                                    join j in db.JobPgDets
+                                    on p.Id equals j.PGiD
+                                    where j.JobPostId == id
+                                    select new PGViewModel
+                                    {
+                                        value = j.PGiD,
+                                        text = p.PGQualification
+
+                                    }).ToList();
+            listofpost.jobPgDets = pg;
+
+            return View(listofpost);
+            
+        }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            ListOfJobPost listofpost = new ListOfJobPost();
+            List<JobPostFieldsViewModel> jbp = (from j in db.JobPosts
+                                                join f in db.FunctionalAreas
+                                                on j.FunctionalAreaId equals f.Id
+                                                join i in db.IndustryTypes
+                                                on j.IndustryId equals i.Id
+                                                join r in db.Roles
+                                                on j.RoleId equals r.Id
+                                                join c in db.Companies
+                                                on j.CompanyId equals c.Id
+                                                where j.Id == id
+
+                                                select new JobPostFieldsViewModel
+                                                {
+                                                    Id = j.Id,
+                                                    JobTittle = j.JobTittle,
+                                                    ExpFrom = j.ExpFrom,
+                                                    ExpTo = j.ExpTo,
+                                                    CTCFrom = j.CTCFrom,
+                                                    CTCTo = j.CTCTo,
+                                                    Description = j.Description,
+                                                    FunctionalAreaName = f.FunctionalAreaName,
+                                                    BusinessStreamName = i.BusinessStreamName,
+                                                    RoleType = r.RoleType,
+                                                    CompanyName = c.CompanyName,
+                                                    AboutCompany = c.AboutCompany,
+                                                    NoOfvacancies = j.NoOfvacancies,
+                                                    RoleId = r.Id,
+                                                    FunctionalAreaId = j.FunctionalAreaId,
+                                                    Requirement = j.Requirement,
+                                                    ContactPerson = c.ContactPerson,
+                                                    SpecifyDoc = j.SpecifyDoc,
+                                                    CompanyPresentation = c.CompanyPresentation,
+                                                    ComapnyWebsite = c.ComapnyWebsite
+
+
+                                                }).ToList();
+
+            listofpost.JobPostfields = jbp;
+
+            List<JobLocDetViewModel> loc = (from l in db.Cities
+                                            join j in db.JobLocDets
+                                            on l.Id equals j.CityID
+                                            where j.JobPostId == id
+                                            select new JobLocDetViewModel
+                                            {
+                                                Id = j.CityID,
+                                                CityName = l.CityName,
+                                                JobPostId = j.JobPostId
+                                            }).ToList();
+
+            listofpost.city = loc;
+            List<JobSkillDetViewModel> Skill = (from S in db.Skills
+                                                join j in db.JobPostSkills
+                                                on S.id equals j.SkillId
+                                                where j.JobPostId == id
+                                                select new JobSkillDetViewModel
+                                                {
+                                                    Id = j.SkillId,
+                                                    SkillName = S.SkillName,
+                                                    JobPostId = j.JobPostId
+                                                }).ToList();
+            listofpost.jobPostSkill = Skill;
+            List<UGViewModel> ug = (from u in db.UGs
+                                    join j in db.JobUgDets
+                                    on u.Id equals j.UgId
+                                    where j.JobPostId == id
+                                    select new UGViewModel
+                                    {
+                                        value = j.UgId,
+                                        text = u.UQqualification
+
+                                    }).ToList();
+            listofpost.JobUgDet = ug;
+            List<PGViewModel> pg = (from p in db.PGs
+                                    join j in db.JobPgDets
+                                    on p.Id equals j.PGiD
+                                    where j.JobPostId == id
+                                    select new PGViewModel
+                                    {
+                                        value = j.PGiD,
+                                        text = p.PGQualification
+
+                                    }).ToList();
+            listofpost.jobPgDets = pg;
+
+          //return View(listofpost);
+
+
+            return Json(listofpost, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult RelatedJob(int Id)
+        {
+            ListOfJobPost listofpost = new ListOfJobPost();
+            List<JobPostFieldsViewModel> jbp = (from j in db.JobPosts
+                                                join f in db.FunctionalAreas
+                                                on j.FunctionalAreaId equals f.Id
+                                                join i in db.IndustryTypes
+                                                on j.IndustryId equals i.Id
+                                                join r in db.Roles
+                                                on j.RoleId equals r.Id
+                                                join c in db.Companies
+                                                on j.CompanyId equals c.Id
+                                                where j.Id == Id
+
+                                                select new JobPostFieldsViewModel
+                                                {
+                                                    Id = j.Id,
+                                                    JobTittle = j.JobTittle,
+                                                    ExpFrom = j.ExpFrom,
+                                                    ExpTo = j.ExpTo,
+                                                    CTCFrom = j.CTCFrom,
+                                                    CTCTo = j.CTCTo,
+                                                    Description = j.Description,
+                                                    FunctionalAreaName = f.FunctionalAreaName,
+                                                    BusinessStreamName = i.BusinessStreamName,
+                                                    RoleType = r.RoleType,
+                                                    CompanyName = c.CompanyName,
+                                                    AboutCompany = c.AboutCompany,
+                                                    NoOfvacancies = j.NoOfvacancies,
+                                                    RoleId = r.Id,
+                                                    FunctionalAreaId = j.FunctionalAreaId,
+                                                    Requirement = j.Requirement,
+                                                    ContactPerson = c.ContactPerson,
+                                                    SpecifyDoc = j.SpecifyDoc,
+                                                    CompanyPresentation = c.CompanyPresentation,
+                                                    ComapnyWebsite = c.ComapnyWebsite
+
+
+                                                }).ToList();
+            
+            listofpost.JobPostfields = jbp;
+
+            List<JobLocDetViewModel> loc = (from l in db.Cities
+                                            join j in db.JobLocDets
+                                            on l.Id equals j.CityID
+                                            where j.JobPostId == Id
+                                            select new JobLocDetViewModel
+                                            {
+                                                Id = j.CityID,
+                                                CityName = l.CityName,
+                                                JobPostId = j.JobPostId
+                                            }).ToList();
+
+            listofpost.city = loc;
+            List<JobSkillDetViewModel> Skill = (from S in db.Skills
+                                                join j in db.JobPostSkills
+                                                on S.id equals j.SkillId
+                                                where j.JobPostId == Id
+                                                select new JobSkillDetViewModel
+                                                {
+                                                    Id = j.SkillId,
+                                                    SkillName = S.SkillName,
+                                                    JobPostId = j.JobPostId
+                                                }).ToList();
+            listofpost.jobPostSkill = Skill;
+            List<UGViewModel> ug = (from u in db.UGs
+                                    join j in db.JobUgDets
+                                    on u.Id equals j.UgId
+                                    where j.JobPostId == Id
+                                    select new UGViewModel
+                                    {
+                                        value = j.UgId,
+                                        text = u.UQqualification
+
+                                    }).ToList();
+            listofpost.JobUgDet = ug;
+            List<PGViewModel> pg = (from p in db.PGs
+                                    join j in db.JobPgDets
+                                    on p.Id equals j.PGiD
+                                    where j.JobPostId == Id
+                                    select new PGViewModel
+                                    {
+                                        value = j.PGiD,
+                                        text = p.PGQualification
+
+                                    }).ToList();
+            listofpost.jobPgDets = pg;
+
+            //return View(listofpost);
+
+
+            return Json(listofpost, JsonRequestBehavior.AllowGet);
         }
     }
 

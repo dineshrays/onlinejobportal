@@ -23,7 +23,9 @@ namespace JobPortal.Models
         public Nullable<bool> Isactive { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-    
+        public int SubUserCount { get; set; }
+
+
         public virtual RecruiterPlan RecruiterPlan { get; set; }
     }
 }
