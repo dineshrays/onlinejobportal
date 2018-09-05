@@ -5,8 +5,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<style>
 
+    .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #fff;
+            color: #555;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+            font-size: 1rem
+        }
+
+
+            .popup .popuptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+</style>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -34,40 +85,111 @@
         <th>
             @Html.DisplayNameFor(model => model.UserDetail.Email)
         </th>
+        <th>
+            @Html.Label("List of Preffered Companies")
+        </th>
+        <th>
+            @Html.Label("List of Preferred Locations")
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <tr>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoticePeriod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastWorkingDay)
-        </td>
-        <td>
-            @item.IsPlaced
-            @*@Html.(modelItem => item.IsPlaced)*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Package)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoticePeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastWorkingDay)
+            </td>
+            <td>
+                @item.IsPlaced
+                @*@Html.(modelItem => item.IsPlaced)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.Email)
+            </td>
+            <td>
+                <div class="popup" id="@item.Id" onclick="myFunction(@item.Id)">
+                    Preferred Companies
+                    <span class="popuptext" id="myPopup-@item.Id"></span>
+                </div>
+            </td>
+            <td>
+                <div class="popup" id="@item.Id" onclick="myLocation(@item.Id)">
+                     Preferred Locations
+                    <span class="popuptext" id="myPops-@item.Id"></span>
+                </div>
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+<script>
+    function myFunction(Id) {
+
+        var assresid = Id;
+
+        $("#myPopup-" + Id).html("");
+        $.ajax(
+            {
+                url: '/Lookouts/complist',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: assresid }),
+                success: function (result) {
+                    $.each(result, function (i, compname) {
+                        $("#myPopup-" + Id).append("<h4>" + compname.companyname + "</h4>")
+                    });
+                },
+                error: function () { alert("Something Gone Wrong") },
+            });
+        var popup = document.getElementById("myPopup-" + Id);
+
+        popup.classList.toggle("show");
+
+    }
+</script>
+<script>
+    function myLocation(Id) {
+
+        var assresid = Id;
+
+        $("#myPops-" + Id).html("");
+        $.ajax(
+            {
+                url: '/Lookouts/loclist',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: assresid }),
+                success: function (result) {
+                    $.each(result, function (i, loc) {
+                        $("#myPops-" + Id).append("<h4>" + loc.locname + "</h4>")
+                    });
+                },
+                error: function () { alert("Something Gone Wrong") },
+            });
+        var popup = document.getElementById("myPops-" + Id);
+
+        popup.classList.toggle("show");
+
+    }
+</script>

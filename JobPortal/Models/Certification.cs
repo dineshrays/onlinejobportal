@@ -11,11 +11,13 @@ namespace JobPortal.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Certification
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ValidDate { get; set; }
         public int PersonalInfo_id { get; set; }
         public Nullable<bool> IsActive { get; set; }

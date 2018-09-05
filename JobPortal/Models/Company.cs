@@ -11,6 +11,7 @@ namespace JobPortal.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Company
     {
@@ -27,6 +28,8 @@ namespace JobPortal.Models
         public Nullable<int> IndustryId { get; set; }
         public byte[] AboutCompany { get; set; }
         public string ComapnyWebsite { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> EstablishmentDate { get; set; }
         public string ContactPerson { get; set; }
         public string Address { get; set; }
