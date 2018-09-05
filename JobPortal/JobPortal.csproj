@@ -164,6 +164,7 @@
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\PlanMastersController.cs" />
     <Compile Include="Controllers\RecruitersController.cs" />
+    <Compile Include="Controllers\Users\LoginController.cs" />
     <Compile Include="Controllers\Users\UserBusinessStreamsController.cs" />
     <Compile Include="Controllers\Users\CertificationsController.cs" />
     <Compile Include="Controllers\Users\CitiesController.cs" />
@@ -308,8 +309,11 @@
     <Compile Include="ViewModel\JobSkillDetViewModel.cs" />
     <Compile Include="ViewModel\ListOfJobPost.cs" />
     <Compile Include="ViewModel\locationViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\PGViewModel.cs" />
     <Compile Include="ViewModel\PlanMasterModel.cs" />
+    <Compile Include="ViewModel\prefCompViewModel.cs" />
+    <Compile Include="ViewModel\preflocViewModel.cs" />
     <Compile Include="ViewModel\SearchList.cs" />
     <Compile Include="ViewModel\SkilViewModel.cs" />
     <Compile Include="ViewModel\UGViewModel.cs" />
@@ -4465,6 +4469,7 @@
     <Content Include="Views\JobPost\Edit.cshtml" />
     <Content Include="Views\JobPost\ListAllJobPost.cshtml" />
     <Content Include="Views\JobPost\ListOfJobPost.cshtml" />
+    <Content Include="Views\Login\userlogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
